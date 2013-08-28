@@ -9,7 +9,7 @@ app.configure(function(){
   app.use(app.router);
 });
 
-var recipes_map = {
+var products_map = {
   '1': {
     "id": "1",
     "title": "Cookies",
@@ -25,7 +25,7 @@ var recipes_map = {
   },
   '2': {
     id: 2,
-    'title': 'Recipe 2',
+    'title': 'Product 2',
     'description': 'Description 2',
     'instructions': 'Instruction 2',
     ingredients: [
@@ -35,48 +35,48 @@ var recipes_map = {
 };
 var next_id = 3;
 
-app.get('/recipes', function(req, res) {
-  var recipes = [];
+app.get('/products', function(req, res) {
+  var products = [];
 
-  for (var key in recipes_map) {
-    recipes.push(recipes_map[key]);
+  for (var key in products_map) {
+    products.push(products_map[key]);
   }
 
   // Simulate delay in server
   setTimeout(function() {
-    res.send(recipes);
+    res.send(products);
   }, 500);
 });
 
-app.get('/recipes/:id', function(req, res) {
-  console.log('Requesting recipe with id', req.params.id);
-  res.send(recipes_map[req.params.id]);
+app.get('/products/:id', function(req, res) {
+  console.log('Requesting product with id', req.params.id);
+  res.send(products_map[req.params.id]);
 });
 
-app.post('/recipes', function(req, res) {
-  var recipe = {};
-  recipe.id = next_id++;
-  recipe.title = req.body.title;
-  recipe.description = req.body.description;
-  recipe.ingredients = req.body.ingredients;
-  recipe.instructions = req.body.instructions;
+app.post('/products', function(req, res) {
+  var product = {};
+  product.id = next_id++;
+  product.title = req.body.title;
+  product.description = req.body.description;
+  product.ingredients = req.body.ingredients;
+  product.instructions = req.body.instructions;
 
-  recipes_map[recipe.id] = recipe;
+  products_map[product.id] = product;
 
-  res.send(recipe);
+  res.send(product);
 });
 
-app.post('/recipes/:id', function(req, res) {
-  var recipe = {};
-  recipe.id = req.params.id;
-  recipe.title = req.body.title;
-  recipe.description = req.body.description;
-  recipe.ingredients = req.body.ingredients;
-  recipe.instructions = req.body.instructions;
+app.post('/products/:id', function(req, res) {
+  var product = {};
+  product.id = req.params.id;
+  product.title = req.body.title;
+  product.description = req.body.description;
+  product.ingredients = req.body.ingredients;
+  product.instructions = req.body.instructions;
 
-  recipes_map[recipe.id] = recipe;
+  products_map[product.id] = product;
 
-  res.send(recipe);
+  res.send(product);
 });
 
 app.listen(port);

@@ -3,32 +3,32 @@
 var services = angular.module('guthub.services',
     ['ngResource']);
 
-services.factory('Recipe', ['$resource',
+services.factory('Product', ['$resource',
     function($resource) {
-  return $resource('/recipes/:id', {id: '@id'});
+  return $resource('/products/:id', {id: '@id'});
 }]);
 
-services.factory('MultiRecipeLoader', ['Recipe', '$q',
-    function(Recipe, $q) {
+services.factory('MultiProductLoader', ['Product', '$q',
+    function(Product, $q) {
   return function() {
     var delay = $q.defer();
-    Recipe.query(function(recipes) {
-      delay.resolve(recipes);
+    Product.query(function(products) {
+      delay.resolve(products);
     }, function() {
-      delay.reject('Unable to fetch recipes');
+      delay.reject('Unable to fetch products');
     });
     return delay.promise;
   };
 }]);
 
-services.factory('RecipeLoader', ['Recipe', '$route', '$q',
-    function(Recipe, $route, $q) {
+services.factory('ProductLoader', ['Product', '$route', '$q',
+    function(Product, $route, $q) {
   return function() {
     var delay = $q.defer();
-    Recipe.get({id: $route.current.params.recipeId}, function(recipe) {
-      delay.resolve(recipe);
+    Product.get({id: $route.current.params.productId}, function(product) {
+      delay.resolve(product);
     }, function() {
-      delay.reject('Unable to fetch recipe '  + $route.current.params.recipeId);
+      delay.reject('Unable to fetch product '  + $route.current.params.productId);
     });
     return delay.promise;
   };

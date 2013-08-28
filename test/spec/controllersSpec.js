@@ -11,55 +11,55 @@ describe('Controllers', function() {
   });
 
   describe('ListCtrl', function() {
-    var mockBackend, recipe;
+    var mockBackend, product;
     // The _$httpBackend_ is the same as $httpBackend. Only written this way to
     // differentiate between injected variables and local variables
-    beforeEach(inject(function($rootScope, $controller, _$httpBackend_, Recipe) {
-      recipe = Recipe;
+    beforeEach(inject(function($rootScope, $controller, _$httpBackend_, Product) {
+      product = Product;
       mockBackend = _$httpBackend_;
       $scope = $rootScope.$new();
       ctrl = $controller('ListCtrl', {
         $scope: $scope,
-        recipes: [1, 2, 3]
+        products: [1, 2, 3]
       });
     }));
 
-    it('should have list of recipes', function() {
-      expect($scope.recipes).toEqual([1, 2, 3]);
+    it('should have list of products', function() {
+      expect($scope.products).toEqual([1, 2, 3]);
     });
   });
 
-  describe('MultiRecipeLoader', function() {
-    var mockBackend, recipe, loader;
+  describe('MultiProductLoader', function() {
+    var mockBackend, product, loader;
     // The _$httpBackend_ is the same as $httpBackend. Only written this way to
     // differentiate between injected variables and local variables
-    beforeEach(inject(function(_$httpBackend_, Recipe, MultiRecipeLoader) {
-      recipe = Recipe;
+    beforeEach(inject(function(_$httpBackend_, Product, MultiProductLoader) {
+      product = Product;
       mockBackend = _$httpBackend_;
-      loader = MultiRecipeLoader;
+      loader = MultiProductLoader;
     }));
 
-    it('should load list of recipes', function() {
-      mockBackend.expectGET('/recipes').respond([{id: 1}, {id: 2}]);
+    it('should load list of products', function() {
+      mockBackend.expectGET('/products').respond([{id: 1}, {id: 2}]);
 
-      var recipes;
+      var products;
 
       var promise = loader();
       promise.then(function(rec) {
-        recipes = rec;
+        products = rec;
       });
 
-      expect(recipes).toBeUndefined();
+      expect(products).toBeUndefined();
 
       mockBackend.flush();
 
-      expect(recipes).toEqualData([{id: 1}, {id: 2}]);
+      expect(products).toEqualData([{id: 1}, {id: 2}]);
     });
   });
 
   describe('EditController', function() {
     var mockBackend, location;
-    beforeEach(inject(function($rootScope, $controller, _$httpBackend_, $location, Recipe) {
+    beforeEach(inject(function($rootScope, $controller, _$httpBackend_, $location, Product) {
       mockBackend = _$httpBackend_;
       location = $location;
       $scope = $rootScope.$new();
@@ -67,12 +67,12 @@ describe('Controllers', function() {
       ctrl = $controller('EditCtrl', {
         $scope: $scope,
         $location: $location,
-        recipe: new Recipe({id: 1, title: 'Recipe'})
+        product: new Product({id: 1, title: 'Product'})
       });
     }));
 
-    it('should save the recipe', function() {
-      mockBackend.expectPOST('/recipes/1', {id: 1, title: 'Recipe'}).respond({id: 2});
+    it('should save the product', function() {
+      mockBackend.expectPOST('/products/1', {id: 1, title: 'Product'}).respond({id: 2});
 
       // Set it to something else to ensure it is changed during the test
       location.path('test');
@@ -85,13 +85,13 @@ describe('Controllers', function() {
       expect(location.path()).toEqual('/view/2');
     });
 
-    it('should remove the recipe', function() {
-      expect($scope.recipe).toBeTruthy();
+    it('should remove the product', function() {
+      expect($scope.product).toBeTruthy();
       location.path('test');
 
       $scope.remove();
 
-      expect($scope.recipe).toBeUndefined();
+      expect($scope.product).toBeUndefined();
       expect(location.path()).toEqual('/');
     });
   });
