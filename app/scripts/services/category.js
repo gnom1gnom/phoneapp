@@ -6,8 +6,7 @@ services.factory('Category', ['$resource',
   function($resource) {
     return $resource('http://llewandowski.waw.eo.pl\\:3000/api/categories/:id', {
     // return $resource('/categories/:id', {
-      id: '@id'
-    }, {
+      id: '@id'}, {
       query: {
         method: 'GET',
         isArray: true

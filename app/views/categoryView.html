@@ -3,8 +3,9 @@
 <div>{{category.name}}</div>
 
 
-<form ng-submit="edit()" class="form-horizontal">
+<form class="form-horizontal">
   <div class="form-actions">
-    <button class="btn btn-primary">Edit</button>
+    <button class="btn btn-primary" ng-submit="edit()">Edit</button>
+    <button class="btn btn-primary" ng-submit="remove()">Delete</button>
   </div>
 </form>

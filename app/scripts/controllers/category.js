@@ -15,6 +15,26 @@ app.controller('CategoryViewCtrl', ['$scope', '$location', 'category',
 		$scope.edit = function() {
 			$location.path('/editCategory/' + category.id);
 		};
+
+		$scope.remove = function() {
+
+			$.prompt("Czy napewno usunąć kategorię:" + $scope.category.name, {
+				title: "Potwierdź usunięcie",
+				buttons: {
+					"OK": true,
+					"Anuluj": false
+				},
+				submit: function(e, v, m, f) {
+					// use e.preventDefault() to prevent closing when needed or return false. 
+					// e.preventDefault(); 
+					if (v) {
+						delete $scope.category;
+						$location.path('/categories');
+					}
+				}
+			});
+
+		};
 	}
 ]);
 
@@ -26,11 +46,6 @@ app.controller('CategoryEditCtrl', ['$scope', '$location', 'category',
 			$scope.category.$update(function(category) {
 				$location.path('/viewCategory/' + category.id);
 			});
-		};
-
-		$scope.remove = function() {
-			delete $scope.category;
-			$location.path('/categories');
 		};
 	}
 ]);

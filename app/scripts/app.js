@@ -1,12 +1,13 @@
 'use strict';
 
-angular.module('phoneappApp', ['phoneappApp.categoryServices', 'phoneappApp.productServices', 'phoneappApp.directives'])
+angular.module('phoneappApp', ['phoneappApp.tagServices', 'phoneappApp.categoryServices', 'phoneappApp.productServices', 'phoneappApp.directives'])
   .config(function($routeProvider) {
     $routeProvider
-    .when('/main', {
-      templateUrl: 'views/main.html',
-      controller: 'MainCtrl'
-    })
+      .when('/main', {
+        templateUrl: 'views/main.html',
+        controller: 'MainCtrl'
+      })
+
     // products
     .when('/products', {
       controller: 'ProductListCtrl',
@@ -84,6 +85,46 @@ angular.module('phoneappApp', ['phoneappApp.categoryServices', 'phoneappApp.prod
       controller: 'CategoryNewCtrl',
       templateUrl: '/views/categoryForm.html'
     })
+
+    //tags
+    .when('/tags', {
+      controller: 'TagListCtrl',
+      resolve: {
+        tags: ["MultiTagLoader",
+          function(MultiTagLoader) {
+            return MultiTagLoader();
+          }
+        ]
+      },
+      templateUrl: '/views/tagList.html'
+    })
+    .when('/editTag/:tagId', {
+      controller: 'TagEditCtrl',
+      resolve: {
+        tag: ["TagLoader",
+          function(TagLoader) {
+            return TagLoader();
+          }
+        ]
+      },
+      templateUrl: '/views/tagForm.html'
+    })
+    .when('/viewTag/:tagId', {
+      controller: 'TagViewCtrl',
+      resolve: {
+        tag: ["TagLoader",
+          function(TagLoader) {
+            return TagLoader();
+          }
+        ]
+      },
+      templateUrl: '/views/tagView.html'
+    })
+    .when('/newTag', {
+      controller: 'TagNewCtrl',
+      templateUrl: '/views/tagForm.html'
+    })
+
     .otherwise({
       redirectTo: '/main'
     });
