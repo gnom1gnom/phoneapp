@@ -1,34 +1,110 @@
-<!DOCTYPE html>
-<html   lang="en" ng-app="guthub">
+<!doctype html>
+<!--[if lt IE 7]>
+<html class="no-js lt-ie9 lt-ie8 lt-ie7">
+<![endif]-->
+<!--[if IE 7]>
+<html class="no-js lt-ie9 lt-ie8">
+<![endif]-->
+<!--[if IE 8]>
+<html class="no-js lt-ie9">
+<![endif]-->
+<!--[if gt IE 8]>
+<!-->
+<html class="no-js">
+<!--<![endif]-->
 <head>
-  <title>GutHub - Create and Share</title>
-  <script src="scripts/vendor/angular.min.js"></script>
-  <script src="scripts/vendor/angular-resource.min.js"></script>
-  <script src="scripts/directives/directives.js"></script>
-  <script src="scripts/services/services.js"></script>
-  <script src="scripts/controllers/controllers.js"></script>
-  <link href="styles/bootstrap.css" rel="stylesheet">
-  <link href="styles/guthub.css" rel="stylesheet">
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Phine app</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width">
+        <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+
+        <!-- build:css(.tmp) styles/main.css -->
+        <link href="styles/bootstrap.css" rel="stylesheet">
+        <link rel="stylesheet" href="styles/main.css">
+        <!-- endbuild -->
+
+        <script src="http://localhost:35729/livereload.js"></script>
 </head>
-<body>
-  <header>
-    <h1>GutHub</h1>
-  </header>
+<body ng-app="phoneappApp">
+        <!--[if lt IE 7]>
+        <p class="browsehappy">
+          You are using an <strong>outdated</strong>
+          browser. Please
+          <a href="http://browsehappy.com/">upgrade your browser</a>
+          to improve your experience.
+        </p>
+        <![endif]-->
 
-  <div butterbar>Loading...</div>
+        <!--[if lt IE 9]>
+        <script src="bower_components/es5-shim/es5-shim.js"></script>
+        <script src="bower_components/json3/lib/json3.min.js"></script>
+        <![endif]-->
 
-  <div class="container-fluid">
-    <div class="row-fluid">
-      <div class="span2">
-        <!--Sidebar-->
-        <div id="focus"><a href="/#/new">New Product</a></div>
-        <div><a href="/#/">Product List</a></div>
+        <header>
+            <h1>Phone app</h1>
+        </header>
+        <div butterbar>Loading...</div>
+        <hr />
 
-      </div>
-      <div class="span10">
-        <div ng-view></div>
-      </div>
-    </div>
-  </div>
+        <div class="container-fluid">
+            <div class="row-fluid">
+                <div class="span2">
+                    <!--Sidebar-->
+                    <div id="focus">
+                        <a href="/#/newCategory">New category</a>
+                    </div>
+                    <div>
+                        <a href="/#/categories">Category list</a>
+                    </div>
+                    <br />
+
+                    <div id="focus">
+                        <a href="/#/newTag">New tag</a>
+                    </div>
+                    <div>
+                        <a href="/#/tags">Tag list</a>
+                    </div>
+                    <br />
+
+                    <div id="focus">
+                        <a href="/#/newProduct">New Product</a>
+                    </div>
+                    <div>
+                        <a href="/#/products">Product List</a>
+                    </div>
+                    <br />
+
+                </div>
+                <div class="span10">
+                    <div ng-view=""></div>
+                </div>
+            </div>
+        </div>
+
+        <script src="bower_components/jquery/jquery.js"></script>
+        <script src="bower_components/angular/angular.js"></script>
+
+        <!-- build:js scripts/modules.js -->
+        <script src="bower_components/angular-cookies/angular-cookies.js"></script>
+        <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+        <script src="bower_components/angular-resource/angular-resource.js"></script>
+        <!-- endbuild -->
+
+        <!-- build:js({.tmp,app}) scripts/scripts.js -->
+        <script src="scripts/app.js"></script>
+
+        <script src="scripts/services/product.js"></script>
+        <script src="scripts/services/category.js"></script>
+        <script src="scripts/services/tag.js"></script>
+
+        <script src="scripts/directives/directive.js"></script>
+        
+        <script src="scripts/controllers/main.js"></script>
+        <script src="scripts/controllers/product.js"></script>
+        <script src="scripts/controllers/category.js"></script>
+        <!--script src="scripts/controllers/tag.js"></script-->
+        <!-- endbuild -->
 </body>
 </html>

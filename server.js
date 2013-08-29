@@ -1,8 +1,8 @@
-var express = require("express"),
-  app     = express(),
-  port    = parseInt(process.env.PORT, 10) || 8080;
+var express = require("express"),ingredientName
+  app = express(),
+  port = parseInt(process.env.PORT, 10) || 8080;
 
-app.configure(function(){
+app.configure(function() {
   app.use(express.methodOverride());
   app.use(express.bodyParser());
   app.use(express.static(__dirname + '/app'));
@@ -12,28 +12,45 @@ app.configure(function(){
 var products_map = {
   '1': {
     "id": "1",
-    "title": "Cookies",
-    "description": "Delicious, crisp on the outside, chewy on the outside, oozing with chocolatey goodness cookies. The best kind",
-    "ingredients": [
-      {
-        "amount": "1",
-        "amountUnits": "packet",
-        "ingredientName": "Chips Ahoy"
-      }
-    ],
-    "instructions": "1. Go buy a packet of Chips Ahoy\n2. Heat it up in an oven\n3. Enjoy warm cookies\n4. Learn how to bake cookies from somewhere else"
+    "title": "Samsung Galaxy",
+    "description": "Smartfon, który myśli naprawdę jak Ty.",
+    "ingredients": [{
+      "amount": "1",
+      "amountUnits": "szt",
+      "ingredientName": "Cortex-A7"
+    }],
+    "instructions": "Wireless charging (market dependent)"
   },
   '2': {
     id: 2,
     'title': 'Product 2',
     'description': 'Description 2',
     'instructions': 'Instruction 2',
-    ingredients: [
-      {amount: 13, amountUnits: 'pounds', ingredientName: 'Awesomeness'}
-    ]
+    "ingredients": [{
+      "amount": 13,
+      "amountUnits": 'pounds',
+      "ingredientName": 'Awesomeness'
+    }]
   }
 };
+
+var categories_map = {
+  '1': {
+    "name": "Kategoria 2",
+    "id": 1
+  },
+  '2': {
+    "name": "Kategoria 3",
+    "id": 2
+  },
+  '3': {
+    "name": "Kategoria 1",
+    "id": 3
+  }
+};
+
 var next_id = 3;
+var next_cat_id = 3;
 
 app.get('/products', function(req, res) {
   var products = [];
@@ -77,6 +94,44 @@ app.post('/products/:id', function(req, res) {
   products_map[product.id] = product;
 
   res.send(product);
+});
+
+app.get('/categories', function(req, res) {
+  var categories = [];
+
+  for (var key in categories_map) {
+    categories.push(categories_map[key]);
+  }
+
+  // Simulate delay in server
+  setTimeout(function() {
+    res.send(categories);
+  }, 500);
+});
+
+app.get('/categories/:id', function(req, res) {
+  console.log('Requesting category with id', req.params.id);
+  res.send(categories_map[req.params.id]);
+});
+
+app.post('/categories', function(req, res) {
+  var category = {};
+  category.id = next_cat_id++;
+  category.name = req.body.name;
+
+  categories_map[category.id] = category;
+
+  res.send(category);
+});
+
+app.post('/categories/:id', function(req, res) {
+  var category = {};
+  category.id = req.params.id;
+  category.name = req.body.name;
+
+  categories_map[category.id] = category;
+
+  res.send(category);
 });
 
 app.listen(port);

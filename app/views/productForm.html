@@ -17,7 +17,7 @@
   <div class="control-group">
     <label class="control-label" for="ingredients">Ingredients:</label>
     <div class="controls">
-      <ul id="ingredients" class="unstyled" ng-controller="IngredientsCtrl">
+      <ul id="ingredients" class="unstyled" ng-controller="ProductIngredientsCtrl">
         <li ng-repeat="ingredient in product.ingredients">
           <input ng-model="ingredient.amount" class="input-mini">
           <input ng-model="ingredient.amountUnits" class="input-small">
