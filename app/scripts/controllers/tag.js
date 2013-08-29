@@ -8,12 +8,42 @@ app.controller('TagListCtrl', ['$scope', 'tags',
 	}
 ]);
 
-app.controller('TagViewCtrl', ['$scope', '$location', 'tag',
-	function($scope, $location, tag) {
+app.controller('TagViewCtrl', ['$scope', '$location', '$dialog', 'tag',
+	function($scope, $location, $dialog, tag) {
 		$scope.tag = tag;
+
+		$scope.opts = {
+			backdrop: true,
+			keyboard: true,
+			backdropClick: true,
+			template: 'template/dialog/message.html'
+		};
 
 		$scope.edit = function() {
 			$location.path('/editTag/' + tag.id);
+		};
+
+		$scope.remove = function() {
+			var title = 'Usunięcie tagu';
+			var msg = 'Czy chcesz usunąć tag: ' + $scope.tag.name;
+			var btns = [{
+				result: false,
+				label: 'Anuluj'
+			}, {
+				result: true,
+				label: 'OK',
+				cssClass: 'btn-primary'
+			}];
+
+			$dialog.messageBox(title, msg, btns)
+				.open()
+				.then(function(result) {
+					if (result) {
+						$scope.tag.$delete(function() {
+							$location.path('/tags');
+						});
+					}
+				});
 		};
 	}
 ]);
@@ -28,9 +58,8 @@ app.controller('TagEditCtrl', ['$scope', '$location', 'tag',
 			});
 		};
 
-		$scope.remove = function() {
-			delete $scope.tag;
-			$location.path('/tags');
+		$scope.cancel = function() {
+			$location.path('/viewTag/' + tag.id);
 		};
 	}
 ]);
@@ -45,6 +74,10 @@ app.controller('TagNewCtrl', ['$scope', '$location', 'Tag',
 			$scope.tag.$save(function(tag) {
 				$location.path('/viewTag/' + tag.id);
 			});
+		};
+
+		$scope.cancel = function() {
+			$location.path('/categories');
 		};
 	}
 ]);

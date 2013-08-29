@@ -1,11 +1,11 @@
-<h2>{{category.name}}</h2>
+<h2>Kategoria</h2>
 
-<div>{{category.name}}</div>
+<div class="well">Name: {{category.name}}</div>
 
 
 <form class="form-horizontal">
   <div class="form-actions">
-    <button class="btn btn-primary" ng-submit="edit()">Edit</button>
-    <button class="btn btn-primary" ng-submit="remove()">Delete</button>
+    <button class="btn btn-primary" ng-click="edit()">Edit</button>
+    <button class="btn btn-danger" ng-click="remove()">Delete</button>
   </div>
 </form>

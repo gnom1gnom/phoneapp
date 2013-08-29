@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('phoneappApp', ['phoneappApp.tagServices', 'phoneappApp.categoryServices', 'phoneappApp.productServices', 'phoneappApp.directives'])
+angular.module('phoneappApp', ['phoneappApp.tagServices', 'phoneappApp.categoryServices', 'phoneappApp.productServices', 'phoneappApp.directives', 'ui.bootstrap'])
   .config(function($routeProvider) {
     $routeProvider
       .when('/main', {

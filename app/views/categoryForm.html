@@ -1,6 +1,8 @@
-<h2>Edit Category</h2>
+<h2 ng-show="!category.id">Create Category</h2>
+<h2 ng-show="category.id">Edit Category</h2>
+
 <form name="categoryForm" ng-submit="save()" class="form-horizontal">
-  <div class="control-group">
+  <div class="well control-group">
     <label class="control-label" for="name">Name:</label>
     <div class="controls">
       <input ng-model="category.name" class="input-xlarge" id="name" focus required>
@@ -9,6 +11,6 @@
 
   <div class="form-actions">
     <button class="btn btn-primary" ng-disabled="categoryForm.$invalid">Save</button>
-    <button type="button" ng-click="remove()" ng-show="!category.id" class="btn">Delete</button>
+    <button type="button" ng-click="cancel()" class="btn">Cancel</button>
   </div>
 </form>

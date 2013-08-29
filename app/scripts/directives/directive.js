@@ -29,3 +29,15 @@ directives.directive('focus',
 			}
 		};
 	});
+
+directives.directive('nav',
+	function() {
+		return {
+			link: function(scope, element, attrs) {
+				element.click(function() {
+					element.siblings().removeClass('active');
+					element.addClass('active');
+				});
+			}
+		};
+	});

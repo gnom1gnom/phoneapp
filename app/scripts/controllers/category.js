@@ -8,32 +8,42 @@ app.controller('CategoryListCtrl', ['$scope', 'categories',
 	}
 ]);
 
-app.controller('CategoryViewCtrl', ['$scope', '$location', 'category',
-	function($scope, $location, category) {
+app.controller('CategoryViewCtrl', ['$scope', '$location', '$dialog', 'category',
+	function($scope, $location, $dialog, category) {
 		$scope.category = category;
+
+		$scope.opts = {
+			backdrop: true,
+			keyboard: true,
+			backdropClick: true,
+			template: 'template/dialog/message.html'
+		};
 
 		$scope.edit = function() {
 			$location.path('/editCategory/' + category.id);
 		};
 
 		$scope.remove = function() {
+			var title = 'Usunięcie kategorii';
+			var msg = 'Czy chcesz usunąć kategorię: ' + $scope.category.name;
+			var btns = [{
+				result: false,
+				label: 'Anuluj'
+			}, {
+				result: true,
+				label: 'OK',
+				cssClass: 'btn-primary'
+			}];
 
-			$.prompt("Czy napewno usunąć kategorię:" + $scope.category.name, {
-				title: "Potwierdź usunięcie",
-				buttons: {
-					"OK": true,
-					"Anuluj": false
-				},
-				submit: function(e, v, m, f) {
-					// use e.preventDefault() to prevent closing when needed or return false. 
-					// e.preventDefault(); 
-					if (v) {
-						delete $scope.category;
-						$location.path('/categories');
+			$dialog.messageBox(title, msg, btns)
+				.open()
+				.then(function(result) {
+					if (result) {
+						$scope.category.$delete(function() {
+							$location.path('/categories');
+						});
 					}
-				}
-			});
-
+				});
 		};
 	}
 ]);
@@ -46,6 +56,10 @@ app.controller('CategoryEditCtrl', ['$scope', '$location', 'category',
 			$scope.category.$update(function(category) {
 				$location.path('/viewCategory/' + category.id);
 			});
+		};
+
+		$scope.cancel = function() {
+			$location.path('/viewCategory/' + category.id);
 		};
 	}
 ]);
@@ -60,6 +74,10 @@ app.controller('CategoryNewCtrl', ['$scope', '$location', 'Category',
 			$scope.category.$save(function(category) {
 				$location.path('/viewCategory/' + category.id);
 			});
+		};
+
+		$scope.cancel = function() {
+			$location.path('/categories');
 		};
 	}
 ]);
