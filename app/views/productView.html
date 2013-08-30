@@ -17,27 +17,48 @@
 			<div class="controls">
 				<span class="input-xlarge uneditable-input" id="name">{{product.name}}</span>
 			</div>
+		</div>
+
+		<div class="control-group">
 
 			<label class="control-label" for="stock">Stock</label>
 			<div class="controls">
 				<span class="input-xlarge uneditable-input" id="stock">{{product.stock}}</span>
 			</div>
+		</div>
 
+		<div class="control-group">
 			<label class="control-label" for="created">Created</label>
 			<div class="controls">
 				<span class="input-xlarge uneditable-input" id="created">{{product.created | date:'yyyy-MM-dd'}}</span>
 			</div>
+		</div>
 
+		<div class="control-group">
 			<label class="control-label" for="price">Price</label>
 			<div class="controls">
 				<span class="input-xlarge uneditable-input" id="price">{{product.price | currency}}</span>
 			</div>
+		</div>
 
+		<div class="control-group">
+			<label class="control-label" for="categories">Categories</label>
+			<div class="controls">
+				<ul class="unstyled" id="categories">
+					<li ng-repeat="category in product.categories">
+						<div>
+							<a ng-href="/#/viewCategory/{{category.id}}">{{category.name}}</a>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+
+		<div class="control-group">
 			<label class="control-label" for="description">Description</label>
 			<div class="controls">
 				<textarea disabled class="input-xlarge uneditable-input description readonly" id="description">{{product.description}}</textarea>
 			</div>
-
 		</div>
 	</fieldset>
 </div>

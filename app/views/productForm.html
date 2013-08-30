@@ -38,6 +38,20 @@
       </div>
 
       <div class="control-group">
+        <label class="control-label" for="categories">Categories</label>
+        <div class="controls">
+          <ul id="categories" class="unstyled" ng-controller="ProductCategoriesCtrl">
+            <li ng-repeat="category in product.categories">
+              <div>
+                <a ng-href="/#/viewCategory/{{category.id}}">{{category.name}}</a><button type="button" class="btn btn-mini" ng-click="removeCategory($index)"><i class="icon-minus-sign"></i>Delete</button>
+              </div>
+            </li>
+            <button type="button" class="btn btn-mini" ng-click="addCategory()"><i class="icon-plus-sign"></i>Add</button>
+          </ul>
+        </div>
+      </div>
+
+      <div class="control-group">
         <label class="control-label" for="description">Description</label>
         <div class="controls">
           <textarea class="input-xlarge description" id="description" ng-model="product.description"></textarea>

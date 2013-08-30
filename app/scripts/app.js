@@ -27,6 +27,11 @@ angular.module('phoneappApp', ['phoneappApp.tagServices', 'phoneappApp.categoryS
           function(ProductLoader) {
             return ProductLoader();
           }
+        ],
+        categories: ["MultiCategoryLoader",
+          function(MultiCategoryLoader) {
+            return MultiCategoryLoader();
+          }
         ]
       },
       templateUrl: '/views/productForm.html'
@@ -38,12 +43,24 @@ angular.module('phoneappApp', ['phoneappApp.tagServices', 'phoneappApp.categoryS
           function(ProductLoader) {
             return ProductLoader();
           }
+        ],
+        categories: ["MultiCategoryLoader",
+          function(MultiCategoryLoader) {
+            return MultiCategoryLoader();
+          }
         ]
       },
       templateUrl: '/views/productView.html'
     })
     .when('/newProduct', {
       controller: 'ProductNewCtrl',
+      resolve: {
+        categories: ["MultiCategoryLoader",
+          function(MultiCategoryLoader) {
+            return MultiCategoryLoader();
+          }
+        ]
+      },
       templateUrl: '/views/productForm.html'
     })
 

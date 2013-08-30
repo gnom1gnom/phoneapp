@@ -8,9 +8,13 @@ app.controller('ProductListCtrl', ['$scope', 'products',
 	}
 ]);
 
-app.controller('ProductViewCtrl', ['$scope', '$location', '$dialog', 'product',
-	function($scope, $location, $dialog, product) {
+app.controller('ProductViewCtrl', ['$scope', '$location', '$dialog', 'product', 'categories',
+	function($scope, $location, $dialog, product, categories) {
 		$scope.product = product;
+
+		$scope.product.categories = _.filter(categories, function(category){
+			return _.contains(product.category_id, category.id);
+		});
 
 		$scope.opts = {
 			backdrop: true,
@@ -48,11 +52,27 @@ app.controller('ProductViewCtrl', ['$scope', '$location', '$dialog', 'product',
 	}
 ]);
 
-app.controller('ProductEditCtrl', ['$scope', '$location', 'product',
-	function($scope, $location, product) {
+app.controller('ProductEditCtrl', ['$scope', '$location', 'product', 'categories',
+	function($scope, $location, product, categories) {
 		$scope.product = product;
 
+		$scope.product.categories = _.filter(categories, function(category){
+			return _.contains(product.category_id, category.id);
+		});
+
 		$scope.save = function() {
+			// update selected category list
+			// $scope.product.category_id = _.pluck($scope.product.categories, 'id');
+
+			var categoryIds = [];
+			var categories = $scope.product.categories;
+
+			for(var index in categories) {
+				categoryIds.push(categories[index].id);
+			}
+
+			$scope.product.category_id = categoryIds;
+			
 			$scope.product.$update(function(product) {
 				$location.path('/viewProduct/' + product.id);
 			});
@@ -69,6 +89,9 @@ app.controller('ProductNewCtrl', ['$scope', '$location', 'Product',
 		$scope.product = new Product();
 
 		$scope.save = function() {
+			// update selected category list
+			$scope.product.category_id = _.pluck($scope.product.categories, 'id');
+
 			$scope.product.$save(function(product) {
 				$location.path('/viewProduct/' + product.id);
 			});
@@ -80,14 +103,14 @@ app.controller('ProductNewCtrl', ['$scope', '$location', 'Product',
 	}
 ]);
 
-app.controller('ProductIngredientsCtrl', ['$scope',
+app.controller('ProductCategoriesCtrl', ['$scope',
 	function($scope) {
-		$scope.addIngredient = function() {
-			var ingredients = $scope.product.ingredients;
-			ingredients[ingredients.length] = {};
+		$scope.addCategory = function() {
+			var categories = $scope.product.categories;
+			categories[categories.length] = {};
 		};
-		$scope.removeIngredient = function(index) {
-			$scope.product.ingredients.splice(index, 1);
+		$scope.removeCategory = function(index) {
+			$scope.product.categories.splice(index, 1);
 		};
 	}
 ]);
