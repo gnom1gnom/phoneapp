@@ -22,3 +22,24 @@ body {
     height: 21px;
     margin-top: 8px;
 }
+
+.well .no-top {
+    padding-top: 0px;
+}
+
+textarea.description {
+    min-height: 150px;
+    resize: vertical;
+}
+
+textarea.description.readonly {
+    background-color: #fff;
+}
+
+input.ng-valid.ng-dirty:focus {
+    background-color: #78FA89;
+}
+
+input.ng-invalid.ng-dirty {
+    background-color: #FA787E;
+}

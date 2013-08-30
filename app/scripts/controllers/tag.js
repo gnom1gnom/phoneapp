@@ -66,9 +66,7 @@ app.controller('TagEditCtrl', ['$scope', '$location', 'tag',
 
 app.controller('TagNewCtrl', ['$scope', '$location', 'Tag',
 	function($scope, $location, Tag) {
-		$scope.tag = new Tag({
-			ingredients: [{}]
-		});
+		$scope.tag = new Tag();
 
 		$scope.save = function() {
 			$scope.tag.$save(function(tag) {

@@ -8,12 +8,42 @@ app.controller('ProductListCtrl', ['$scope', 'products',
 	}
 ]);
 
-app.controller('ProductViewCtrl', ['$scope', '$location', 'product',
-	function($scope, $location, product) {
+app.controller('ProductViewCtrl', ['$scope', '$location', '$dialog', 'product',
+	function($scope, $location, $dialog, product) {
 		$scope.product = product;
 
+		$scope.opts = {
+			backdrop: true,
+			keyboard: true,
+			backdropClick: true,
+			template: 'template/dialog/message.html'
+		};
+
 		$scope.edit = function() {
-			$location.path('/edit/' + product.id);
+			$location.path('/editProduct/' + product.id);
+		};
+
+		$scope.remove = function() {
+			var title = 'Usunięcie produktu';
+			var msg = 'Czy chcesz usunąć produkt: ' + $scope.product.name;
+			var btns = [{
+				result: false,
+				label: 'Anuluj'
+			}, {
+				result: true,
+				label: 'OK',
+				cssClass: 'btn-primary'
+			}];
+
+			$dialog.messageBox(title, msg, btns)
+				.open()
+				.then(function(result) {
+					if (result) {
+						$scope.product.$delete(function() {
+							$location.path('/products');
+						});
+					}
+				});
 		};
 	}
 ]);
@@ -24,27 +54,28 @@ app.controller('ProductEditCtrl', ['$scope', '$location', 'product',
 
 		$scope.save = function() {
 			$scope.product.$update(function(product) {
-				$location.path('/view/' + product.id);
+				$location.path('/viewProduct/' + product.id);
 			});
 		};
 
-		$scope.remove = function() {
-			delete $scope.product;
-			$location.path('/');
+		$scope.cancel = function() {
+			$location.path('/viewProduct/' + product.id);
 		};
 	}
 ]);
 
 app.controller('ProductNewCtrl', ['$scope', '$location', 'Product',
 	function($scope, $location, Product) {
-		$scope.product = new Product({
-			ingredients: [{}]
-		});
+		$scope.product = new Product();
 
 		$scope.save = function() {
 			$scope.product.$save(function(product) {
-				$location.path('/view/' + product.id);
+				$location.path('/viewProduct/' + product.id);
 			});
+		};
+
+		$scope.cancel = function() {
+			$location.path('/products');
 		};
 	}
 ]);

@@ -1,4 +1,5 @@
-var express = require("express"),ingredientName
+var express = require("express"),
+  ingredientName
   app = express(),
   port = parseInt(process.env.PORT, 10) || 8080;
 
@@ -11,26 +12,24 @@ app.configure(function() {
 
 var products_map = {
   '1': {
-    "id": "1",
-    "title": "Samsung Galaxy",
-    "description": "Smartfon, który myśli naprawdę jak Ty.",
-    "ingredients": [{
-      "amount": "1",
-      "amountUnits": "szt",
-      "ingredientName": "Cortex-A7"
-    }],
-    "instructions": "Wireless charging (market dependent)"
+    "created": "2013-08-29T04:13:52.279+0200",
+    "category_id": "1",
+    "name": "produkt 1",
+    "price": 100,
+    "id": 1,
+    "stock": 0,
+    "description": 'gagagsgsgagsagsagsadsad',
+    "tags": []
   },
   '2': {
-    id: 2,
-    'title': 'Product 2',
-    'description': 'Description 2',
-    'instructions': 'Instruction 2',
-    "ingredients": [{
-      "amount": 13,
-      "amountUnits": 'pounds',
-      "ingredientName": 'Awesomeness'
-    }]
+    "created": "2013-08-29T04:13:52.279+0200",
+    "category_id": "1",
+    "name": "produkt 2",
+    "price": 100,
+    "id": 2,
+    "stock": 0,
+    "description": null,
+    "tags": []
   }
 };
 
@@ -73,23 +72,43 @@ app.get('/products/:id', function(req, res) {
 app.post('/products', function(req, res) {
   var product = {};
   product.id = next_id++;
-  product.title = req.body.title;
+
+  console.log('Saving product: ' + req.params);
+
+  product.name = req.body.name;
+  product.created = req.body.created;
+  product.price = req.body.price;
+  product.stock = req.body.stock;
   product.description = req.body.description;
-  product.ingredients = req.body.ingredients;
-  product.instructions = req.body.instructions;
+
+  //product.category_id = req.body.category_id;
+  //product.tags = req.body.tags;
 
   products_map[product.id] = product;
 
   res.send(product);
 });
 
-app.post('/products/:id', function(req, res) {
+app.put('/products/:id', function(req, res) {
   var product = {};
+
+  console.log('Updating product: ');
+  console.log(req.body.name);
+  console.log(req.body.created);
+  console.log(req.body.price);
+  console.log(req.body.stock);
+  console.log(req.body.description);
+
   product.id = req.params.id;
-  product.title = req.body.title;
+  product.name = req.body.name;
+  product.created = req.body.created;
+  product.price = req.body.price;
+  product.stock = req.body.stock;
   product.description = req.body.description;
-  product.ingredients = req.body.ingredients;
-  product.instructions = req.body.instructions;
+  
+  //product.category_id = req.body.category_id;
+  //product.tags = req.body.tags;
+
 
   products_map[product.id] = product;
 
@@ -124,7 +143,7 @@ app.post('/categories', function(req, res) {
   res.send(category);
 });
 
-app.post('/categories/:id', function(req, res) {
+app.put('/categories/:id', function(req, res) {
   var category = {};
   category.id = req.params.id;
   category.name = req.body.name;

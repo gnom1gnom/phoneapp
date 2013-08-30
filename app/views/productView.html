@@ -1,22 +1,48 @@
-<h2>{{product.title}}</h2>
-
-<div>{{product.description}}</div>
-
-<h3>Ingredients</h3>
+<!-- <h3>Ingredients</h3>
 <span ng-show="product.ingredients.length == 0">No Ingredients</span>
 <ul class="unstyled" ng-hide="product.ingredients.length == 0">
-  <li ng-repeat="ingredient in product.ingredients">
-    <span>{{ingredient.amount}}</span>
-    <span>{{ingredient.amountUnits}}</span>
-    <span>{{ingredient.ingredientName}}</span>
-  </li>
+<li ng-repeat="ingredient in product.ingredients">
+	<span>{{ingredient.amount}}</span>
+	<span>{{ingredient.amountUnits}}</span>
+	<span>{{ingredient.ingredientName}}</span>
+</li>
 </ul>
+-->
+<form class="form-horizontal">
+<div class="well no-top">
+	<fieldset>
+		<legend>Product</legend>
+		<div class="control-group">
+			<label class="control-label" for="name">Name</label>
+			<div class="controls">
+				<span class="input-xlarge uneditable-input" id="name">{{product.name}}</span>
+			</div>
 
-<h3>Instructions</h3>
-<div>{{product.instructions}}</div>
+			<label class="control-label" for="stock">Stock</label>
+			<div class="controls">
+				<span class="input-xlarge uneditable-input" id="stock">{{product.stock}}</span>
+			</div>
 
-<form ng-submit="edit()" class="form-horizontal">
-  <div class="form-actions">
-    <button class="btn btn-primary">Edit</button>
-  </div>
+			<label class="control-label" for="created">Created</label>
+			<div class="controls">
+				<span class="input-xlarge uneditable-input" id="created">{{product.created | date:'yyyy-MM-dd'}}</span>
+			</div>
+
+			<label class="control-label" for="price">Price</label>
+			<div class="controls">
+				<span class="input-xlarge uneditable-input" id="price">{{product.price | currency}}</span>
+			</div>
+
+			<label class="control-label" for="description">Description</label>
+			<div class="controls">
+				<textarea disabled class="input-xlarge uneditable-input description readonly" id="description">{{product.description}}</textarea>
+			</div>
+
+		</div>
+	</fieldset>
+</div>
+<div class="form-actions">
+	<button class="btn btn-primary" ng-click="edit()">Edit</button>
+	<button class="btn btn-danger" ng-click="remove()">Delete</button>
+</div>
 </form>

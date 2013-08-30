@@ -1,15 +1,5 @@
 <div class="container-fluid">
 
-  <div class="hero-unit">
-    <h1>'Allo, 'Allo!</h1>
-    <p>You now have</p>
-    <ul>
-      <li ng-repeat="thing in awesomeThings">{{thing}}</li>
-    </ul>
-    <p>installed.</p>
-    <h3>Enjoy coding! - Yeoman</h3>
-  </div>
-
   <div class="row-fluid">
     <div class="span6">
       <label class="checkbox">
@@ -38,4 +28,21 @@
       </p>
     </div>
   </div>
-</div>
+
+  <div class="row-fluid">
+    <div class="span9"></div>
+  </div>
+
+  <div class="row-fluid">
+    <div class="span9">
+      <div ng-controller="DatepickerCtrl">
+
+        <div class="form-horizontal">
+          <input type="text" show-weeks="false" datepicker-popup="dd-MMMM-yyyy" ng-model="dt" open="opened" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" />
+          <button class="btn" ng-click="openDatePicker()"> <i class="icon-calendar"></i>
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </div>

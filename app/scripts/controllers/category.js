@@ -66,9 +66,7 @@ app.controller('CategoryEditCtrl', ['$scope', '$location', 'category',
 
 app.controller('CategoryNewCtrl', ['$scope', '$location', 'Category',
 	function($scope, $location, Category) {
-		$scope.category = new Category({
-			ingredients: [{}]
-		});
+		$scope.category = new Category();
 
 		$scope.save = function() {
 			$scope.category.$save(function(category) {

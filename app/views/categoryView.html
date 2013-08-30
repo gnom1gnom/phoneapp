@@ -1,11 +1,17 @@
-<h2>Kategoria</h2>
-
-<div class="well">Name: {{category.name}}</div>
-
-
 <form class="form-horizontal">
-  <div class="form-actions">
-    <button class="btn btn-primary" ng-click="edit()">Edit</button>
-    <button class="btn btn-danger" ng-click="remove()">Delete</button>
-  </div>
+	<div class="well no-top">
+		<fieldset>
+			<legend>Kategoria</legend>
+			<div class="control-group">
+				<label class="control-label" for="name">Name</label>
+				<div class="controls">
+					<span class="input-xlarge uneditable-input" id="name">{{category.name}}</span>
+				</div>
+			</div>
+		</fieldset>
+	</div>
+	<div class="form-actions">
+		<button class="btn btn-primary" ng-click="edit()">Edit</button>
+		<button class="btn btn-danger" ng-click="remove()">Delete</button>
+	</div>
 </form>
