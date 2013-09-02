@@ -2,12 +2,17 @@
 
 var app = angular.module('phoneappApp');
 
-app.controller('MainCtrl', function($scope, $dialog) {
-	$scope.awesomeThings = [
-		'HTML5 Boilerplate',
-		'AngularJS',
-		'Karma'
-	];
+app.controller('MainCtrl1', ['$scope', 'categories',
+	function($scope, categories) {
+		$scope.categories = categories;
+	}
+]);
+
+
+app.controller('MainCtrl', ['$scope', 'categories',
+		function($scope, categories) {
+
+	$scope.categories = categories;
 
 	// Inlined template for demo
 	var t = '<div class="modal-header">' +
@@ -56,7 +61,7 @@ app.controller('MainCtrl', function($scope, $dialog) {
 			});
 	};
 
-});
+}]);
 
 // the dialog is injected in the specified controller
 

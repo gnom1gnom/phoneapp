@@ -8,12 +8,16 @@ app.controller('ProductListCtrl', ['$scope', 'products',
 	}
 ]);
 
-app.controller('ProductViewCtrl', ['$scope', '$location', '$dialog', 'product', 'categories',
-	function($scope, $location, $dialog, product, categories) {
+app.controller('ProductViewCtrl', ['$scope', '$location', '$dialog', 'product', 'categories', 'tags',
+	function($scope, $location, $dialog, product, categories, tags) {
 		$scope.product = product;
 
-		$scope.product.categories = _.filter(categories, function(category){
-			return _.contains(product.category_id, category.id);
+		$scope.product.category = _.find(categories, function(category) {
+			return product.category_id == category.id;
+		});
+
+		$scope.product.tags = _.filter(tags, function(tag) {
+			return _.contains(product.tag_id, tag.id);
 		});
 
 		$scope.opts = {
@@ -52,13 +56,18 @@ app.controller('ProductViewCtrl', ['$scope', '$location', '$dialog', 'product', 
 	}
 ]);
 
-app.controller('ProductEditCtrl', ['$scope', '$location', 'product', 'categories',
-	function($scope, $location, product, categories) {
+app.controller('ProductEditCtrl', ['$scope', '$location', 'product', 'categories', 'tags',
+	function($scope, $location, product, categories, tags) {
 		$scope.product = product;
 		$scope.categories = categories;
+		$scope.tags = tags;
 
-		$scope.product.categories = _.filter(categories, function(category){
-			return _.contains(product.category_id, category.id);
+		$scope.product.category = _.find(categories, function(category) {
+			return product.category_id == category.id;
+		});
+
+		$scope.product.tags = _.filter(tags, function(tag) {
+			return _.contains(product.tag_id, tag.id);
 		});
 
 		$scope.save = function() {
@@ -70,16 +79,22 @@ app.controller('ProductEditCtrl', ['$scope', '$location', 'product', 'categories
 		$scope.cancel = function() {
 			$location.path('/viewProduct/' + product.id);
 		};
+
+		$scope.$watch('product.category', function(newVal, oldVal) {
+			if(_.isObject(newVal))
+				$scope.product.category_id = newVal.id;
+		});
 	}
 ]);
 
-app.controller('ProductNewCtrl', ['$scope', '$location', 'Product', 'categories',
-	function($scope, $location, Product, categories) {
+app.controller('ProductNewCtrl', ['$scope', '$location', 'Product', 'categories', 'tags',
+	function($scope, $location, Product, categories, tags) {
 		$scope.product = new Product();
-		$scope.product.categories = [];
-		$scope.product.category_id = [];
-		
+		$scope.product.tags = [];
+		$scope.product.tag_id = [];
+
 		$scope.categories = categories;
+		$scope.tags = tags;
 
 		$scope.save = function() {
 			$scope.product.$save(function(product) {
@@ -90,23 +105,28 @@ app.controller('ProductNewCtrl', ['$scope', '$location', 'Product', 'categories'
 		$scope.cancel = function() {
 			$location.path('/products');
 		};
+
+		$scope.$watch('product.category', function(newVal, oldVal) {
+			if(_.isObject(newVal))
+				$scope.product.category_id = newVal.id;
+		});
 	}
 ]);
 
-app.controller('ProductCategoriesCtrl', ['$scope',
+app.controller('ProductTagCtrl', ['$scope',
 	function($scope) {
-		$scope.addCategory = function() {
-			var categories = $scope.product.categories;
-			var category_id = $scope.product.category_id;
+		$scope.addTag = function() {
+			var tags = $scope.product.tags;
+			var tag_id = $scope.product.tag_id;
 
-			categories[categories.length] = $scope.addedCategory;
-			category_id[category_id.length] = $scope.addedCategory.id;
+			tags[tags.length] = $scope.addedTag;
+			tag_id[tag_id.length] = $scope.addedTag.id;
 
-			delete $scope.addedCategory;
+			delete $scope.addedTag;
 		};
-		$scope.removeCategory = function(index) {
-			$scope.product.categories.splice(index, 1);
-			$scope.product.category_id.splice(index, 1);
+		$scope.removeTag = function(index) {
+			$scope.product.tags.splice(index, 1);
+			$scope.product.tag_id.splice(index, 1);
 		};
 	}
 ]);

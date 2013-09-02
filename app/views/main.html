@@ -28,18 +28,38 @@
       </p>
     </div>
   </div>
-
+  <hr />
   <div class="row-fluid">
-    <div class="span9"></div>
+    <div class="span9">
+      <ul class="icons-ul">
+        <li ng-hide="categories"> <i class="icon-li icon-check-empty"></i>
+          None
+        </li>
+        <li ng-repeat="category in categories"> <i class="icon-li icon-check"></i>
+          <a ng-href="/#/viewCategory/{{tag.id}}">{{tag.name}}</a>
+        </li>
+      </ul>
+
+      <ul class="categories">
+        <li ng-repeat="category in categories">
+          <div>
+            <a ng-href="/#/viewCategory/{{category.id}}">{{category.name}}</a>
+          </div>
+        </li>
+      </ul>
+
+    </div>
   </div>
 
+  <hr />
   <div class="row-fluid">
     <div class="span9">
       <div ng-controller="DatepickerCtrl">
 
         <div class="form-horizontal">
           <input type="text" show-weeks="false" datepicker-popup="dd-MMMM-yyyy" ng-model="dt" open="opened" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" />
-          <button class="btn" ng-click="openDatePicker()"> <i class="icon-calendar"></i>
+          <button class="btn" ng-click="openDatePicker()">
+            <i class="icon-calendar"></i>
           </button>
         </div>
 

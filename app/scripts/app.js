@@ -18,51 +18,66 @@ angular.module('phoneappApp', ['phoneappApp.tagServices', 'phoneappApp.categoryS
           }
         ]
       },
-      templateUrl: '/views/productList.html'
+      templateUrl: '/views/product/productList.html'
     })
-    .when('/editProduct/:productId', {
-      controller: 'ProductEditCtrl',
-      resolve: {
-        product: ["ProductLoader",
-          function(ProductLoader) {
-            return ProductLoader();
-          }
-        ],
-        categories: ["MultiCategoryLoader",
-          function(MultiCategoryLoader) {
-            return MultiCategoryLoader();
-          }
-        ]
-      },
-      templateUrl: '/views/productForm.html'
-    })
-    .when('/viewProduct/:productId', {
-      controller: 'ProductViewCtrl',
-      resolve: {
-        product: ["ProductLoader",
-          function(ProductLoader) {
-            return ProductLoader();
-          }
-        ],
-        categories: ["MultiCategoryLoader",
-          function(MultiCategoryLoader) {
-            return MultiCategoryLoader();
-          }
-        ]
-      },
-      templateUrl: '/views/productView.html'
-    })
-    .when('/newProduct', {
-      controller: 'ProductNewCtrl',
-      resolve: {
-        categories: ["MultiCategoryLoader",
-          function(MultiCategoryLoader) {
-            return MultiCategoryLoader();
-          }
-        ]
-      },
-      templateUrl: '/views/productForm.html'
-    })
+      .when('/editProduct/:productId', {
+        controller: 'ProductEditCtrl',
+        resolve: {
+          product: ["ProductLoader",
+            function(ProductLoader) {
+              return ProductLoader();
+            }
+          ],
+          categories: ["MultiCategoryLoader",
+            function(MultiCategoryLoader) {
+              return MultiCategoryLoader();
+            }
+          ],
+          tags: ["MultiTagLoader",
+            function(MultiTagLoader) {
+              return MultiTagLoader();
+            }
+          ]
+        },
+        templateUrl: '/views/product/productForm.html'
+      })
+      .when('/viewProduct/:productId', {
+        controller: 'ProductViewCtrl',
+        resolve: {
+          product: ["ProductLoader",
+            function(ProductLoader) {
+              return ProductLoader();
+            }
+          ],
+          categories: ["MultiCategoryLoader",
+            function(MultiCategoryLoader) {
+              return MultiCategoryLoader();
+            }
+          ],
+          tags: ["MultiTagLoader",
+            function(MultiTagLoader) {
+              return MultiTagLoader();
+            }
+          ]
+        },
+        templateUrl: '/views/product/productView.html'
+      })
+      .when('/newProduct', {
+        controller: 'ProductNewCtrl',
+        resolve: {
+          categories: ["MultiCategoryLoader",
+            function(MultiCategoryLoader) {
+              return MultiCategoryLoader();
+            }
+          ],
+          tags: ["MultiTagLoader",
+            function(MultiTagLoader) {
+              return MultiTagLoader();
+            }
+          ]
+        },
+        templateUrl: '/views/product/productForm.html'
+      })
 
     //categories
     .when('/categories', {
@@ -74,34 +89,34 @@ angular.module('phoneappApp', ['phoneappApp.tagServices', 'phoneappApp.categoryS
           }
         ]
       },
-      templateUrl: '/views/categoryList.html'
+      templateUrl: '/views/category/categoryList.html'
     })
-    .when('/editCategory/:categoryId', {
-      controller: 'CategoryEditCtrl',
-      resolve: {
-        category: ["CategoryLoader",
-          function(CategoryLoader) {
-            return CategoryLoader();
-          }
-        ]
-      },
-      templateUrl: '/views/categoryForm.html'
-    })
-    .when('/viewCategory/:categoryId', {
-      controller: 'CategoryViewCtrl',
-      resolve: {
-        category: ["CategoryLoader",
-          function(CategoryLoader) {
-            return CategoryLoader();
-          }
-        ]
-      },
-      templateUrl: '/views/categoryView.html'
-    })
-    .when('/newCategory', {
-      controller: 'CategoryNewCtrl',
-      templateUrl: '/views/categoryForm.html'
-    })
+      .when('/editCategory/:categoryId', {
+        controller: 'CategoryEditCtrl',
+        resolve: {
+          category: ["CategoryLoader",
+            function(CategoryLoader) {
+              return CategoryLoader();
+            }
+          ]
+        },
+        templateUrl: '/views/category/categoryForm.html'
+      })
+      .when('/viewCategory/:categoryId', {
+        controller: 'CategoryViewCtrl',
+        resolve: {
+          category: ["CategoryLoader",
+            function(CategoryLoader) {
+              return CategoryLoader();
+            }
+          ]
+        },
+        templateUrl: '/views/category/categoryView.html'
+      })
+      .when('/newCategory', {
+        controller: 'CategoryNewCtrl',
+        templateUrl: '/views/category/categoryForm.html'
+      })
 
     //tags
     .when('/tags', {
@@ -113,34 +128,34 @@ angular.module('phoneappApp', ['phoneappApp.tagServices', 'phoneappApp.categoryS
           }
         ]
       },
-      templateUrl: '/views/tagList.html'
+      templateUrl: '/views/tag/tagList.html'
     })
-    .when('/editTag/:tagId', {
-      controller: 'TagEditCtrl',
-      resolve: {
-        tag: ["TagLoader",
-          function(TagLoader) {
-            return TagLoader();
-          }
-        ]
-      },
-      templateUrl: '/views/tagForm.html'
-    })
-    .when('/viewTag/:tagId', {
-      controller: 'TagViewCtrl',
-      resolve: {
-        tag: ["TagLoader",
-          function(TagLoader) {
-            return TagLoader();
-          }
-        ]
-      },
-      templateUrl: '/views/tagView.html'
-    })
-    .when('/newTag', {
-      controller: 'TagNewCtrl',
-      templateUrl: '/views/tagForm.html'
-    })
+      .when('/editTag/:tagId', {
+        controller: 'TagEditCtrl',
+        resolve: {
+          tag: ["TagLoader",
+            function(TagLoader) {
+              return TagLoader();
+            }
+          ]
+        },
+        templateUrl: '/views/tag/tagForm.html'
+      })
+      .when('/viewTag/:tagId', {
+        controller: 'TagViewCtrl',
+        resolve: {
+          tag: ["TagLoader",
+            function(TagLoader) {
+              return TagLoader();
+            }
+          ]
+        },
+        templateUrl: '/views/tag/tagView.html'
+      })
+      .when('/newTag', {
+        controller: 'TagNewCtrl',
+        templateUrl: '/views/tag/tagForm.html'
+      })
 
     .otherwise({
       redirectTo: '/main'

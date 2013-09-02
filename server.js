@@ -13,43 +13,43 @@ app.configure(function() {
 var products_map = {
   '1': {
     "created": "2013-08-29T04:13:52.279+0200",
-    "category_id": [1, 3, 5],
+    "category_id": 3,
     "name": "produkt 1",
     "price": 110,
     "id": 1,
     "stock": 10,
     "description": 'To jest opis produktu 1',
-    "tags": []
+    "tag_id": [2, 3]
   },
   '2': {
     "created": "2013-08-29T04:13:52.279+0200",
-    "category_id": [2, 3, 4],
+    "category_id": 4,
     "name": "produkt 2",
     "price": 120,
     "id": 2,
     "stock": 20,
     "description": 'To jest opis produktu 2',
-    "tags": []
+    "tag_id": [3, 5]
   },
   '3': {
     "created": "2013-08-29T04:13:52.279+0200",
-    "category_id": [3, 4],
+    "category_id": 1,
     "name": "produkt 3",
     "price": 130,
     "id": 3,
     "stock": 30,
     "description": 'To jest opis produktu 3',
-    "tags": []
+    "tag_id": [1]
   },
   '4': {
     "created": "2013-08-29T04:13:52.279+0200",
-    "category_id": [1, 2, 3, 4],
+    "category_id": 5,
     "name": "produkt 4",
     "price": 140,
     "id": 4,
     "stock": 40,
     "description": 'To jest opis produktu 4',
-    "tags": []
+    "tag_id": []
   }
 };
 
@@ -80,8 +80,36 @@ var categories_map = {
   }
 };
 
-var next_id = 3;
-var next_cat_id = 3;
+var tags_map = {
+  '1': {
+    "name": "Tag 1",
+    "id": 1
+  },
+  '2': {
+    "name": "Tag 2",
+    "id": 2
+  },
+  '3': {
+    "name": "Tag 3",
+    "id": 3
+  },
+  '4': {
+    "name": "Tag 4",
+    "id": 4
+  },
+  '5': {
+    "name": "Tag 5",
+    "id": 5
+  },
+  '6': {
+    "name": "Tag 6",
+    "id": 6
+  }
+};
+
+var next_id = 5;
+var next_cat_id = 7;
+var next_tag_id = 7;
 
 app.get('/products', function(req, res) {
   var products = [];
@@ -112,6 +140,7 @@ app.post('/products', function(req, res) {
   console.log('\tStock: ' + req.body.stock);
   console.log('\tDescription: ' + req.body.description);
   console.log('\tCategory ids: ' + req.body.category_id);
+  console.log('\tTag ids: ' + req.body.tag_id);
 
   product.name = req.body.name;
   product.created = req.body.created;
@@ -119,8 +148,7 @@ app.post('/products', function(req, res) {
   product.stock = req.body.stock;
   product.description = req.body.description;
   product.category_id = req.body.category_id;
-
-  //product.tags = req.body.tags;
+  product.tag_id = req.body.tag_id;
 
   products_map[product.id] = product;
 
@@ -137,7 +165,7 @@ app.put('/products/:id', function(req, res) {
   console.log('\tStock: ' + req.body.stock);
   console.log('\tDescription: ' + req.body.description);
   console.log('\tCategory ids: ' + req.body.category_id);
-  //console.log('tags: ' + req.body.tags);
+  console.log('\tTag ids: ' + req.body.tag_id);
 
   product.id = req.params.id;
   product.name = req.body.name;
@@ -146,7 +174,7 @@ app.put('/products/:id', function(req, res) {
   product.stock = req.body.stock;
   product.description = req.body.description;
   product.category_id = req.body.category_id;
-  //product.tags = req.body.tags;
+  product.tag_id = req.body.tag_id;
 
 
   products_map[product.id] = product;
@@ -190,6 +218,44 @@ app.put('/categories/:id', function(req, res) {
   categories_map[category.id] = category;
 
   res.send(category);
+});
+
+app.get('/tags', function(req, res) {
+  var tags = [];
+
+  for (var key in tags_map) {
+    tags.push(tags_map[key]);
+  }
+
+  // Simulate delay in server
+  setTimeout(function() {
+    res.send(tags);
+  }, 500);
+});
+
+app.get('/tags/:id', function(req, res) {
+  console.log('Requesting tag with id', req.params.id);
+  res.send(tags_map[req.params.id]);
+});
+
+app.post('/tags', function(req, res) {
+  var tag = {};
+  tag.id = next_cat_id++;
+  tag.name = req.body.name;
+
+  tags_map[tag.id] = tag;
+
+  res.send(tag);
+});
+
+app.put('/tags/:id', function(req, res) {
+  var tag = {};
+  tag.id = req.params.id;
+  tag.name = req.body.name;
+
+  tags_map[tag.id] = tag;
+
+  res.send(tag);
 });
 
 app.listen(port);

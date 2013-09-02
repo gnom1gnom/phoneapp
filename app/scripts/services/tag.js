@@ -4,7 +4,9 @@ var services = angular.module('phoneappApp.tagServices', ['ngResource']);
 
 services.factory('Tag', ['$resource',
   function($resource) {
-    return $resource('http://llewandowski.waw.eo.pl\\:3000/api/tags/:id', {id: '@id'}, {
+    // return $resource('http://llewandowski.waw.eo.pl\\:3000/api/tags/:id', {
+    return $resource('/tags/:id', {
+      id: '@id'}, {
       query: {
         method: 'GET',
         isArray: true
