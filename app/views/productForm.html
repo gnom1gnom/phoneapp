@@ -43,25 +43,33 @@
           <ul id="categories" class="unstyled" ng-controller="ProductCategoriesCtrl">
             <li ng-repeat="category in product.categories">
               <div>
-                <a ng-href="/#/viewCategory/{{category.id}}">{{category.name}}</a><button type="button" class="btn btn-mini" ng-click="removeCategory($index)"><i class="icon-minus-sign"></i>Delete</button>
-              </div>
-            </li>
-            <button type="button" class="btn btn-mini" ng-click="addCategory()"><i class="icon-plus-sign"></i>Add</button>
-          </ul>
-        </div>
+                <!-- <a ng-href="/#/viewCategory/{{category.id}}">{{category.name}}</a>
+              -->
+              <span class="input-xlarge uneditable-input">{{category.name}}</span>
+              <a class="btn btn-small" ng-click="removeCategory($index)"> <i class="icon-remove icon-small"></i>
+              </a>
+            </div>
+          </li>
+          <li>
+            <select ng-model="addedCategory" class="select-xlarge list-add" ng-options="category.name for category in categories | categoryFilter:this"></select>
+            <button type="button" class="btn btn-small list-add" ng-click="addCategory()" ng-disabled="!addedCategory" ><i class="icon-plus icon-small"></i>
+            </button>
+          </li>
+        </ul>
       </div>
+    </div>
 
-      <div class="control-group">
-        <label class="control-label" for="description">Description</label>
-        <div class="controls">
-          <textarea class="input-xlarge description" id="description" ng-model="product.description"></textarea>
-        </div>
+    <div class="control-group">
+      <label class="control-label" for="description">Description</label>
+      <div class="controls">
+        <textarea class="input-xlarge description" id="description" ng-model="product.description"></textarea>
       </div>
+    </div>
 
-    </fieldset>
-  </div>
-  <div class="form-actions">
-    <button class="btn btn-primary" ng-disabled="productForm.$invalid">Save</button>
-    <button type="button" ng-click="cancel()" class="btn">Cancel</button>
-  </div>
+  </fieldset>
+</div>
+<div class="form-actions">
+  <button class="btn btn-primary" ng-disabled="productForm.$invalid">Save</button>
+  <button type="button" ng-click="cancel()" class="btn">Cancel</button>
+</div>
 </form>

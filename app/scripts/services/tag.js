@@ -45,7 +45,7 @@ services.factory('TagLoader', ['Tag', '$route', '$q',
       }, function(product) {
         delay.resolve(product);
       }, function() {
-        delay.reject('Unable to fetch tag ' + $route.current.params.productId);
+        delay.reject('Unable to fetch tag ' + $route.current.params.tagId);
       });
       return delay.promise;
     };

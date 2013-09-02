@@ -47,7 +47,7 @@ services.factory('CategoryLoader', ['Category', '$route', '$q',
       }, function(product) {
         delay.resolve(product);
       }, function() {
-        delay.reject('Unable to fetch category ' + $route.current.params.productId);
+        delay.reject('Unable to fetch category ' + $route.current.params.categoryId);
       });
       return delay.promise;
     };

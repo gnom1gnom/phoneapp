@@ -44,11 +44,10 @@
 		<div class="control-group">
 			<label class="control-label" for="categories">Categories</label>
 			<div class="controls">
-				<ul class="unstyled" id="categories">
+				<ul class="icons-ul" id="categories">
+					<li ng-hide="product.categories"><i class="icon-li icon-check-empty"></i>None</li>
 					<li ng-repeat="category in product.categories">
-						<div>
-							<a ng-href="/#/viewCategory/{{category.id}}">{{category.name}}</a>
-						</div>
+						<i class="icon-li icon-check"></i><a ng-href="/#/viewCategory/{{category.id}}">{{category.name}}</a>
 					</li>
 				</ul>
 			</div>

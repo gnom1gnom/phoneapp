@@ -43,3 +43,20 @@ input.ng-valid.ng-dirty:focus {
 input.ng-invalid.ng-dirty {
     background-color: #FA787E;
 }
+
+button.listaction {
+    margin-left: 6px;
+}
+
+i.delete {
+    color: #CC4036;
+}
+
+select.select-xlarge {
+    width: 280px;
+    margin-top: 3px;
+}
+
+select,button.list-add{
+    margin-top: 3px;
+}
