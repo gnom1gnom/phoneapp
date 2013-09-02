@@ -15,31 +15,31 @@ var products_map = {
     "created": "2013-08-29T04:13:52.279+0200",
     "category_id": 3,
     "name": "produkt 1",
-    "price": 110,
+    "price": 110.11,
     "id": 1,
     "stock": 10,
     "description": 'To jest opis produktu 1',
-    "tag_id": [2, 3]
+    "tags": [2, 3]
   },
   '2': {
     "created": "2013-08-29T04:13:52.279+0200",
     "category_id": 4,
     "name": "produkt 2",
-    "price": 120,
+    "price": 120.12,
     "id": 2,
     "stock": 20,
     "description": 'To jest opis produktu 2',
-    "tag_id": [3, 5]
+    "tags": [3, 5]
   },
   '3': {
     "created": "2013-08-29T04:13:52.279+0200",
     "category_id": 1,
     "name": "produkt 3",
-    "price": 130,
+    "price": 130.99,
     "id": 3,
     "stock": 30,
     "description": 'To jest opis produktu 3',
-    "tag_id": [1]
+    "tags": [1]
   },
   '4': {
     "created": "2013-08-29T04:13:52.279+0200",
@@ -49,7 +49,7 @@ var products_map = {
     "id": 4,
     "stock": 40,
     "description": 'To jest opis produktu 4',
-    "tag_id": []
+    "tags": []
   }
 };
 
@@ -140,7 +140,7 @@ app.post('/products', function(req, res) {
   console.log('\tStock: ' + req.body.stock);
   console.log('\tDescription: ' + req.body.description);
   console.log('\tCategory ids: ' + req.body.category_id);
-  console.log('\tTag ids: ' + req.body.tag_id);
+  console.log('\tTag ids: ' + req.body.tags);
 
   product.name = req.body.name;
   product.created = req.body.created;
@@ -148,7 +148,7 @@ app.post('/products', function(req, res) {
   product.stock = req.body.stock;
   product.description = req.body.description;
   product.category_id = req.body.category_id;
-  product.tag_id = req.body.tag_id;
+  product.tags = req.body.tags;
 
   products_map[product.id] = product;
 
@@ -165,7 +165,7 @@ app.put('/products/:id', function(req, res) {
   console.log('\tStock: ' + req.body.stock);
   console.log('\tDescription: ' + req.body.description);
   console.log('\tCategory ids: ' + req.body.category_id);
-  console.log('\tTag ids: ' + req.body.tag_id);
+  console.log('\tTag ids: ' + req.body.tags);
 
   product.id = req.params.id;
   product.name = req.body.name;
@@ -174,7 +174,7 @@ app.put('/products/:id', function(req, res) {
   product.stock = req.body.stock;
   product.description = req.body.description;
   product.category_id = req.body.category_id;
-  product.tag_id = req.body.tag_id;
+  product.tags = req.body.tags;
 
 
   products_map[product.id] = product;
@@ -240,7 +240,7 @@ app.get('/tags/:id', function(req, res) {
 
 app.post('/tags', function(req, res) {
   var tag = {};
-  tag.id = next_cat_id++;
+  tag.id = next_tag_id++;
   tag.name = req.body.name;
 
   tags_map[tag.id] = tag;

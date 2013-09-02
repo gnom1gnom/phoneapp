@@ -32,7 +32,7 @@
       <div class="control-group">
         <label class="control-label" for="price">Price</label>
         <div class="controls">
-          <input ng-model="product.price" type="number" min="0" class="input-xlarge invalid" id="price" name="price" required price>
+          <input ng-model="product.price" min="0" class="input-xlarge invalid" id="price" name="price" required price>
           <span ng-show="productForm.price.$error.float">Niepoprawny format ceny</span>
         </div>
       </div>
@@ -40,7 +40,7 @@
       <div class="control-group">
         <label class="control-label" for="categories">Categories</label>
         <div class="controls">
-          <select ng-model="product.category" ng-options="category.name for category in categories" id="categories"></select>
+          <select ng-model="product.category" ng-options="category.name for category in categoryList" id="categories"></select>
         </div>
       </div>
 
@@ -48,7 +48,7 @@
         <label class="control-label" for="tags">Tags</label>
         <div class="controls">
           <ul id="tags" class="unstyled" ng-controller="ProductTagCtrl">
-            <li ng-repeat="tag in product.tags">
+            <li ng-repeat="tag in product.tagObjs">
               <div>
                 <!-- <a ng-href="/#/viewCategory/{{tag.id}}">{{tag.name}}</a>
               -->
@@ -59,7 +59,7 @@
             </div>
           </li>
           <li>
-            <select ng-model="addedTag" class="select-xlarge list-add" ng-options="tag.name for tag in tags | tagFilter:this"></select>
+            <select ng-model="addedTag" class="select-xlarge list-add" ng-options="tag.name for tag in tagList | tagFilter:this"></select>
             <button type="button" class="btn btn-small list-add" ng-click="addTag()" ng-disabled="!addedTag" >
               <i class="icon-plus icon-small"></i>
             </button>

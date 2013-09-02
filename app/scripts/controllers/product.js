@@ -16,8 +16,8 @@ app.controller('ProductViewCtrl', ['$scope', '$location', '$dialog', 'product', 
 			return product.category_id == category.id;
 		});
 
-		$scope.product.tags = _.filter(tags, function(tag) {
-			return _.contains(product.tag_id, tag.id);
+		$scope.product.tagObjs = _.filter(tags, function(tag) {
+			return _.contains(product.tags, tag.id);
 		});
 
 		$scope.opts = {
@@ -59,15 +59,15 @@ app.controller('ProductViewCtrl', ['$scope', '$location', '$dialog', 'product', 
 app.controller('ProductEditCtrl', ['$scope', '$location', 'product', 'categories', 'tags',
 	function($scope, $location, product, categories, tags) {
 		$scope.product = product;
-		$scope.categories = categories;
-		$scope.tags = tags;
+		$scope.categoryList = categories;
+		$scope.tagList = tags;
 
 		$scope.product.category = _.find(categories, function(category) {
 			return product.category_id == category.id;
 		});
 
-		$scope.product.tags = _.filter(tags, function(tag) {
-			return _.contains(product.tag_id, tag.id);
+		$scope.product.tagObjs = _.filter(tags, function(tag) {
+			return _.contains(product.tags, tag.id);
 		});
 
 		$scope.save = function() {
@@ -91,10 +91,10 @@ app.controller('ProductNewCtrl', ['$scope', '$location', 'Product', 'categories'
 	function($scope, $location, Product, categories, tags) {
 		$scope.product = new Product();
 		$scope.product.tags = [];
-		$scope.product.tag_id = [];
+		$scope.product.tagObjs = [];
 
-		$scope.categories = categories;
-		$scope.tags = tags;
+		$scope.categoryList = categories;
+		$scope.tagList = tags;
 
 		$scope.save = function() {
 			$scope.product.$save(function(product) {
@@ -116,17 +116,17 @@ app.controller('ProductNewCtrl', ['$scope', '$location', 'Product', 'categories'
 app.controller('ProductTagCtrl', ['$scope',
 	function($scope) {
 		$scope.addTag = function() {
+			var tagObjs = $scope.product.tagObjs;
 			var tags = $scope.product.tags;
-			var tag_id = $scope.product.tag_id;
 
-			tags[tags.length] = $scope.addedTag;
-			tag_id[tag_id.length] = $scope.addedTag.id;
+			tagObjs[tagObjs.length] = $scope.addedTag;
+			tags[tags.length] = $scope.addedTag.id;
 
 			delete $scope.addedTag;
 		};
 		$scope.removeTag = function(index) {
+			$scope.product.tagObjs.splice(index, 1);
 			$scope.product.tags.splice(index, 1);
-			$scope.product.tag_id.splice(index, 1);
 		};
 	}
 ]);

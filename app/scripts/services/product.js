@@ -4,8 +4,8 @@ var services = angular.module('phoneappApp.productServices', ['ngResource']);
 
 services.factory('Product', ['$resource',
   function($resource) {
-    // return $resource('http://llewandowski.waw.eo.pl\\:3000/api/products/:id', {
-    return $resource('products/:id', {
+    return $resource('http://llewandowski.waw.eo.pl\\:3000/api/products/:id', {
+    // return $resource('products/:id', {
       id: '@id'}, {
       query: {
         method: 'GET',
