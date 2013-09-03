@@ -10,6 +10,88 @@ app.configure(function() {
   app.use(app.router);
 });
 
+var search_result = {
+  "facet": {
+    "category_id": [{
+      "@groupby": "3",
+      "weight": "1",
+      "@count": "2",
+      "id": "3"
+    }, {
+      "@groupby": "2",
+      "weight": "1",
+      "@count": "1",
+      "id": "2"
+    }, {
+      "@groupby": "1",
+      "weight": "1",
+      "@count": "1",
+      "id": "1"
+    }],
+    "tags": [{
+      "@groupby": "5",
+      "weight": "1",
+      "@count": "1",
+      "id": "1"
+    }]
+  },
+  "data": [{
+    "name": "Product 4",
+    "description": "Lorem ipsum",
+    "stock": "5",
+    "tags": "",
+    "created": "2013",
+    "category_id": "3",
+    "weight": "1",
+    "id": "4",
+    "price": "100.989998",
+    "updated": "2013"
+  }, {
+    "name": "Product 3",
+    "description": "",
+    "stock": "0",
+    "tags": "",
+    "created": "2013",
+    "category_id": "3",
+    "weight": "1",
+    "id": "3",
+    "price": "299.989990",
+    "updated": "0"
+  }, {
+    "name": "Product 2",
+    "description": "",
+    "stock": "20",
+    "tags": "",
+    "created": "2013",
+    "category_id": "2",
+    "weight": "1",
+    "id": "2",
+    "price": "199.990005",
+    "updated": "0"
+  }, {
+    "name": "Product 1",
+    "description": "Lorem dolor amet sum...",
+    "stock": "10",
+    "tags": "5",
+    "created": "2013",
+    "category_id": "1",
+    "weight": "1",
+    "id": "1",
+    "price": "99.989998",
+    "updated": "0"
+  }],
+  "meta": [{
+    "Value": "4",
+    "Variable_name": "total"
+  }, {
+    "Value": "4",
+    "Variable_name": "total_found"
+  }, {
+    "Value": "0.000",
+    "Variable_name": "time"
+  }]
+};
+
 var products_map = {
   '1': {
     "created": "2013-08-29T04:13:52.279+0200",
@@ -110,6 +192,14 @@ var tags_map = {
 var next_id = 5;
 var next_cat_id = 7;
 var next_tag_id = 7;
+
+app.get('/search', function(req, res) {
+  console.log('Searching for ' + req.query.q);
+
+  setTimeout(function() {
+    res.send(search_result);
+  }, 500);
+});
 
 app.get('/products', function(req, res) {
   var products = [];

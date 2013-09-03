@@ -1,10 +1,25 @@
-<h3>Search result</h3>
+<div class="container-fluid">
+	<form  name="productForm" ng-submit="save()" class="form-horizontal">
+		<div class="well no-top">
+			<legend>Search criteria</legend>
+			<div class="control-group">
+				<label class="control-label" for="name">Name</label>
+				<div class="controls">
+					<input ng-model="query" class="input-xlarge" id="name" ng-change="search()" focus></div>
+			</div>
+		</div>
+	</form>
+</div>
 <div class="container-fluid">
 	<div class="row-fluid row-fluid-fix">
 		<div class="span3 well" ng-repeat="product in searchResults.data">
-			<a ng-href="/#/viewProduct/{{product.id}}">{{product.name}}</a><br />
-			Price: <span>{{product.price | currency}}</span><br />
-			Stock: <span>{{product.stock}}</span>
+			<a ng-href="/#/viewProduct/{{product.id}}">{{product.name}}</a>
+			<br />
+			Price:
+			<span>{{product.price | currency}}</span>
+			<br />
+			Stock:
+			<span>{{product.stock}}</span>
 		</div>
 	</div>
 </div>

@@ -11,9 +11,9 @@ angular.module('phoneappApp', ['phoneappApp.productSearchService', 'phoneappApp.
     .when('/productSearch', {
       controller: 'ProductSearchCtrl',
       resolve: {
-        searchResults: ["ProductSearchResultLoader",
+        searchService: ["ProductSearchResultLoader",
           function(ProductSearchResultLoader) {
-            return ProductSearchResultLoader();
+            return ProductSearchResultLoader;
           }
         ]
       },
