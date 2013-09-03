@@ -60,3 +60,8 @@ select.select-xlarge {
 select,button.list-add{
     margin-top: 3px;
 }
+
+.row-fluid-fix [class*="span"]:first-child {
+  margin-left: 2.127659574%;
+  *margin-left: 2.0744680846382977%;
+}

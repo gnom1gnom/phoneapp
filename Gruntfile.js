@@ -85,7 +85,8 @@ module.exports = function (grunt) {
     },
     open: {
       server: {
-        url: 'http://localhost:<%= express.options.port %>'
+        url: 'http://localhost:<%= express.options.port %>',
+        app: 'chromium-browser --allow-file-access-from-files --disable-web-security'
       }
     },
     clean: {

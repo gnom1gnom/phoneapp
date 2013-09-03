@@ -1,12 +1,24 @@
 'use strict';
 
-angular.module('phoneappApp', ['phoneappApp.tagServices', 'phoneappApp.categoryServices', 'phoneappApp.productServices', 'phoneappApp.directives', 'ui.bootstrap'])
+angular.module('phoneappApp', ['phoneappApp.productSearchService', 'phoneappApp.tagServices', 'phoneappApp.categoryServices', 'phoneappApp.productServices', 'phoneappApp.directives', 'ui.bootstrap'])
   .config(function($routeProvider) {
     $routeProvider
       .when('/main', {
         templateUrl: 'views/main.html',
         controller: 'MainCtrl'
       })
+    // search
+    .when('/productSearch', {
+      controller: 'ProductSearchCtrl',
+      resolve: {
+        searchResults: ["ProductSearchResultLoader",
+          function(ProductSearchResultLoader) {
+            return ProductSearchResultLoader();
+          }
+        ]
+      },
+      templateUrl: '/views/product/searchResults.html'
+    })
 
     // products
     .when('/products', {
@@ -158,6 +170,6 @@ angular.module('phoneappApp', ['phoneappApp.tagServices', 'phoneappApp.categoryS
       })
 
     .otherwise({
-      redirectTo: '/main'
+      redirectTo: '/productSearch'
     });
   });
