@@ -5,21 +5,41 @@
 			<div class="control-group">
 				<label class="control-label" for="name">Name</label>
 				<div class="controls">
-					<input ng-model="query" class="input-xlarge" id="name" ng-change="search()" focus></div>
+					<input ng-model="query['q']" class="input-xlarge" id="name" ng-change="search()" focus></div>
 			</div>
-		</div>
-	</form>
+			<div class="control-group" ng-repeat="criteria in searchResults.facet">
+				<label class="control-label" for="{{criteria.name}}">{{criteria.name}}</label>
+				<div class="controls">
+					<input ng-model="query[criteria.name]" class="input-xlarge" id="{{criteria.name}}" ng-change="search()"></div>
+			</div>
+			<!-- 			<searchfilter></searchfilter>
+		-->
+		<pre>{{query | json}}</pre>
+	</div>
+</form>
+<div class="alert alert-success" ng-show="resultCount">Found {{resultCount}} in {{searchTime}}s</div>
+<div class="alert alert-info" ng-show="searchInProgress">Search in progress</div>
+<div class="alert alert-error" ng-show="searchError">Error: {{searchError}}</div>
 </div>
 <div class="container-fluid">
-	<div class="row-fluid row-fluid-fix">
-		<div class="span3 well" ng-repeat="product in searchResults.data">
-			<a ng-href="/#/viewProduct/{{product.id}}">{{product.name}}</a>
-			<br />
-			Price:
-			<span>{{product.price | currency}}</span>
-			<br />
-			Stock:
-			<span>{{product.stock}}</span>
-		</div>
+<div class="row-fluid row-fluid-fix">
+	<div class="span2 well" ng-repeat="product in searchResults.data">
+		<a ng-href="/#/viewProduct/{{product.id}}">{{product.name}}</a>
+		<br />
+		Price:
+		<span>{{product.price | currency}}</span>
+		<br />
+		Stock:
+		<span>{{product.stock}}</span>
+		<br />
+		Category:
+		<span>{{product.category_id}}</span>
+		<br />
+		Tag:
+		<span>{{product.tags}}</span>
+		<br />
+		Description:
+		<span>{{product.description}}</span>
 	</div>
+</div>
 </div>

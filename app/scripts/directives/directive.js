@@ -6,7 +6,7 @@ directives.directive('butterbar', ['$rootScope',
 	function($rootScope) {
 		return {
 			link: function(scope, element, attrs) {
-				element.addClass('loading')
+				element.addClass(attrs.butterbar);
 				element.addClass('hide');
 
 				$rootScope.$on('$routeChangeStart', function() {
@@ -50,9 +50,11 @@ directives.directive('integer', function() {
 			ctrl.$parsers.unshift(function(viewValue) {
 				if (INTEGER_REGEXP.test(viewValue)) {
 					ctrl.$setValidity('integer', true);
+					console.log("valid int");
 					return viewValue;
 				} else {
 					ctrl.$setValidity('integer', false);
+					console.log("invalid int");
 					return undefined;
 				}
 			});

@@ -9,11 +9,11 @@
           <input ng-model="product.name" class="input-xlarge" id="name" focus required></div>
       </div>
 
-      <div class="control-group">
+      <div class="control-group" ng-class="{error: productForm.stock.$error.integer}">
         <label class="control-label" for="stock">Stock</label>
         <div class="controls">
           <input ng-model="product.stock" type="number" min="0" class="input-xlarge" id="stock" name="stock" required integer>
-          <span ng-show="productForm.stock.$error.integer">Niepoprawna ilość</span>
+          <span ng-show="productForm.stock.$error.integer" class="help-inline">Niepoprawna ilość</span>
         </div>
       </div>
 
@@ -29,11 +29,11 @@
         </div>
       </div>
 
-      <div class="control-group">
+      <div class="control-group" ng-class="{error: productForm.price.$error.float}">
         <label class="control-label" for="price">Price</label>
         <div class="controls">
-          <input ng-model="product.price" min="0" class="input-xlarge invalid" id="price" name="price" required price>
-          <span ng-show="productForm.price.$error.float">Niepoprawny format ceny</span>
+          <input ng-model="product.price" min="0" class="input-xlarge" id="price" name="price" required price>
+          <span ng-show="productForm.price.$error.float" class="help-inline">Niepoprawny format ceny</span>
         </div>
       </div>
 

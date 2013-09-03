@@ -11,86 +11,144 @@ app.configure(function() {
 });
 
 var search_result = {
-  "facet": {
-    "category_id": [{
-      "@groupby": "3",
-      "weight": "1",
-      "@count": "2",
-      "id": "3"
-    }, {
-      "@groupby": "2",
-      "weight": "1",
-      "@count": "1",
-      "id": "2"
-    }, {
-      "@groupby": "1",
-      "weight": "1",
-      "@count": "1",
-      "id": "1"
-    }],
-    "tags": [{
-      "@groupby": "5",
-      "weight": "1",
-      "@count": "1",
-      "id": "1"
-    }]
-  },
-  "data": [{
-    "name": "Product 4",
-    "description": "Lorem ipsum",
-    "stock": "5",
-    "tags": "",
-    "created": "2013",
-    "category_id": "3",
-    "weight": "1",
-    "id": "4",
-    "price": "100.989998",
-    "updated": "2013"
+  "facet": [{
+    "options": {
+      "1": 0,
+      "3": 0
+    },
+    "name": "category_id"
   }, {
-    "name": "Product 3",
+    "options": {
+      "5": 0,
+      "6": 0,
+      "7": 0,
+      "8": 0,
+      "10": 0
+    },
+    "name": "tags"
+  }],
+  "data": [{
+    "name": "Product ABC",
     "description": "",
     "stock": "0",
     "tags": "",
     "created": "2013",
     "category_id": "3",
     "weight": "1",
-    "id": "3",
-    "price": "299.989990",
+    "id": "20",
+    "price": "199.000000",
     "updated": "0"
   }, {
-    "name": "Product 2",
+    "name": "Product ABC",
     "description": "",
-    "stock": "20",
+    "stock": "0",
     "tags": "",
     "created": "2013",
-    "category_id": "2",
+    "category_id": "3",
     "weight": "1",
-    "id": "2",
+    "id": "19",
+    "price": "199.000000",
+    "updated": "0"
+  }, {
+    "name": "Product ABC",
+    "description": "",
+    "stock": "0",
+    "tags": "",
+    "created": "2013",
+    "category_id": "3",
+    "weight": "1",
+    "id": "18",
+    "price": "199.000000",
+    "updated": "0"
+  }, {
+    "name": "Product ABC",
+    "description": "",
+    "stock": "0",
+    "tags": "",
+    "created": "2013",
+    "category_id": "3",
+    "weight": "1",
+    "id": "17",
+    "price": "199.000000",
+    "updated": "0"
+  }, {
+    "name": "Product ABC",
+    "description": "",
+    "stock": "0",
+    "tags": "",
+    "created": "2013",
+    "category_id": "3",
+    "weight": "1",
+    "id": "16",
+    "price": "199.000000",
+    "updated": "0"
+  }, {
+    "name": "Product ABC",
+    "description": "",
+    "stock": "0",
+    "tags": "",
+    "created": "2013",
+    "category_id": "3",
+    "weight": "1",
+    "id": "15",
+    "price": "199.000000",
+    "updated": "0"
+  }, {
+    "name": "Product XXX",
+    "description": "",
+    "stock": "0",
+    "tags": "5,6,7",
+    "created": "2013",
+    "category_id": "3",
+    "weight": "1",
+    "id": "12",
+    "price": "199.990005",
+    "updated": "2013"
+  }, {
+    "name": "Product 100",
+    "description": "",
+    "stock": "0",
+    "tags": "",
+    "created": "2013",
+    "category_id": "3",
+    "weight": "1",
+    "id": "8",
     "price": "199.990005",
     "updated": "0"
   }, {
-    "name": "Product 1",
-    "description": "Lorem dolor amet sum...",
-    "stock": "10",
-    "tags": "5",
+    "name": "Product 100",
+    "description": "",
+    "stock": "0",
+    "tags": "",
     "created": "2013",
-    "category_id": "1",
+    "category_id": "3",
     "weight": "1",
-    "id": "1",
-    "price": "99.989998",
+    "id": "7",
+    "price": "199.990005",
+    "updated": "0"
+  }, {
+    "name": "Product 100",
+    "description": "",
+    "stock": "0",
+    "tags": "",
+    "created": "2013",
+    "category_id": "3",
+    "weight": "1",
+    "id": "6",
+    "price": "199.990005",
     "updated": "0"
   }],
   "meta": [{
-    "Value": "4",
+    "Value": "14",
     "Variable_name": "total"
   }, {
-    "Value": "4",
+    "Value": "14",
     "Variable_name": "total_found"
   }, {
     "Value": "0.000",
     "Variable_name": "time"
   }]
-};
+}
 
 var products_map = {
   '1': {
@@ -199,6 +257,7 @@ app.get('/search', function(req, res) {
   setTimeout(function() {
     res.send(search_result);
   }, 500);
+  // res.send(500, { error: 'something blew up' });
 });
 
 app.get('/products', function(req, res) {
