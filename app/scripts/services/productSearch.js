@@ -15,10 +15,11 @@ services.service('ProductSearchResultLoader', ['$http', '$q',
 			});
 
 			searchHttp.success(function(productSearchResult) {
-				console.log('Search results received in service');
+				console.debug('Search results received in service');
 				delay.resolve(productSearchResult);
 			}).error(function(reason) {
-				delay.reject('Unable to fetch search results - ' + reason.error);
+				console.error('Search error in service');
+				delay.reject(reason.errors);
 			});
 
 			return delay.promise;
