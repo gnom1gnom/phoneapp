@@ -50,7 +50,9 @@ directives.directive('sortable',
 					$scope.reverse = $scope.options.reverse;
 
 				element.bind("click", function(event) {
-					$scope.reverse = !($scope.reverse);
+					if ($scope.options.predicate == $scope.atribute)
+						$scope.reverse = !($scope.reverse);
+
 					$scope.clicked({
 						attribute: $scope.atribute,
 						order: $scope.reverse

@@ -56,13 +56,8 @@ app.controller('ProductSearchCtrl', ['$scope', '$location', 'searchService', '$s
 
 
 		$scope.sort = function(attribute, order) {
-			console.log("Sorting: " + attribute)
-			if ($scope.sortOptions.predicate != attribute) {
-				$scope.sortOptions.predicate = attribute;
-				$scope.sortOptions.reverse = order;
-			} else {
-				$scope.sortOptions.reverse = !order;
-			}
+			$scope.sortOptions.predicate = attribute;
+			$scope.sortOptions.reverse = order;
 
 			$scope.$apply();
 		};
@@ -72,8 +67,8 @@ app.controller('ProductSearchCtrl', ['$scope', '$location', 'searchService', '$s
 		};
 
 		$scope.sortOptions = {
-			predicate : "name",
-			reverse : false
+			predicate: "name",
+			reverse: false
 		};
 
 		$scope.search();
