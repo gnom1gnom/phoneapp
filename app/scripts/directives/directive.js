@@ -8,7 +8,6 @@ directives.directive('navbar', ['$rootScope', '$location',
 			link: function(scope, element, attrs) {
 
 				$rootScope.$on('$routeChangeSuccess', function() {
-					console.log('li:has(a[href="/#' + $location.path() +'"])');
 					element.find('li.active').removeClass('active');
 					element.find('li:has(a[href="/#' + $location.path() +'"])').addClass('active');
 				});

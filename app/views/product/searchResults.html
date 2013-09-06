@@ -5,11 +5,11 @@
 			<div class="control-group">
 				<label class="control-label" for="name">Name</label>
 				<div class="controls">
-					<input ng-model="query['q']" class="input-xlarge" id="name" focus typeahead-on-select="search()" typeahead="description for description in descriptions | filter:$viewValue | limitTo:15" />
+					<input ng-model="query['q']" class="input-xlarge" id="name" focus typeahead-on-select="search()" typeahead="description for description in suggest($viewValue)" />
 				</div>
 			</div>
 			<div class="control-group" ng-repeat="criteria in searchResults.facet | facetOptionFilter">
-				<label class="control-label" for="{{criteria.name}}">{{criteria.name}}</label>
+				<label class="control-label" for="{{criteria.name}}">{{searchFacets[criteria.name].label}}</label>
 				<div class="controls">
 					<input ng-model="query[criteria.name]" class="input-xlarge" id="{{criteria.name}}" />
 				</div>
@@ -28,23 +28,24 @@
 </div>
 <div class="container-fluid">
 	<div class="row-fluid row-fluid-fix">
-		<div class="span2 well" ng-repeat="product in searchResults.data">
-			<a ng-href="/#/viewProduct/{{product.id}}">{{product.name}}</a>
-			<br />
-			Price:
-			<span>{{product.price | currency}}</span>
-			<br />
-			Stock:
-			<span>{{product.stock}}</span>
-			<br />
-			Category:
-			<span>{{product.category_id}}</span>
-			<br />
-			Tag:
-			<span>{{product.tags}}</span>
-			<br />
-			Description:
-			<span>{{product.description}}</span>
-		</div>
+		<pre>Sorting predicate = {{sorting.predicate}}; reverse = {{sorting.reverse}}</pre>
+		<table class="table table-striped">
+			<tr>
+				<th><a class="sortable" clicked="sort(attribute, order)" predicate="{{sorting.predicate}}" atribute="name"></a></th>
+				<th><a class="sortable" clicked="sort(attribute, order)" predicate="{{sorting.predicate}}" atribute="price">Price </a></th>
+				<th><a class="sortable" clicked="sort(attribute, order)" predicate="{{sorting.predicate}}" atribute="stock">Stock </a></th>
+				<th><a class="sortable" clicked="sort(attribute, order)" predicate="{{sorting.predicate}}" atribute="category_id">Category </a></th>
+				<th><a class="sortable" clicked="sort(attribute, order)" predicate="{{sorting.predicate}}" atribute="tags">Tags </a></th>
+				<th><a class="sortable" clicked="sort(attribute, order)" predicate="{{sorting.predicate}}" atribute="description">Description </a></th>
+			</tr>
+			<tr ng-repeat="product in searchResults.data | orderBy:sorting.predicate:sorting.reverse" ng-click="view('/viewProduct/' + product.id)">
+				<td>{{product.name}}</td>
+				<td>{{product.price | currency}}</td>
+				<td>{{product.stock}}</td>
+				<td>{{product.category_id}}</td>
+				<td>{{product.tags}}</td>
+				<td>{{product.description}}</td>
+			</tr>
+		</table>
 	</div>
 </div>

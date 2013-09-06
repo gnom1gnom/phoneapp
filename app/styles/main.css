@@ -65,3 +65,7 @@ select,button.list-add{
   margin-left: 2.127659574%;
   *margin-left: 2.0744680846382977%;
 }
+
+.sortable {
+    cursor: pointer;
+}

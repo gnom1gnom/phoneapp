@@ -30,3 +30,26 @@ directives.directive('ngenter',
 		};
 	}
 );
+
+directives.directive('sortable',
+	function($compile, $searchFacets) {
+		return {
+			restrict: 'C',
+			scope: {
+				clicked: '&',
+				predicate: '@'
+			},
+			template: '{{label}}<i ng-class="' + '{true: \'icon-sort-up\', false: \'icon-sort-down\'}' + '[reverse]" ng-show="name==predicate"></i>',
+			link: function($scope, element, attrs, controller) {
+				$scope.label = $searchFacets[attrs.atribute].label;
+				$scope.name = attrs.atribute;
+				$scope.reverse = false;
+
+				element.bind("click", function(event) {
+					$scope.reverse = !($scope.reverse);
+					$scope.clicked({attribute: $scope.name, order:$scope.reverse});
+				});
+			}
+		};
+	}
+);
