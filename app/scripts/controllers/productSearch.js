@@ -27,11 +27,6 @@ app.controller('ProductSearchCtrl', ['$scope', '$location', 'searchService', '$s
 						"Variable_name": "time"
 					});
 
-					// if (_($scope.descriptions).isUndefined() && _(result.data).isObject())
-					// 	$scope.descriptions = _.union(_.pluck(result.data, 'name'), _.pluck(result.data, 'description'));
-
-					// console.log('Search results descriptions:' + JSON.stringify($scope.descriptions));
-
 					$scope.resultCount = _.first(total_found).Value;
 					$scope.searchTime = _.first(time).Value;
 
@@ -62,11 +57,11 @@ app.controller('ProductSearchCtrl', ['$scope', '$location', 'searchService', '$s
 
 		$scope.sort = function(attribute, order) {
 			console.log("Sorting: " + attribute)
-			if ($scope.sorting.predicate != attribute) {
-				$scope.sorting.predicate = attribute;
-				$scope.sorting.reverse = order;
+			if ($scope.sortOptions.predicate != attribute) {
+				$scope.sortOptions.predicate = attribute;
+				$scope.sortOptions.reverse = order;
 			} else {
-				$scope.sorting.reverse = !order;
+				$scope.sortOptions.reverse = !order;
 			}
 
 			$scope.$apply();
@@ -76,7 +71,7 @@ app.controller('ProductSearchCtrl', ['$scope', '$location', 'searchService', '$s
 			limit: 50
 		};
 
-		$scope.sorting = {
+		$scope.sortOptions = {
 			predicate : "name",
 			reverse : false
 		};

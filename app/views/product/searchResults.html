@@ -28,17 +28,17 @@
 </div>
 <div class="container-fluid">
 	<div class="row-fluid row-fluid-fix">
-		<pre>Sorting predicate = {{sorting.predicate}}; reverse = {{sorting.reverse}}</pre>
+		<pre>Sorting predicate = {{sortOptions.predicate}}; reverse = {{sortOptions.reverse}}</pre>
 		<table class="table table-striped">
 			<tr>
-				<th><a class="sortable" clicked="sort(attribute, order)" predicate="{{sorting.predicate}}" atribute="name"></a></th>
-				<th><a class="sortable" clicked="sort(attribute, order)" predicate="{{sorting.predicate}}" atribute="price">Price </a></th>
-				<th><a class="sortable" clicked="sort(attribute, order)" predicate="{{sorting.predicate}}" atribute="stock">Stock </a></th>
-				<th><a class="sortable" clicked="sort(attribute, order)" predicate="{{sorting.predicate}}" atribute="category_id">Category </a></th>
-				<th><a class="sortable" clicked="sort(attribute, order)" predicate="{{sorting.predicate}}" atribute="tags">Tags </a></th>
-				<th><a class="sortable" clicked="sort(attribute, order)" predicate="{{sorting.predicate}}" atribute="description">Description </a></th>
+				<th><a class="sortable" clicked="sort(attribute, order)" options="sortOptions" atribute="name"></a></th>
+				<th><a class="sortable" clicked="sort(attribute, order)" options="sortOptions" atribute="price"></a></th>
+				<th><a class="sortable" clicked="sort(attribute, order)" options="sortOptions" atribute="stock"></a></th>
+				<th><a class="sortable" clicked="sort(attribute, order)" options="sortOptions" atribute="category_id"></a></th>
+				<th><a class="sortable" clicked="sort(attribute, order)" options="sortOptions" atribute="tags"></a></th>
+				<th><a class="sortable" clicked="sort(attribute, order)" options="sortOptions" atribute="description"></a></th>
 			</tr>
-			<tr ng-repeat="product in searchResults.data | orderBy:sorting.predicate:sorting.reverse" ng-click="view('/viewProduct/' + product.id)">
+			<tr ng-repeat="product in searchResults.data | orderBy:sortOptions.predicate:sortOptions.reverse" ng-click="view('/viewProduct/' + product.id)">
 				<td>{{product.name}}</td>
 				<td>{{product.price | currency}}</td>
 				<td>{{product.stock}}</td>

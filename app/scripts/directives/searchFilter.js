@@ -37,17 +37,24 @@ directives.directive('sortable',
 			restrict: 'C',
 			scope: {
 				clicked: '&',
-				predicate: '@'
+				options: '='
 			},
-			template: '{{label}}<i ng-class="' + '{true: \'icon-sort-up\', false: \'icon-sort-down\'}' + '[reverse]" ng-show="name==predicate"></i>',
+			template: '{{label}} <i ng-class="' + '{true: \'icon-sort-up\', false: \'icon-sort-down\'}' + '[reverse]" ng-show="atribute==options.predicate"></i>',
 			link: function($scope, element, attrs, controller) {
-				$scope.label = $searchFacets[attrs.atribute].label;
-				$scope.name = attrs.atribute;
+				$scope.atribute = attrs.atribute;
+				$scope.label = $searchFacets[$scope.atribute].label;
 				$scope.reverse = false;
+
+
+				if ($scope.options.predicate == $scope.atribute)
+					$scope.reverse = $scope.options.reverse;
 
 				element.bind("click", function(event) {
 					$scope.reverse = !($scope.reverse);
-					$scope.clicked({attribute: $scope.name, order:$scope.reverse});
+					$scope.clicked({
+						attribute: $scope.atribute,
+						order: $scope.reverse
+					});
 				});
 			}
 		};
