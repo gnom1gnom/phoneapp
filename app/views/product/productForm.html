@@ -50,8 +50,6 @@
           <ul id="tags" class="unstyled" ng-controller="ProductTagCtrl">
             <li ng-repeat="tag in product.tagObjs">
               <div>
-                <!-- <a ng-href="/#/viewCategory/{{tag.id}}">{{tag.name}}</a>
-              -->
               <span class="input-xlarge uneditable-input">{{tag.name}}</span>
               <a class="btn btn-small" ng-click="removeTag($index)">
                 <i class="icon-remove icon-small"></i>

@@ -23,10 +23,19 @@ angular.module("phoneappApp.searchFacets", [], ["$provide",
         "label": "Updated"
       },
       "category_id": {
-        "label": "Category"
+        "label": "Category",
+        "dictionary": {
+          "service": "MultiCategoryLoader",
+          "key": "id"
+        }
       },
       "tags": {
-        "label": "Tags"
+        "label": "Tags",
+        "dictionary": {
+          "service": "MultiTagLoader",
+          "key": "id"
+        },
+        "multiple" : true
       }
     });
   }

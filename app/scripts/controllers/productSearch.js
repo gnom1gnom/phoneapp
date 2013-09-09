@@ -71,6 +71,8 @@ app.controller('ProductSearchCtrl', ['$scope', '$location', 'searchService', '$s
 			reverse: false
 		};
 
-		$scope.search();
+		$scope.dict = {};
+
+		//$scope.search();
 	}
 ]);

@@ -10,8 +10,8 @@
 			</div>
 			<div class="control-group" ng-repeat="criteria in searchResults.facet | facetOptionFilter">
 				<label class="control-label" for="{{criteria.name}}">{{searchFacets[criteria.name].label}}</label>
-				<div class="controls">
-					<input ng-model="query[criteria.name]" class="input-xlarge" id="{{criteria.name}}" />
+				<div class="controls" searchfield criteria="criteria" query="query" dict="dict">
+					<!-- <input ng-model="query[criteria.name]" class="input-xlarge" id="{{criteria.name}}" /> -->
 				</div>
 			</div>
 			<div class="control-group">
@@ -28,7 +28,7 @@
 </div>
 <div class="container-fluid">
 	<div class="row-fluid row-fluid-fix">
-		<pre>Sorting predicate = {{sortOptions.predicate}}; reverse = {{sortOptions.reverse}}</pre>
+<!-- 		<pre>Sorting predicate = {{sortOptions.predicate}}; reverse = {{sortOptions.reverse}}</pre> -->
 		<table class="table table-striped">
 			<tr>
 				<th><a class="sortable" clicked="sort(attribute, order)" options="sortOptions" atribute="name"></a></th>
