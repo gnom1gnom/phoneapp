@@ -39,14 +39,13 @@ directives.directive('searchfield',
 			// terminal: true,
 			scope: {
 				query: '=',
-				criteria: '=',
-				dict: '='
-
-			}, 
+				criteria: '='
+			},
 			restrict: 'A',
+			template: '<select ng-model="query" ng-options="entry.id as entry.name for entry in dictionary"><option value="" style="display: none;"></option></select>',
+			// templateUrl: '/views/search/singleoption.html',
 			link: function($scope, iElm, iAttrs, controller) {
 				$scope.facet = $searchFacets[$scope.criteria.name];
-				console.log('Searchfield:' + JSON.stringify($scope.facet));
 
 				if (!(_.isEmpty($scope.facet.dictionary))) {
 					var dictionaryDefinition = $scope.facet.dictionary;
@@ -60,20 +59,15 @@ directives.directive('searchfield',
 								return _.contains(facetKeys, "" + entry.id);
 							});
 
-							$scope.dictionary.splice(0, 0, {'name' : '', 'id' : '*'});
+							$scope.dictionary.splice(0, 0, {
+								'name': '',
+								'id': '*'
+							});
 
-							console.log('dictionary:' + JSON.stringify($scope.dictionary));
-
-							$scope.model = 'query[\'' + $scope.criteria.name + '\']';
-
-							var elemHtml = '<select ng-model="' + $scope.model + '" ng-options="entry.id as entry.name for entry in dictionary"><option value="" style="display: none;"></option></select>';
-
-							iElm.append($compile(elemHtml)($scope));
-
-
-							$scope.$watch(model, function(newVal, oldVal) {
-								if(newVal == '*')
-									delete $scope.query[$scope.criteria.name];
+							var watch = 'query["' + $scope.criteria.name + '"]';
+							$scope.$parent.$watch(watch, function(newVal, oldVal) {
+								if (newVal == '*')
+									delete $scope.$parent.query[$scope.criteria.name];
 							});
 						},
 						function(error) {

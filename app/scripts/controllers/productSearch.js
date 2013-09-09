@@ -27,8 +27,8 @@ app.controller('ProductSearchCtrl', ['$scope', '$location', 'searchService', '$s
 						"Variable_name": "time"
 					});
 
-					$scope.resultCount = _.first(total_found).Value;
-					$scope.searchTime = _.first(time).Value;
+					$scope.resultCount = result.meta.total_found;
+					$scope.searchTime = result.meta.time;
 
 					$scope.searchInProgress = false;
 					delete $scope.searchError;
