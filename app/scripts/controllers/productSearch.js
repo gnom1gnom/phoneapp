@@ -1,14 +1,7 @@
 var app = angular.module('phoneappApp');
 
-app.controller('ProductSearchCtrl', ['$scope', '$location', 'searchService', '$searchFacets',
-	function($scope, $location, searchService, $searchFacets) {
-		$scope.searchFacets = $searchFacets;
-
-		$scope.typeAheadSearch = function() {
-			console.log("typed ahead search");
-			$.scope.search();
-		};
-
+app.controller('ProductSearchCtrl', ['$scope', '$location', 'searchService', '$searchFacets', '$stateParams',
+	function($scope, $location, searchService, $searchFacets, $stateParams) {
 		$scope.search = function() {
 			$scope.searchInProgress = true;
 
@@ -62,17 +55,46 @@ app.controller('ProductSearchCtrl', ['$scope', '$location', 'searchService', '$s
 			$scope.$apply();
 		};
 
-		$scope.query = {
-			limit: 50
-		};
+		$scope.searchFacets = $searchFacets;
 
 		$scope.sortOptions = {
 			predicate: "name",
 			reverse: false
 		};
 
-		$scope.dict = {};
-
-		//$scope.search();
+		//czysczenie przekazanych parametrów 
+		$scope.query = _.parameterCleanu($stateParams, $searchFacets);
+		if (_($scope.query).isEmpty()) {
+			$scope.query = {
+				limit: 50
+			}
+		} else {
+			$scope.search();
+		}
 	}
 ]);
+
+// czyści obiekt w kluczy o pustej wartości
+_.mixin({
+	parameterCleanu: function(object, searchFacets) {
+		_.each(object, function(value, key) {
+			if (!value)
+				delete object[key];
+			else {
+				var facet = searchFacets[key];
+				if (_(facet).isObject()) {
+					var newValue = value;
+
+					if (facet.type.match(/number/i))
+						newValue = parseInt(value);
+
+					if (facet.multiple)
+						object[key] = [newValue];
+					else
+						object[key] = newValue;
+				}
+			}
+		});
+		return object;
+	}
+});

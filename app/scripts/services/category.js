@@ -38,12 +38,12 @@ services.factory('MultiCategoryLoader', ['Category', '$q',
   }
 ]);
 
-services.factory('CategoryLoader', ['Category', '$route', '$q',
-  function(Category, $route, $q) {
-    return function() {
+services.factory('CategoryLoader', ['Category', '$q',
+  function(Category, $q) {
+    return function(idParam) {
       var delay = $q.defer();
       Category.get({
-        id: $route.current.params.categoryId
+        id: idParam
       }, function(product) {
         delay.resolve(product);
       }, function() {

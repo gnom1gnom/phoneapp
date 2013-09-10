@@ -10,7 +10,7 @@
 			</div>
 			<div class="control-group" ng-repeat="criteria in searchResults.facet | facetOptionFilter">
 				<label class="control-label" for="{{criteria.name}}">{{searchFacets[criteria.name].label}}</label>
-				<div class="controls" searchfield criteria="criteria" query="query[criteria.name]">
+				<div class="controls" searchfield criteria="criteria" query="query">
 					<!-- <input ng-model="query[criteria.name]" class="input-xlarge" id="{{criteria.name}}" /> -->
 				</div>
 			</div>

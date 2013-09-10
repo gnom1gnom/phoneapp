@@ -2,17 +2,8 @@
 
 var app = angular.module('phoneappApp');
 
-app.controller('MainCtrl1', ['$scope', 'categories',
-	function($scope, categories) {
-		$scope.categories = categories;
-	}
-]);
-
-
-app.controller('MainCtrl', ['$scope', 'categories',
-		function($scope, categories) {
-
-	$scope.categories = categories;
+app.controller('MainCtrl', ['$scope',
+		function($scope) {
 
 	// Inlined template for demo
 	var t = '<div class="modal-header">' +

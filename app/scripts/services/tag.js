@@ -38,12 +38,12 @@ services.factory('MultiTagLoader', ['Tag', '$q',
   }
 ]);
 
-services.factory('TagLoader', ['Tag', '$route', '$q',
-  function(Tag, $route, $q) {
-    return function() {
+services.factory('TagLoader', ['Tag', '$q',
+  function(Tag, $q) {
+    return function(idParam) {
       var delay = $q.defer();
       Tag.get({
-        id: $route.current.params.tagId
+        id: idParam
       }, function(product) {
         delay.resolve(product);
       }, function() {

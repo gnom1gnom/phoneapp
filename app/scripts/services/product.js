@@ -38,16 +38,16 @@ services.factory('MultiProductLoader', ['Product', '$q',
   }
 ]);
 
-services.factory('ProductLoader', ['Product', '$route', '$q',
-  function(Product, $route, $q) {
-    return function() {
+services.factory('ProductLoader', ['Product', '$q',
+  function(Product, $q) {
+    return function(idParam) {
       var delay = $q.defer();
       Product.get({
-        id: $route.current.params.productId
+        id: idParam
       }, function(product) {
         delay.resolve(product);
       }, function() {
-        delay.reject('Unable to fetch product ' + $route.current.params.productId);
+        delay.reject('Unable to fetch product ' + $stateParams.productId);
       });
       return delay.promise;
     };

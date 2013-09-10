@@ -2,41 +2,59 @@ angular.module("phoneappApp.searchFacets", [], ["$provide",
   function($provide) {
     $provide.value('$searchFacets', {
       "name": {
-        "label": "Name"
+        "label": "Name",
+        "type": "string",
+        "multiple": false
       },
       "description": {
-        "label": "Description"
+        "label": "Description",
+        "type": "string",
+        "multiple": false
       },
       "stock": {
-        "label": "Stock"
+        "label": "Stock",
+        "type": "number",
+        "multiple": false
       },
       "created": {
-        "label": "Created"
+        "label": "Created",
+        "type": "date",
+        "multiple": false
       },
       "id": {
-        "label": "Id"
+        "label": "Id",
+        "type": "number",
+        "multiple": false
       },
       "price": {
-        "label": "Price"
+        "label": "Price",
+        "type": "number",
+        "multiple": false
       },
       "updated": {
-        "label": "Updated"
+        "label": "Updated",
+        "type": "date",
+        "multiple": false
       },
       "category_id": {
         "label": "Category",
+        "type": "number",
+        "multiple": false,
         "dictionary": {
           "service": "MultiCategoryLoader",
-          "key": "id"
+          "key": "id",
         },
-        "controll" : "singleDropdown"
+        "controll": "singleDropdown"
       },
       "tags": {
         "label": "Tags",
+        "type": "number",
+        "multiple": true,
         "dictionary": {
           "service": "MultiTagLoader",
           "key": "id"
         },
-        "controll" : "multipleDropdown"
+        "controll": "multipleDropdown"
       }
     });
   }
