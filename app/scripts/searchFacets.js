@@ -27,7 +27,8 @@ angular.module("phoneappApp.searchFacets", [], ["$provide",
         "dictionary": {
           "service": "MultiCategoryLoader",
           "key": "id"
-        }
+        },
+        "controll" : "singleDropdown"
       },
       "tags": {
         "label": "Tags",
@@ -35,7 +36,7 @@ angular.module("phoneappApp.searchFacets", [], ["$provide",
           "service": "MultiTagLoader",
           "key": "id"
         },
-        "multiple" : true
+        "controll" : "multipleDropdown"
       }
     });
   }

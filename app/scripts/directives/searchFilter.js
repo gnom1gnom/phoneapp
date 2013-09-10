@@ -33,6 +33,25 @@ directives.directive('ngenter',
 
 directives.directive('searchfield',
 	function($compile, $searchFacets, $injector) {
+		var singleDropdownTemplate = '<select ng-model="query" ng-options="entry.id as entry.name for entry in dictionary"><option value="" style="display: none;"></option></select>';
+
+		var multipleDropdownTemplate = '<select ng-model="query" ng-options="entry.id as entry.name for entry in dictionary" multiple><option value="" style="display: none;"></option></select>';
+
+		var getTemplate = function(contentType) {
+			var template = '';
+
+			switch (contentType) {
+				case 'singleDropdown':
+					template = singleDropdownTemplate;
+					break;
+				case 'multipleDropdown':
+					template = multipleDropdownTemplate;
+					break;
+			}
+
+			return template;
+		}
+
 		return {
 			// name: '',
 			// priority: 1,
@@ -42,7 +61,7 @@ directives.directive('searchfield',
 				criteria: '='
 			},
 			restrict: 'A',
-			template: '<select ng-model="query" ng-options="entry.id as entry.name for entry in dictionary"><option value="" style="display: none;"></option></select>',
+			// template: '<select ng-model="query" ng-options="entry.id as entry.name for entry in dictionary"><option value="" style="display: none;"></option></select>',
 			// templateUrl: '/views/search/singleoption.html',
 			link: function($scope, iElm, iAttrs, controller) {
 				$scope.facet = $searchFacets[$scope.criteria.name];
@@ -63,6 +82,10 @@ directives.directive('searchfield',
 								'name': '',
 								'id': '*'
 							});
+
+							iElm.html(getTemplate($scope.facet.controll)).show();
+
+							$compile(iElm.contents())($scope);
 
 							var watch = 'query["' + $scope.criteria.name + '"]';
 							$scope.$parent.$watch(watch, function(newVal, oldVal) {
