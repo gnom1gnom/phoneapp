@@ -6,7 +6,7 @@
       <div class="control-group">
         <label class="control-label" for="name">Name</label>
         <div class="controls">
-          <input ng-model="product.name" class="input-xlarge" id="name" focus required></div>
+          <input ng-model="product.name" class="input-xlarge" type="text" id="name" focus required></div>
       </div>
 
       <div class="control-group" ng-class="{error: productForm.stock.$error.integer}">
@@ -32,7 +32,7 @@
       <div class="control-group" ng-class="{error: productForm.price.$error.float}">
         <label class="control-label" for="price">Price</label>
         <div class="controls">
-          <input ng-model="product.price" min="0" class="input-xlarge" id="price" name="price" required price>
+          <input ng-model="product.price" min="0" class="input-xlarge" id="price" name="price" type="number" required price>
           <span ng-show="productForm.price.$error.float" class="help-inline">Niepoprawny format ceny</span>
         </div>
       </div>
@@ -40,7 +40,7 @@
       <div class="control-group">
         <label class="control-label" for="categories">Categories</label>
         <div class="controls">
-          <select ng-model="product.category" ng-options="category.name for category in categoryList" id="categories"></select>
+          <select bs-select class="input span3 single" ng-model="product.category" ng-options="category.name for category in categoryList" id="categories"></select>
         </div>
       </div>
 
@@ -49,34 +49,33 @@
         <div class="controls">
           <ul id="tags" class="unstyled" ng-controller="ProductTagCtrl">
             <li ng-repeat="tag in product.tagObjs">
-              <div>
-              <span class="input-xlarge uneditable-input">{{tag.name}}</span>
-              <a class="btn btn-small" ng-click="removeTag($index)">
-                <i class="icon-remove icon-small"></i>
-              </a>
-            </div>
-          </li>
-          <li>
-            <select ng-model="addedTag" class="select-xlarge list-add" ng-options="tag.name for tag in tagList | tagFilter:this"></select>
-            <button type="button" class="btn btn-small list-add" ng-click="addTag()" ng-disabled="!addedTag" >
-              <i class="icon-plus icon-small"></i>
-            </button>
-          </li>
-        </ul>
+              <table>
+                <tr>
+                  <td><span class="input-xlarge uneditable-input">{{tag.name}}</span></td>
+                  <td><a class="btn btn-small" ng-click="removeTag($index)"> <i class="icon-remove icon-small"></i>
+                </a></td>
+                </tr>
+              </table>
+            </li>
+            <li>
+                <select bs-select class="input-xlarge" ng-model="addedTag" class="select-xlarge list-add" ng-options="tag.name for tag in tagList | tagFilter:this"></select>
+                <button type="button" class="btn btn-small list-add" ng-click="addTag()" ng-disabled="!addedTag" ><i class="icon-plus icon-small"></i></button>
+            </li>
+          </ul>
+        </div>
       </div>
-    </div>
 
-    <div class="control-group">
-      <label class="control-label" for="description">Description</label>
-      <div class="controls">
-        <textarea class="input-xlarge description" id="description" ng-model="product.description"></textarea>
+      <div class="control-group">
+        <label class="control-label" for="description">Description</label>
+        <div class="controls">
+          <textarea class="input-xlarge description" id="description" ng-model="product.description"></textarea>
+        </div>
       </div>
-    </div>
 
-  </fieldset>
-</div>
-<div class="form-actions">
-  <button class="btn btn-primary" ng-disabled="productForm.$invalid">Save</button>
-  <button type="button" ng-click="cancel()" class="btn">Cancel</button>
-</div>
+    </fieldset>
+  </div>
+  <div class="form-actions">
+    <button class="btn btn-primary" ng-disabled="productForm.$invalid">Save</button>
+    <button type="button" ng-click="cancel()" class="btn">Cancel</button>
+  </div>
 </form>

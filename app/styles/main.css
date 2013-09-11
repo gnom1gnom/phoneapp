@@ -58,7 +58,8 @@ select.select-xlarge {
 }
 
 select,button.list-add{
-    margin-top: 3px;
+    margin-top: -20px;
+    margin-left: -2px;
 }
 
 .row-fluid-fix [class*="span"]:first-child {
@@ -67,9 +68,19 @@ select,button.list-add{
 }
 
 .sortable {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .single ul.dropdown-menu li.selected[rel="0"] {
-    display: none;
+  display: none;
+}
+
+/*hides controlgroup when not yet compiled*/
+.facet-container {
+  display: none;
+}
+
+/*fix for bootstrap-select bottom margin*/
+.bootstrap-select.btn-group, .bootstrap-select.btn-group[class*="span"] {
+    margin-bottom: 0px !important;
 }
