@@ -36,6 +36,12 @@ app.controller('ProductSearchCtrl', ['$scope', '$location', 'searchService', '$s
 				});
 		}
 
+		$scope.reset = function() {
+			$scope.query = {
+				limit: 50
+			}
+		};
+
 		$scope.suggest = function($viewValue) {
 			var suggestQuery = {
 				q: $viewValue

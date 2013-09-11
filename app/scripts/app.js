@@ -2,7 +2,7 @@
 
 angular.module('phoneappApp', ['phoneappApp.productSearchService', 'phoneappApp.tagServices', 'phoneappApp.categoryServices',
   'phoneappApp.productServices', 'phoneappApp.directives', 'phoneappApp.searchDirectives',
-  'phoneappApp.searchFacets', 'ui.bootstrap', 'ui.router'
+  'phoneappApp.searchFacets', 'ui.bootstrap', 'ui.router', '$strap.directives'
 ]).config(function($stateProvider, $urlRouterProvider) {
   $stateProvider
     .state('search', {

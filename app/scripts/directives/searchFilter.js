@@ -33,11 +33,11 @@ directives.directive('ngenter',
 
 directives.directive('searchfield',
 	function($compile, $searchFacets, $injector) {
-		// var singleDropdownTemplate = '<select ng-model="query" ng-options="entry.id as entry.name for entry in dictionary"><option value="" style="display: none;"></option></select>';
-		var singleDropdownTemplate = _.template('<select class="form-control" ng-model="<%= ngmodel %>" ng-options="entry.id as entry.name for entry in dictionary"><option value="" style="display: none;"></option></select>');
+		var singleDropdownTemplate = _.template('<select bs-select class="span3 single" ng-model="<%= ngmodel %>" ng-options="entry.id as entry.name for entry in dictionary"></select>');
+		// var singleDropdownTemplate = _.template('<select ng-model="<%= ngmodel %>" ng-options="entry.id as entry.name for entry in dictionary"></select>');
 
-		// var multipleDropdownTemplate = '<select ng-model="query" ng-options="entry.id as entry.name for entry in dictionary" multiple></select>';
-		var multipleDropdownTemplate = _.template('<select class="form-control" ng-model="<%= ngmodel %>" ng-options="entry.id as entry.name for entry in dictionary" multiple></select>');
+		var multipleDropdownTemplate = _.template('<select bs-select class="span3" ng-model="<%= ngmodel %>" ng-options="entry.id as entry.name for entry in dictionary" multiple></select>');
+		// var multipleDropdownTemplate = _.template('<select ng-model="<%= ngmodel %>" ng-options="entry.id as entry.name for entry in dictionary" multiple></select>');
 
 		var getTemplate = function(contentType, model) {
 			var template = '';
@@ -88,8 +88,11 @@ directives.directive('searchfield',
 							$scope.model = "query['" + $scope.criteria.name + "']";
 
 							// inject the control from template
-							iElm.html(getTemplate($scope.facet.controll, $scope.model)).show();
+							iElm.html(getTemplate($scope.facet.controll, $scope.model));
 							$compile(iElm.contents())($scope);
+
+							// fade in .facet-container
+							iElm.parent(".facet-container").fadeIn();
 
 							$scope.$parent.$watch($scope.model, function(newVal, oldVal) {
 								switch ($scope.facet.controll) {

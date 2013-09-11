@@ -69,3 +69,7 @@ select,button.list-add{
 .sortable {
     cursor: pointer;
 }
+
+.single ul.dropdown-menu li.selected[rel="0"] {
+    display: none;
+}
