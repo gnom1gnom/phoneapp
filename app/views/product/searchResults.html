@@ -25,7 +25,7 @@
 	<div class="alert alert-info" ng-show="searchInProgress">Search in progress</div>
 	<div class="alert alert-error" ng-show="searchError">Error: {{searchError}}</div>
 </div>
-<div class="container-fluid">
+<div class="container-fluid" ng-show="searchResults.data">
 	<div class="row-fluid row-fluid-fix">
 <!-- 		<pre>Sorting predicate = {{sortOptions.predicate}}; reverse = {{sortOptions.reverse}}</pre> -->
 		<table class="table table-striped">
@@ -41,8 +41,8 @@
 				<td>{{product.name}}</td>
 				<td>{{product.price | currency}}</td>
 				<td>{{product.stock}}</td>
-				<td>{{product.category_id}}</td>
-				<td>{{product.tags}}</td>
+				<td>{{product.category_id | dictionary:dictionaries['category_id']:searchFacets['category_id']}}</td>
+				<td>{{product.tags | dictionary:dictionaries['tags']:searchFacets['tags']}}</td>
 				<td>{{product.description}}</td>
 			</tr>
 		</table>

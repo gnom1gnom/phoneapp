@@ -31,6 +31,53 @@ directives.directive('ngenter',
 	}
 );
 
+var getDictionary = function(facet, dictionaries, $q, $injector) {
+	var delay = $q.defer();
+	var dictionaryDefinition = facet.dictionary;
+
+	if (_(dictionaries).isUndefined()) {
+		console.warn('Dictionary chache is undefined');
+		return getInjectedDictionaryPromise(dictionaryDefinition.service, $injector);
+	}
+
+	if (_(dictionaries[facet.attribute]).isObject()) {
+		console.log("Getting " + facet.attribute + " dictionary from cache");
+		delay.resolve(dictionaries[facet.attribute].list);
+	} else {
+		console.warn("Acquiring dictionary " + facet.attribute + " for cache");
+		var dictionaryPromise = getInjectedDictionaryPromise(dictionaryDefinition.service, $injector);
+
+		dictionaryPromise.then(function(dictionaryResource) {
+			console.log("Putting dictionary " + facet.attribute + " to cache");
+			dictionaries[facet.attribute] = {};
+			dictionaries[facet.attribute].list = dictionaryResource;
+			dictionaries[facet.attribute].map = _.dictionaryToMap(dictionaryResource);
+			delay.resolve(dictionaries[facet.attribute].list);
+		}, function(error) {
+			delay.reject(error);
+		})
+	}
+
+	return delay.promise;
+};
+
+var getInjectedDictionaryPromise = function(dictionaryName, $injector) {
+	var service = $injector.get(dictionaryName);
+	var dictionaryPromise = service.prototype.constructor();
+	return dictionaryPromise;
+};
+
+// czyści obiekt w kluczy o pustej wartości
+_.mixin({
+	dictionaryToMap: function(dictionary) {
+		var dictionaryMap = {};
+		_.each(dictionary, function(entry) {
+			dictionaryMap[entry.id] = entry.name;
+		});
+		return dictionaryMap;
+	}
+});
+
 directives.directive('searchfield',
 	function($compile, $searchFacets, $injector, $q) {
 		var singleDropdownTemplate = _.template('<select bs-select class="input-xlarge single" ng-model="<%= ngmodel %>" ng-options="entry.id as entry.name for entry in dictionary"></select>');
@@ -54,39 +101,6 @@ directives.directive('searchfield',
 			return template;
 		};
 
-		var getDictionary = function(dictionaryName, dictionaries) {
-			var delay = $q.defer();
-
-			if (_(dictionaries).isUndefined()) {
-				console.warn('Dictionary chache is undefined');
-				return getInjectedDictionaryPromise(dictionaryName);
-			}
-
-			if (_(dictionaries[dictionaryName]).isObject()) {
-				console.log("Getting " + dictionaryName + " dictionary from cache");
-				delay.resolve(dictionaries[dictionaryName]);
-			} else {
-				console.warn("Acquiring dictionary " + dictionaryName + " for cache");
-				var dictionaryPromise = getInjectedDictionaryPromise(dictionaryName);
-
-				dictionaryPromise.then(function(dictionaryResource) {
-					console.log("Putting dictionary " + dictionaryName + " to cache");
-					dictionaries[dictionaryName] = dictionaryResource;
-					delay.resolve(dictionaryResource);
-				}, function(error) {
-					delay.reject(error);
-				})
-			}
-
-			return delay.promise;
-		};
-
-		var getInjectedDictionaryPromise = function(dictionaryName) {
-			var service = $injector.get(dictionaryName);
-			var dictionaryPromise = service.prototype.constructor();
-			return dictionaryPromise;
-		};
-
 		return {
 			scope: {
 				query: '=',
@@ -98,8 +112,7 @@ directives.directive('searchfield',
 				$scope.facet = $searchFacets[$scope.criteria.name];
 
 				if (!(_.isEmpty($scope.facet.dictionary))) {
-					var dictionaryDefinition = $scope.facet.dictionary;
-					var dictionaryPromise = getDictionary(dictionaryDefinition.service, $scope.dictionaries);
+					var dictionaryPromise = getDictionary($scope.facet, $scope.dictionaries, $q, $injector);
 					dictionaryPromise.then(
 						function(dictionaryResource) {
 							var facetKeys = _($scope.criteria.data).keys();
@@ -144,7 +157,8 @@ directives.directive('searchfield',
 				}
 			}
 		};
-	});
+	}
+);
 
 directives.directive('sortable',
 	function($compile, $searchFacets) {
