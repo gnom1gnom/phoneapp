@@ -63,6 +63,7 @@ app.controller('ProductSearchCtrl', ['$scope', '$location', 'searchService', '$s
 		};
 
 		$scope.searchFacets = $searchFacets;
+		$scope.dictionaries = {};
 
 		$scope.sortOptions = {
 			predicate: "name",

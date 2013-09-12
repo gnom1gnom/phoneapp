@@ -32,7 +32,7 @@ directives.directive('ngenter',
 );
 
 directives.directive('searchfield',
-	function($compile, $searchFacets, $injector) {
+	function($compile, $searchFacets, $injector, $q) {
 		var singleDropdownTemplate = _.template('<select bs-select class="span3 single" ng-model="<%= ngmodel %>" ng-options="entry.id as entry.name for entry in dictionary"></select>');
 		// var singleDropdownTemplate = _.template('<select ng-model="<%= ngmodel %>" ng-options="entry.id as entry.name for entry in dictionary"></select>');
 
@@ -44,23 +44,54 @@ directives.directive('searchfield',
 
 			switch (contentType) {
 				case 'singleDropdown':
-					template = singleDropdownTemplate({'ngmodel' : model});
+					template = singleDropdownTemplate({'ngmodel': model});
 					break;
 				case 'multipleDropdown':
-					template = multipleDropdownTemplate({'ngmodel' : model});
+					template = multipleDropdownTemplate({'ngmodel': model});
 					break;
 			}
 
 			return template;
-		}
+		};
+
+		var getDictionary = function(dictionaryName, dictionaries) {
+			var delay = $q.defer();
+
+			if (_(dictionaries).isUndefined()) {
+				console.warn('Dictionary chache is undefined');
+				return getInjectedDictionaryPromise(dictionaryName);
+			}
+
+			if (_(dictionaries[dictionaryName]).isObject()) {
+				console.log("Getting " + dictionaryName + " dictionary from cache");
+				delay.resolve(dictionaries[dictionaryName]);
+			} else {
+				console.warn("Acquiring dictionary " + dictionaryName + " for cache");
+				var dictionaryPromise = getInjectedDictionaryPromise(dictionaryName);
+
+				dictionaryPromise.then(function(dictionaryResource) {
+					console.log("Putting dictionary " + dictionaryName + " to cache");
+					dictionaries[dictionaryName] = dictionaryResource;
+					delay.resolve(dictionaryResource);
+				}, function(error) {
+					delay.reject(error);
+				})
+			}
+
+			return delay.promise;
+		};
+
+		var getInjectedDictionaryPromise = function(dictionaryName) {
+			var service = $injector.get(dictionaryName);
+			var dictionaryPromise = service.prototype.constructor();
+			return dictionaryPromise;
+		};
 
 		return {
-			// name: '',
-			// priority: 1,
-			// terminal: true,
 			scope: {
 				query: '=',
-				criteria: '='
+				criteria: '=',
+				dictionaries: '='
 			},
 			restrict: 'A',
 			link: function($scope, iElm, iAttrs, controller) {
@@ -68,8 +99,7 @@ directives.directive('searchfield',
 
 				if (!(_.isEmpty($scope.facet.dictionary))) {
 					var dictionaryDefinition = $scope.facet.dictionary;
-					var service = $injector.get(dictionaryDefinition.service);
-					var dictionaryPromise = service.prototype.constructor();
+					var dictionaryPromise = getDictionary(dictionaryDefinition.service, $scope.dictionaries);
 					dictionaryPromise.then(
 						function(dictionaryResource) {
 							var facetKeys = _($scope.criteria.data).keys();
@@ -108,7 +138,7 @@ directives.directive('searchfield',
 							});
 						},
 						function(error) {
-							console.log('dictionary:' + JSON.stringify(dictionary));
+							console.log('Error while getting dictionary:' + JSON.stringify(error));
 						});
 
 				}

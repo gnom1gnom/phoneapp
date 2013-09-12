@@ -10,7 +10,7 @@
 			</div>
 			<div class="control-group facet-container" ng-repeat="criteria in searchResults.facet | facetOptionFilter" style="display: none">
 				<label class="control-label" for="{{criteria.name}}">{{searchFacets[criteria.name].label}}</label>
-				<div class="controls" searchfield criteria="criteria" query="query"></div>
+				<div class="controls" searchfield criteria="criteria" query="query" dictionaries="dictionaries"></div>
 			</div>
 			<div class="control-group">
 				<div class="controls">
