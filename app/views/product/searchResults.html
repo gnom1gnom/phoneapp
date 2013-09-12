@@ -19,7 +19,6 @@
 				</div>
 			</div>
 			<pre>{{query | json}}</pre>
-			<pre>{{dictionaries | json}}</pre>
 		</div>
 	</form>
 	<div class="alert alert-success" ng-show="resultCount">Found {{resultCount}} in {{searchTime}}s</div>
@@ -28,7 +27,6 @@
 </div>
 <div class="container-fluid" ng-show="searchResults.data">
 	<div class="row-fluid row-fluid-fix">
-<!-- 		<pre>Sorting predicate = {{sortOptions.predicate}}; reverse = {{sortOptions.reverse}}</pre> -->
 		<table class="table table-striped">
 			<tr>
 				<th><a class="sortable" clicked="sort(attribute, order)" options="sortOptions" atribute="name"></a></th>
@@ -38,12 +36,22 @@
 				<th><a class="sortable" clicked="sort(attribute, order)" options="sortOptions" atribute="tags"></a></th>
 				<th><a class="sortable" clicked="sort(attribute, order)" options="sortOptions" atribute="description"></a></th>
 			</tr>
-			<tr ng-repeat="product in searchResults.data | orderBy:sortOptions.predicate:sortOptions.reverse" ng-click="view('/viewProduct/' + product.id)">
+			<tr ng-repeat="product in searchResults.data | orderBy:sortOptions.predicate:sortOptions.reverse" ng-click="view('/viewProduct/' + product.id)" class="searchResultRow">
 				<td>{{product.name}}</td>
 				<td>{{product.price | currency}}</td>
 				<td>{{product.stock}}</td>
-				<td>{{product.category_id | dictionary:dictionaries['category_id']:searchFacets['category_id']}}</td>
-				<td>{{product.tags | dictionary:dictionaries['tags']:searchFacets['tags']}}</td>
+				<td>{{product.category_id | dictionary:dictionaries['category_id']}}</td>
+				<td>
+					<ul class="icons-ul" id="tags">
+						<li ng-hide="product.tags">
+							<i class="icon-li icon-check-empty"></i>
+							None
+						</li>
+						<li ng-repeat="tag in product.tags">
+							<span><i class="icon-li icon-check"></i>{{tag | dictionary:dictionaries['tags']}}</span>
+						</li>
+					</ul>
+				</td>
 				<td>{{product.description}}</td>
 			</tr>
 		</table>

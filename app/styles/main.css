@@ -14,6 +14,7 @@ body {
         padding-left: 5px;
         padding-right: 5px;
     }
+
 }
 
 .loading {
@@ -57,30 +58,43 @@ select.select-xlarge {
     margin-top: 3px;
 }
 
-select,button.list-add{
+select, button.list-add {
     margin-top: -20px;
     margin-left: -2px;
 }
 
-.row-fluid-fix [class*="span"]:first-child {
-  margin-left: 2.127659574%;
-  *margin-left: 2.0744680846382977%;
+.row-fluid-fix .product-cell{
+    margin-left: 0px !important;
+    margin-right: 2.12766% !important;
+}
+
+.product-cell {
+    height: 150px;
 }
 
 .sortable {
-  cursor: pointer;
+    cursor: pointer;
+    white-space:nowrap;
+}
+
+.searchResultRow {
+    cursor: pointer;
+}
+
+.searchResultRow li {
+    white-space:nowrap;
 }
 
 .single ul.dropdown-menu li.selected[rel="0"] {
-  display: none;
+    display: none;
 }
 
 /*hides controlgroup when not yet compiled*/
-.facet-container {
-  display: none;
+ .facet-container {
+    display: none;
 }
 
 /*fix for bootstrap-select bottom margin*/
-.bootstrap-select.btn-group, .bootstrap-select.btn-group[class*="span"] {
+ .bootstrap-select.btn-group, .bootstrap-select.btn-group[class*="span"] {
     margin-bottom: 0px !important;
 }

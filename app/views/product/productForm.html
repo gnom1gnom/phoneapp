@@ -21,9 +21,9 @@
         <label class="control-label" for="created">Created</label>
         <div class="controls">
           <div ng-controller="DatepickerCtrl">
-            <input ng-model="product.created" type="text" show-weeks="false" datepicker-popup="dd-MMMM-yyyy" open="opened" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" class="input-xlarge" id="created" />
-            <button type='button' class="btn" ng-click="openDatePicker()"> <i class="icon-calendar"></i>
-            </button>
+            <input ng-model="product.created" type="text" show-weeks="false" datepicker-popup="dd-MMMM-yyyy" is-open="opened" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" class="input-xlarge" id="created">
+<!--             <button type='button' class="btn" ng-click="openDatePicker()"> <i class="icon-calendar"></i>
+            </button> -->
           </div>
 
         </div>

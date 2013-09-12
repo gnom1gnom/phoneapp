@@ -34,6 +34,7 @@ app.controller('DatepickerCtrl', function($scope, $timeout) {
 		});
 	};
 
+	$scope.opened = false;
 	$scope.dateOptions = {
 		'year-format': 'yyyy',
 		'starting-day': 1

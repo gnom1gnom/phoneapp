@@ -17,14 +17,14 @@ app.filter('facetOptionFilter', function() {
  ** Zastępuje klucze wartością ze słownika
  **/
 app.filter('dictionary', function() {
-	return function(key, dictionary, facet) {
+	return function(key, dictionary) {
 		if (_(dictionary).isObject()) {
-			if (facet.multiple) {
+			if (_(key).isArray()) {
 				var valueArray = [];
-				_(key.split(",")).each(function(keyItem) {
+				_(key).each(function(keyItem) {
 					valueArray.push(dictionary.map[keyItem]);
 				});
-				return valueArray.join(",");
+				return valueArray;
 			} else
 				return dictionary.map[key];
 		} else

@@ -1,7 +1,8 @@
 <h3>Product List</h3>
+<br />
 <div class="container-fluid">
 	<div class="row-fluid row-fluid-fix">
-		<div class="span3 well" ng-repeat="product in products">
+		<div class="span3 well product-cell" ng-repeat="product in products">
 			<a ng-href="/#/viewProduct/{{product.id}}">{{product.name}}</a><br />
 			Price: <span>{{product.price | currency}}</span><br />
 			Stock: <span>{{product.stock}}</span>

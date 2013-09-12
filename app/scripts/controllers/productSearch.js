@@ -43,9 +43,8 @@ app.controller('ProductSearchCtrl', ['$scope', '$location', 'searchService', '$s
 		};
 
 		$scope.suggest = function($viewValue) {
-			var suggestQuery = {
-				q: $viewValue
-			};
+			var suggestQuery = angular.copy($scope.query);
+			suggestQuery.q = $viewValue;
 
 			return searchService.suggest(suggestQuery);
 		};
