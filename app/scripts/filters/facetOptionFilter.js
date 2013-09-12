@@ -18,13 +18,16 @@ app.filter('facetOptionFilter', function() {
  **/
 app.filter('dictionary', function() {
 	return function(key, dictionary, facet) {
-		if (facet.multiple) {
-			var valueArray = [];
-			_(key.split(",")).each(function(keyItem) {
-				valueArray.push(dictionary.map[keyItem]);
-			});
-			return valueArray.join(",");
+		if (_(dictionary).isObject()) {
+			if (facet.multiple) {
+				var valueArray = [];
+				_(key.split(",")).each(function(keyItem) {
+					valueArray.push(dictionary.map[keyItem]);
+				});
+				return valueArray.join(",");
+			} else
+				return dictionary.map[key];
 		} else
-			return dictionary.map[key];
+			return key;
 	};
 });

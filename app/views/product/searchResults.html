@@ -15,10 +15,11 @@
 			<div class="control-group">
 				<div class="controls">
 					<input type="submit" class="btn btn-success" value="Search">
-					<a class="btn" href="#" ng-click="reset()"><i class="icon-trash icon-large"></i> Clear</a>
+					<a class="btn" href="javascript:void(0)" ng-click="reset()"><i class="icon-trash icon-large"></i> Clear</a>
 				</div>
 			</div>
 			<pre>{{query | json}}</pre>
+			<pre>{{dictionaries | json}}</pre>
 		</div>
 	</form>
 	<div class="alert alert-success" ng-show="resultCount">Found {{resultCount}} in {{searchTime}}s</div>
