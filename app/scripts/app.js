@@ -4,6 +4,9 @@ angular.module('phoneappApp', ['phoneappApp.productSearchService', 'phoneappApp.
   'phoneappApp.productServices', 'phoneappApp.directives', 'phoneappApp.searchDirectives',
   'phoneappApp.searchFacets', 'ui.bootstrap', 'ui.router', '$strap.directives'
 ]).config(function($stateProvider, $urlRouterProvider) {
+
+  $urlRouterProvider.otherwise('/productSearch');
+
   $stateProvider
     .state('search', {
       url: '/productSearch?category_id&limit&tags&q',

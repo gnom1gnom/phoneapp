@@ -33,10 +33,10 @@ directives.directive('ngenter',
 
 directives.directive('searchfield',
 	function($compile, $searchFacets, $injector, $q) {
-		var singleDropdownTemplate = _.template('<select bs-select class="span3 single" ng-model="<%= ngmodel %>" ng-options="entry.id as entry.name for entry in dictionary"></select>');
+		var singleDropdownTemplate = _.template('<select bs-select class="input-xlarge single" ng-model="<%= ngmodel %>" ng-options="entry.id as entry.name for entry in dictionary"></select>');
 		// var singleDropdownTemplate = _.template('<select ng-model="<%= ngmodel %>" ng-options="entry.id as entry.name for entry in dictionary"></select>');
 
-		var multipleDropdownTemplate = _.template('<select bs-select class="span3" ng-model="<%= ngmodel %>" ng-options="entry.id as entry.name for entry in dictionary" multiple></select>');
+		var multipleDropdownTemplate = _.template('<select bs-select class="input-xlarge" ng-model="<%= ngmodel %>" ng-options="entry.id as entry.name for entry in dictionary" multiple></select>');
 		// var multipleDropdownTemplate = _.template('<select ng-model="<%= ngmodel %>" ng-options="entry.id as entry.name for entry in dictionary" multiple></select>');
 
 		var getTemplate = function(contentType, model) {

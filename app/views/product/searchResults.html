@@ -5,7 +5,7 @@
 			<div class="control-group">
 				<label class="control-label" for="name">Name</label>
 				<div class="controls">
-					<input ng-model="query['q']" class="input span3" id="name" focus typeahead-on-select="search()" typeahead="description for description in suggest($viewValue)" />
+					<input ng-model="query['q']" class="input-xlarge" id="name" focus typeahead-on-select="search()" typeahead="description for description in suggest($viewValue)" />
 				</div>
 			</div>
 			<div class="control-group facet-container" ng-repeat="criteria in searchResults.facet | facetOptionFilter" style="display: none">
