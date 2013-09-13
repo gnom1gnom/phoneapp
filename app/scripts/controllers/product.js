@@ -32,11 +32,11 @@ app.controller('ProductViewCtrl', ['$scope', '$location', '$dialog', 'product', 
 		};
 
 		$scope.remove = function() {
-			var title = 'Usunięcie produktu';
-			var msg = 'Czy chcesz usunąć produkt: ' + $scope.product.name;
+			var title = 'Delete product';
+			var msg = 'Do you want to delete: ' + $scope.product.name;
 			var btns = [{
 				result: false,
-				label: 'Anuluj'
+				label: 'Cancel'
 			}, {
 				result: true,
 				label: 'OK',

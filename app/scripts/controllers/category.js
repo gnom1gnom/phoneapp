@@ -24,11 +24,11 @@ app.controller('CategoryViewCtrl', ['$scope', '$location', '$dialog', 'category'
 		};
 
 		$scope.remove = function() {
-			var title = 'Usunięcie kategorii';
-			var msg = 'Czy chcesz usunąć kategorię: ' + $scope.category.name;
+			var title = 'Delete category';
+			var msg = 'Do you want to delete category: ' + $scope.category.name;
 			var btns = [{
 				result: false,
-				label: 'Anuluj'
+				label: 'Cancel'
 			}, {
 				result: true,
 				label: 'OK',

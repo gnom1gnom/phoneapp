@@ -24,11 +24,11 @@ app.controller('TagViewCtrl', ['$scope', '$location', '$dialog', 'tag',
 		};
 
 		$scope.remove = function() {
-			var title = 'Usunięcie tagu';
-			var msg = 'Czy chcesz usunąć tag: ' + $scope.tag.name;
+			var title = 'Delete tag';
+			var msg = 'Do you want to delete tag: ' + $scope.tag.name;
 			var btns = [{
 				result: false,
-				label: 'Anuluj'
+				label: 'Cancel'
 			}, {
 				result: true,
 				label: 'OK',

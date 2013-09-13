@@ -86,6 +86,8 @@ directives.directive('searchfield',
 		var multipleDropdownTemplate = _.template('<select bs-select class="input-xlarge" ng-model="<%= ngmodel %>" ng-options="entry.id as entry.name for entry in dictionary" multiple></select>');
 		// var multipleDropdownTemplate = _.template('<select ng-model="<%= ngmodel %>" ng-options="entry.id as entry.name for entry in dictionary" multiple></select>');
 
+		var defaultTemplate = _.template('<input class="input-xlarge" ng-model="<%= ngmodel %>" />');
+
 		var getTemplate = function(contentType, model) {
 			var template = '';
 
@@ -95,6 +97,9 @@ directives.directive('searchfield',
 					break;
 				case 'multipleDropdown':
 					template = multipleDropdownTemplate({'ngmodel': model});
+					break;
+				default:
+					template = defaultTemplate({'ngmodel': model});
 					break;
 			}
 
@@ -111,7 +116,19 @@ directives.directive('searchfield',
 			link: function($scope, iElm, iAttrs, controller) {
 				$scope.facet = $searchFacets[$scope.criteria.name];
 
-				if (!(_.isEmpty($scope.facet.dictionary))) {
+				if (_.isEmpty($scope.facet.dictionary)) {
+					$scope.model = "query['" + $scope.criteria.name + "']";
+
+					// inject the control from template
+					iElm.html(getTemplate($scope.facet.controll, $scope.model));
+					$compile(iElm.contents())($scope);
+
+					// fade in .facet-container
+					iElm.parent(".facet-container").fadeIn();
+
+				}
+				else
+				{
 					var dictionaryPromise = getDictionary($scope.facet, $scope.dictionaries, $q, $injector);
 					dictionaryPromise.then(
 						function(dictionaryResource) {

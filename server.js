@@ -10,135 +10,201 @@ app.configure(function() {
   app.use(app.router);
 });
 
-var search_result = {
+var search_result =
+
+{
   "facet": [{
     "name": "category_id",
     "data": {
-      "1": "2",
-      "3": "12"
+      "190": 6,
+      "191": 5,
+      "194": 6,
+      "197": 8,
+      "199": 5,
+      "200": 6,
+      "201": 10,
+      "203": 9,
+      "205": 8,
+      "209": 6
     }
   }, {
     "name": "tags",
     "data": {
-      "5": "3",
-      "6": "3",
-      "7": "2",
-      "8": "1",
-      "10": "1"
+      "261": 16,
+      "262": 16,
+      "263": 16,
+      "264": 16,
+      "265": 22,
+      "268": 20,
+      "271": 18,
+      "274": 15,
+      "280": 16,
+      "281": 15
+    }
+  }, {
+    "name": "price",
+    "data": {
+      "261": 16,
+      "262": 16,
+      "263": 16,
+      "264": 16,
+      "265": 22,
+      "268": 20,
+      "271": 18,
+      "274": 15,
+      "280": 16,
+      "281": 15
     }
   }],
   "data": [{
-    "name": "Product ABC 1",
-    "description": "Description 1",
-    "stock": 0,
-    "tags": [1],
-    "created": "1378199565",
-    "category_id": 3,
-    "id": "20",
-    "price": "199.000000",
-    "updated": "0"
+    "name": "obdzwaniałobyś lizbo",
+    "stock": 30,
+    "description": "efod ułomków haftnięć trylionie",
+    "tags": [
+      "280",
+      "268",
+      "269",
+      "279",
+      "261",
+      "275"
+    ],
+    "created": "1378800941",
+    "category_id": "200",
+    "price": "299.00",
+    "updated": null,
+    "id": "1996"
   }, {
-    "name": "Product ABC 2",
-    "description": "Description 2",
-    "stock": 0,
-    "tags": [2],
-    "created": "1378199554",
-    "category_id": 3,
-    "id": "19",
-    "price": "199.000000",
-    "updated": "0"
+    "name": "jednostopniowym korygowałobym jotacji",
+    "stock": 86,
+    "description": "usiałeś eksonami chomiki gruzińskiego",
+    "tags": [
+      "272",
+      "258",
+      "274",
+      "280"
+    ],
+    "created": "1378800941",
+    "category_id": "203",
+    "price": "299.00",
+    "updated": null,
+    "id": "1997"
   }, {
-    "name": "Product ABC 3",
-    "description": "Description 3",
-    "stock": 0,
-    "tags": [1],
-    "created": "1378199553",
-    "category_id": 3,
-    "id": "18",
-    "price": "199.000000",
-    "updated": "0"
+    "name": "najoczywistsza adnotowania",
+    "stock": 79,
+    "description": "denaturowało bazyliszkowymi asportami notowska lubie antrachinonowe iloosobową ejdetyczne obwiałobyś obieliła likwidowa cudaczniejszemu oktawów",
+    "tags": [
+      "261",
+      "277"
+    ],
+    "created": "1378800941",
+    "category_id": "209",
+    "price": "254.09",
+    "updated": null,
+    "id": "1998"
   }, {
-    "name": "Product ABC 4",
-    "description": "Description 4",
-    "stock": 0,
-    "tags": [3, 4],
-    "created": "1378199551",
-    "category_id": 3,
-    "id": "17",
-    "price": "199.000000",
-    "updated": "0"
+    "name": "frezjowemu kołtunami",
+    "stock": 11,
+    "description": "jonoliftom obrazoburstw flokowałabyś deminutywność memłały współżyłby tropikalnej mailowanych",
+    "tags": [
+      "264",
+      "257",
+      "263",
+      "279"
+    ],
+    "created": "1378800941",
+    "category_id": "198",
+    "price": "876.64",
+    "updated": null,
+    "id": "2000"
   }, {
-    "name": "Product ABC 5",
-    "description": "Description 5",
-    "stock": 0,
-    "tags": [5],
-    "created": "1378199534",
-    "category_id": 3,
-    "id": "16",
-    "price": "199.000000",
-    "updated": "0"
+    "name": "odrzucającą goleniowej",
+    "stock": 10,
+    "description": "fajansiarza cerebrotonikiem wlazły lepnika internistka humifikacją schrypłybyście siódemka koszerowany jadzącym bosmańsku modrzewniku ircowałybyście holistyczni",
+    "tags": [
+      "272",
+      "279",
+      "280",
+      "281"
+    ],
+    "created": "1378800941",
+    "category_id": "205",
+    "price": "709.30",
+    "updated": null,
+    "id": "2001"
   }, {
-    "name": "Product ABC 6",
-    "description": "Description 7",
-    "stock": 0,
-    "tags": [2],
-    "created": "1378199500",
-    "category_id": 3,
-    "id": "15",
-    "price": "199.000000",
-    "updated": "0"
+    "name": "małpicach aeroplanowymi embriotrofem",
+    "stock": 67,
+    "description": "chutnejem uskromnień banjolami cierniczkowi odliczały utorowałabym ujaiłabym wyprostowywanej iłowcu kleruchowie napuszających",
+    "tags": [
+      "265",
+      "262",
+      "274"
+    ],
+    "created": "1378800941",
+    "category_id": "191",
+    "price": "240.68",
+    "updated": null,
+    "id": "2002"
   }, {
-    "name": "Product XXX",
-    "description": "Description 8",
-    "stock": 0,
-    "tags": [5, 6, 7],
-    "created": "1378195799",
-    "category_id": 3,
-    "id": "12",
-    "price": "199.990005",
-    "updated": "1378199366"
+    "name": "kateringową oddzwaniające penalistkę",
+    "stock": 86,
+    "description": "odszywanie odważałybyście yumpiech trajkocemy wymurować głośnościami biorytmolog koszerowany udławiłoś",
+    "tags": [
+      "264",
+      "268"
+    ],
+    "created": "1378800941",
+    "category_id": "203",
+    "price": "276.63",
+    "updated": null,
+    "id": "2003"
   }, {
-    "name": "Product 100",
-    "description": "Description 9",
-    "stock": 4,
-    "tags": [1, 5],
-    "created": "1378195660",
-    "category_id": 3,
-    "id": "8",
-    "price": "199.990005",
-    "updated": "1378300649"
+    "name": "obznajmilibyśmy mantykę maksisprawom fitoterapeuty gruzińskiego",
+    "stock": 25,
+    "description": "utrudzasz iszczenia znakarze mąciłybyście",
+    "tags": [
+      "277",
+      "270",
+      "273",
+      "256"
+    ],
+    "created": "1378800941",
+    "category_id": "197",
+    "price": "735.65",
+    "updated": null,
+    "id": "2004"
   }, {
-    "name": "Product 100",
-    "description": "Description 10",
-    "stock": 0,
-    "tags": [],
-    "created": "1378195569",
-    "category_id": 3,
-    "id": "7",
-    "price": "199.990005",
-    "updated": "0"
+    "name": "bosmańsku kryptokokowym jednolufowa",
+    "stock": 31,
+    "description": "zaśniecisz cantedeskiami yunnanów ekscerpcyjną eklogami yachtu galonom nabrzęknięci chreię anolitem transponowałoś",
+    "tags": [
+      "268",
+      "279"
+    ],
+    "created": "1378800941",
+    "category_id": "196",
+    "price": "346.18",
+    "updated": null,
+    "id": "2006"
   }, {
-    "name": "Product 100",
-    "description": "Description 11",
-    "stock": 0,
-    "tags": [4],
-    "created": "1378195569",
-    "category_id": 3,
-    "id": "6",
-    "price": "199.990005",
-    "updated": "0"
+    "name": "zestrajałoby embriotrofem grajewianką bazyliszkowymi",
+    "stock": 36,
+    "description": "pręcikowymi odliczały denaturowało pedantycznego fechtować chomiki wkolejałbym",
+    "tags": [
+      "256",
+      "261",
+      "260"
+    ],
+    "created": "1378800941",
+    "category_id": "206",
+    "price": "518.90",
+    "updated": null,
+    "id": "2007"
   }],
-  "meta": [{
-    "Value": "14",
-    "Variable_name": "total"
-  }, {
-    "Value": "14",
-    "Variable_name": "total_found"
-  }, {
-    "Value": "0.000",
-    "Variable_name": "time"
-  }]
-}
+  "meta": {
+    "total": 100
+  }
+};
 
 var products_map = {
   '1': {
