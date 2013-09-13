@@ -33,7 +33,7 @@ app.controller('ProductSearchCtrl', ['$scope', '$location', 'searchService', '$s
 
 		$scope.reset = function() {
 			$scope.query = {
-				limit: 1
+				limit: 50
 			};
 		};
 

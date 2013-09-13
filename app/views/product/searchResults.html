@@ -8,7 +8,7 @@
 					<input ng-model="query['q']" class="input-xlarge" id="name" focus typeahead-on-select="search()" typeahead="description for description in suggest($viewValue)" />
 				</div>
 			</div>
-			<div class="control-group facet-container" ng-repeat="criteria in searchResults.facet | facetOptionFilter" style="display: none">
+			<div class="control-group facet-container" ng-repeat="criteria in searchResults.facet | facetOptionFilter:query">
 				<label class="control-label" for="{{criteria.name}}">{{searchFacets[criteria.name].label}}</label>
 				<div class="controls" searchfield criteria="criteria" query="query" dictionaries="dictionaries"></div>
 			</div>
@@ -21,6 +21,7 @@
 			<accordion>
 			    <accordion-group heading="Query debug">
 			      <pre class="pre-scrollable">{{query | json}}</pre>
+			      <pre class="pre-scrollable">{{searchResults.facet | json}}</pre>
 			    </accordion-group>
 			</accordion>
 		</div>
