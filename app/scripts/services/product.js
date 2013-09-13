@@ -6,7 +6,8 @@ services.factory('Product', ['$resource',
   function($resource) {
     return $resource('http://llewandowski.waw.eo.pl\\:3000/api/products/:id', {
     // return $resource('products/:id', {
-      id: '@id'}, {
+      id: '@id'
+    }, {
       query: {
         method: 'GET',
         isArray: true
@@ -47,7 +48,7 @@ services.factory('ProductLoader', ['Product', '$q',
       }, function(product) {
         delay.resolve(product);
       }, function() {
-        delay.reject('Unable to fetch product ' + $stateParams.productId);
+        delay.reject('Unable to fetch product ' + idParam);
       });
       return delay.promise;
     };

@@ -1,3 +1,5 @@
+'use strict';
+
 var app = angular.module('phoneappApp');
 
 app.controller('ProductSearchCtrl', ['$scope', '$location', 'searchService', '$searchFacets', '$stateParams',
@@ -14,14 +16,7 @@ app.controller('ProductSearchCtrl', ['$scope', '$location', 'searchService', '$s
 
 					$scope.searchResults = result;
 
-					var total_found = _.where(result.meta, {
-						"Variable_name": "total_found"
-					});
-					var time = _.where(result.meta, {
-						"Variable_name": "time"
-					});
-
-					$scope.resultCount = result.meta.total_found;
+					$scope.resultCount = _(result.data).size() + ' (' + result.meta.total + ')';
 					$scope.searchTime = result.meta.time;
 
 					$scope.searchInProgress = false;
@@ -34,12 +29,12 @@ app.controller('ProductSearchCtrl', ['$scope', '$location', 'searchService', '$s
 					delete $scope.resultCount;
 					delete $scope.searchTime;
 				});
-		}
+		};
 
 		$scope.reset = function() {
 			$scope.query = {
-				limit: 50
-			}
+				limit: 1
+			};
 		};
 
 		$scope.suggest = function($viewValue) {
@@ -74,7 +69,7 @@ app.controller('ProductSearchCtrl', ['$scope', '$location', 'searchService', '$s
 		if (_($scope.query).isEmpty()) {
 			$scope.query = {
 				limit: 50
-			}
+			};
 		} else {
 			$scope.search();
 		}
@@ -94,7 +89,7 @@ _.mixin({
 					var newValue = value;
 
 					if (facet.type.match(/number/i))
-						newValue = parseInt(value);
+						newValue = parseInt(value, 10);
 
 					if (facet.multiple)
 						object[key] = [newValue];

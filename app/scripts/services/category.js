@@ -6,7 +6,8 @@ services.factory('Category', ['$resource',
   function($resource) {
     return $resource('http://llewandowski.waw.eo.pl\\:3000/api/categories/:id', {
     // return $resource('/categories/:id', {
-      id: '@id'}, {
+      id: '@id'
+    }, {
       query: {
         method: 'GET',
         isArray: true
@@ -47,7 +48,7 @@ services.factory('CategoryLoader', ['Category', '$q',
       }, function(product) {
         delay.resolve(product);
       }, function() {
-        delay.reject('Unable to fetch category ' + $route.current.params.categoryId);
+        delay.reject('Unable to fetch category ' + idParam);
       });
       return delay.promise;
     };

@@ -31,6 +31,13 @@ directives.directive('ngenter',
 	}
 );
 
+
+var getInjectedDictionaryPromise = function(dictionaryName, $injector) {
+	var service = $injector.get(dictionaryName);
+	var dictionaryPromise = service.prototype.constructor();
+	return dictionaryPromise;
+};
+
 var getDictionary = function(facet, dictionaries, $q, $injector) {
 	var delay = $q.defer();
 	var dictionaryDefinition = facet.dictionary;
@@ -55,16 +62,10 @@ var getDictionary = function(facet, dictionaries, $q, $injector) {
 			delay.resolve(dictionaries[facet.attribute].list);
 		}, function(error) {
 			delay.reject(error);
-		})
+		});
 	}
 
 	return delay.promise;
-};
-
-var getInjectedDictionaryPromise = function(dictionaryName, $injector) {
-	var service = $injector.get(dictionaryName);
-	var dictionaryPromise = service.prototype.constructor();
-	return dictionaryPromise;
 };
 
 // czyści obiekt w kluczy o pustej wartości
@@ -138,7 +139,7 @@ directives.directive('searchfield',
 								return _.contains(facetKeys, "" + entry.id);
 							});
 
-							if ($scope.facet.controll == "singleDropdown") {
+							if ($scope.facet.controll === "singleDropdown") {
 								$scope.dictionary.splice(0, 0, {
 									'name': '',
 									'id': '*'
@@ -157,7 +158,7 @@ directives.directive('searchfield',
 							$scope.$parent.$watch($scope.model, function(newVal, oldVal) {
 								switch ($scope.facet.controll) {
 									case 'singleDropdown':
-										if (newVal == '*')
+										if (newVal === '*')
 											delete $scope.$parent.query[$scope.criteria.name];
 										break;
 									case 'multipleDropdown':
@@ -192,11 +193,11 @@ directives.directive('sortable',
 				$scope.reverse = false;
 
 
-				if ($scope.options.predicate == $scope.atribute)
+				if ($scope.options.predicate === $scope.atribute)
 					$scope.reverse = $scope.options.reverse;
 
 				element.bind("click", function(event) {
-					if ($scope.options.predicate == $scope.atribute)
+					if ($scope.options.predicate === $scope.atribute)
 						$scope.reverse = !($scope.reverse);
 
 					$scope.clicked({

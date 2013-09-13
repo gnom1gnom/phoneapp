@@ -12,6 +12,7 @@ app.controller('ProductViewCtrl', ['$scope', '$location', '$dialog', 'product', 
 	function($scope, $location, $dialog, product, categories, tags) {
 		$scope.product = product;
 
+		/* jshint eqeqeq: false */
 		$scope.product.category = _.find(categories, function(category) {
 			return product.category_id == category.id;
 		});
@@ -62,6 +63,7 @@ app.controller('ProductEditCtrl', ['$scope', '$location', 'product', 'categories
 		$scope.categoryList = categories;
 		$scope.tagList = tags;
 
+		/* jshint eqeqeq: false */
 		$scope.product.category = _.find(categories, function(category) {
 			return product.category_id == category.id;
 		});

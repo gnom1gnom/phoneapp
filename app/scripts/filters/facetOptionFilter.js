@@ -25,9 +25,11 @@ app.filter('dictionary', function() {
 					valueArray.push(dictionary.map[keyItem]);
 				});
 				return valueArray;
-			} else
+			} else {
 				return dictionary.map[key];
-		} else
+			}
+		} else {
 			return key;
+		}
 	};
 });

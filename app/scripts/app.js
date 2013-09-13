@@ -7,6 +7,8 @@ angular.module('phoneappApp', ['phoneappApp.productSearchService', 'phoneappApp.
 
   $urlRouterProvider.otherwise('/productSearch');
 
+  /* jshint asi: true */
+  /* jshint newcap: false */
   $stateProvider
     .state('search', {
       url: '/productSearch?category_id&limit&tags&q',
