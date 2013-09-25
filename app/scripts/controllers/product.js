@@ -127,6 +127,9 @@ app.controller('ProductTagCtrl', ['$scope',
 			delete $scope.addedTag;
 		};
 		$scope.removeTag = function(index) {
+			// obejście dla bs-select, które ustawia watcha na ng-model a nie na liście opcji, z których budowany jest select
+			$scope.addedTag = $scope.product.tagObjs[index];
+
 			$scope.product.tagObjs.splice(index, 1);
 			$scope.product.tags.splice(index, 1);
 		};
