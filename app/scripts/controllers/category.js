@@ -39,12 +39,17 @@ app.controller('CategoryViewCtrl', ['$scope', '$location', '$dialog', 'category'
 				.open()
 				.then(function(result) {
 					if (result) {
-						$scope.category.$delete(function() {
-							$location.path('/categories');
-						});
+						$scope.delete();
 					}
 				});
 		};
+
+		$scope.delete = function() {
+			$scope.category.$delete(function() {
+				delete $scope.category; 
+				$location.path('/categories');
+			});
+		}
 	}
 ]);
 

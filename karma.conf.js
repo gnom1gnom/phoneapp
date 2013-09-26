@@ -13,9 +13,14 @@ module.exports = function(config) {
     files: [
       'app/bower_components/angular/angular.js',
       'app/bower_components/angular-mocks/angular-mocks.js',
+      'app/bower_components/angular-resource/angular-resource.js',
+      'app/bower_components/underscore/underscore.js',
+      'app/bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
+      'app/bower_components/angular-ui-router/release/angular-ui-router.js',
+      'app/bower_components/angular-strap/dist/angular-strap.js',
       'app/scripts/*.js',
       'app/scripts/**/*.js',
-      'test/mock/**/*.js',
+      // 'test/mock/**/*.js',
       'test/spec/**/*.js'
     ],
 
