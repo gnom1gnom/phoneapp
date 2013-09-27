@@ -10,7 +10,7 @@ app.filter('facetOptionFilter', function() {
 		return _.filter(facets, function(facet) {
 			// jeśli rezultat nowego zapytania nie uzwględnia jakiegoś facatu, a był on w query dodajemy go
 			// tak żeby było widać jakie parametry brały udział w zapytaniu
-			if (_(facet.data).isEmpty() && !(_(query[facet.name]).isUndefined())) {
+			if (_(facet.data).isEmpty() && !(_(query).isUndefined()) && !(_(query[facet.name]).isUndefined())) {
 				var key = query[facet.name];
 				facet.data = {};
 				facet.data[key] = 0;
