@@ -48,12 +48,17 @@ app.controller('ProductViewCtrl', ['$scope', '$location', '$dialog', 'product', 
 				.open()
 				.then(function(result) {
 					if (result) {
-						$scope.product.$delete(function() {
-							$location.path('/products');
-						});
+						$scope.delete();
 					}
 				});
 		};
+
+		$scope.delete = function() {
+			$scope.product.$delete(function() {
+				delete $scope.product;
+				$location.path('/products');
+			});
+		}
 	}
 ]);
 
@@ -83,7 +88,7 @@ app.controller('ProductEditCtrl', ['$scope', '$location', 'product', 'categories
 		};
 
 		$scope.$watch('product.category', function(newVal, oldVal) {
-			if(_.isObject(newVal))
+			if (_.isObject(newVal))
 				$scope.product.category_id = newVal.id;
 		});
 	}
@@ -109,7 +114,7 @@ app.controller('ProductNewCtrl', ['$scope', '$location', 'Product', 'categories'
 		};
 
 		$scope.$watch('product.category', function(newVal, oldVal) {
-			if(_.isObject(newVal))
+			if (_.isObject(newVal))
 				$scope.product.category_id = newVal.id;
 		});
 	}

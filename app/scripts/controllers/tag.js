@@ -39,12 +39,17 @@ app.controller('TagViewCtrl', ['$scope', '$location', '$dialog', 'tag',
 				.open()
 				.then(function(result) {
 					if (result) {
-						$scope.tag.$delete(function() {
-							$location.path('/tags');
-						});
+						$scope.delete();
 					}
 				});
 		};
+
+		$scope.delete = function() {
+			$scope.tag.$delete(function() {
+				delete $scope.tag;
+				$location.path('/tags');
+			});
+		}
 	}
 ]);
 
