@@ -68,7 +68,7 @@ var getDictionary = function(facet, dictionaries, $q, $injector) {
 	return delay.promise;
 };
 
-// czyści obiekt w kluczy o pustej wartości
+// zamienia liste obiektów na mapę
 _.mixin({
 	dictionaryToMap: function(dictionary) {
 		var dictionaryMap = {};
@@ -94,13 +94,19 @@ directives.directive('searchfield',
 
 			switch (contentType) {
 				case 'singleDropdown':
-					template = singleDropdownTemplate({'ngmodel': model});
+					template = singleDropdownTemplate({
+						'ngmodel': model
+					});
 					break;
 				case 'multipleDropdown':
-					template = multipleDropdownTemplate({'ngmodel': model});
+					template = multipleDropdownTemplate({
+						'ngmodel': model
+					});
 					break;
 				default:
-					template = defaultTemplate({'ngmodel': model});
+					template = defaultTemplate({
+						'ngmodel': model
+					});
 					break;
 			}
 
@@ -127,24 +133,29 @@ directives.directive('searchfield',
 					// fade in .facet-container
 					iElm.parent(".facet-container").fadeIn();
 
-				}
-				else
-				{
+				} else {
 					var dictionaryPromise = getDictionary($scope.facet, $scope.dictionaries, $q, $injector);
 					dictionaryPromise.then(
 						function(dictionaryResource) {
 							var facetKeys = _($scope.criteria.data).keys();
 
-							$scope.dictionary = _.filter(dictionaryResource, function(entry) {
-								return _.contains(facetKeys, "" + entry.id);
-							});
-
+							// usuwa niedostępne opcje i dokleja ilość wyników do nazwy opcji
+							$scope.dictionary = [];
 							if ($scope.facet.controll === "singleDropdown") {
-								$scope.dictionary.splice(0, 0, {
+								$scope.dictionary.push({
 									'name': '',
 									'id': '*'
 								});
 							}
+
+							_.each(dictionaryResource, function(entry) {
+								var entryId = entry.id.toString();
+								if (_.contains(facetKeys, entryId)) {
+									var tempEntry = angular.copy(entry);
+									tempEntry.name = tempEntry.name + " (" + $scope.criteria.data[entryId] + ")";
+									$scope.dictionary.push(tempEntry);
+								}
+							});
 
 							$scope.model = "query['" + $scope.criteria.name + "']";
 
