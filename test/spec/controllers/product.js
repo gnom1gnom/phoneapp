@@ -74,35 +74,6 @@ describe('Controllers', function() {
     });
   });
 
-  describe('MultiProductLoader', function() {
-    var mockBackend, product, loader;
-
-    // The _$httpBackend_ is the same as $httpBackend. Only written this way to
-    // differentiate between injected variables and local variables
-    beforeEach(inject(function(_$httpBackend_, Product, MultiProductLoader) {
-      product = Product;
-      mockBackend = _$httpBackend_;
-      loader = MultiProductLoader;
-    }));
-
-    it('should load list of products', function() {
-      mockBackend.expectGET('http://llewandowski.waw.eo.pl:3000/api/products').respond(productList);
-
-      var products;
-
-      var promise = loader();
-      promise.then(function(rec) {
-        products = rec;
-      });
-
-      expect(products).toBeUndefined();
-
-      mockBackend.flush();
-
-      expect(products).toEqualData(productList);
-    });
-  });
-
   describe('ProductViewCtrl', function() {
     var mockBackend, location;
     var product;

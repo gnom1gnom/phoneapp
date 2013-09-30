@@ -7,12 +7,12 @@ app.controller('ProductSearchCtrl', ['$scope', '$location', 'searchService', '$s
 		$scope.search = function() {
 			$scope.searchInProgress = true;
 
-			console.log('Searching with query: ' + JSON.stringify($scope.query));
+			console.debug('Searching with query: ' + JSON.stringify($scope.query));
 			$location.search($scope.query);
 
 			searchService.search($scope.query)
 				.then(function(result) {
-					// console.log('Search results facet:' + JSON.stringify(result.facet));
+					// console.debug('Search results facet:' + JSON.stringify(result.facet));
 
 					$scope.searchResults = result;
 
@@ -65,7 +65,7 @@ app.controller('ProductSearchCtrl', ['$scope', '$location', 'searchService', '$s
 		};
 
 		//czysczenie przekazanych parametrów 
-		$scope.query = _.parameterCleanu($stateParams, $searchFacets);
+		$scope.query = _.parameterCleanup($stateParams, $searchFacets);
 		if (_($scope.query).isEmpty()) {
 			$scope.query = {
 				limit: 50
@@ -78,7 +78,7 @@ app.controller('ProductSearchCtrl', ['$scope', '$location', 'searchService', '$s
 
 // czyści obiekt w kluczy o pustej wartości
 _.mixin({
-	parameterCleanu: function(object, searchFacets) {
+	parameterCleanup: function(object, searchFacets) {
 		// console.log('$stateParams: ' + JSON.stringify(object));
 		_.each(object, function(value, key) {
 			if (!value)
