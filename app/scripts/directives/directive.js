@@ -8,7 +8,7 @@ directives.directive('navbar', ['$rootScope', '$location',
 			link: function(scope, element, attrs) {
 				$rootScope.$on('$stateChangeSuccess', function() {
 					element.find('li.active').removeClass('active');
-					element.find('li:has(a[href="/#' + $location.path() +'"])').addClass('active');
+					element.find('li:has(a[href="/#' + $location.path() + '"])').addClass('active');
 				});
 			}
 		};
@@ -81,6 +81,7 @@ directives.directive('price', function() {
 		require: 'ngModel',
 		link: function(scope, elm, attrs, ctrl) {
 			ctrl.$parsers.unshift(function(viewValue) {
+				console.log("unshift " + viewValue);
 				if (FLOAT_REGEXP.test(viewValue)) {
 					ctrl.$setValidity('float', true);
 					return parseFloat(viewValue.replace(',', '.'));
