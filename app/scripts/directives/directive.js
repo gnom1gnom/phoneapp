@@ -63,11 +63,9 @@ directives.directive('integer', function() {
 			ctrl.$parsers.unshift(function(viewValue) {
 				if (INTEGER_REGEXP.test(viewValue)) {
 					ctrl.$setValidity('integer', true);
-					console.log("valid int");
 					return viewValue;
 				} else {
 					ctrl.$setValidity('integer', false);
-					console.log("invalid int");
 					return undefined;
 				}
 			});
@@ -81,7 +79,6 @@ directives.directive('price', function() {
 		require: 'ngModel',
 		link: function(scope, elm, attrs, ctrl) {
 			ctrl.$parsers.unshift(function(viewValue) {
-				console.log("unshift " + viewValue);
 				if (FLOAT_REGEXP.test(viewValue)) {
 					ctrl.$setValidity('float', true);
 					return parseFloat(viewValue.replace(',', '.'));
