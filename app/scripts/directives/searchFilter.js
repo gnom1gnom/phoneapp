@@ -2,83 +2,6 @@
 
 var directives = angular.module('phoneappApp.searchDirectives', []);
 
-directives.directive('searchfilter', function() {
-	return {
-		restrict: 'E',
-		replace: true,
-		link: function postLink(scope, element, attrs) {
-			element.text('this is the searchFilter directive');
-		}
-	};
-});
-
-directives.directive('ngenter',
-	function() {
-		return {
-			link: function($scope, element, attrs, controller) {
-				element.bind("keydown keypress", function(event) {
-					if (event.which === 13) {
-						console.log("Pressed: " + event.which);
-						$scope.$apply(function() {
-							$scope.$eval(attrs.ngenter);
-						});
-
-						event.preventDefault();
-					}
-				});
-			}
-		};
-	}
-);
-
-
-var getInjectedDictionaryPromise = function(dictionaryName, $injector) {
-	var service = $injector.get(dictionaryName);
-	var dictionaryPromise = service.prototype.constructor();
-	return dictionaryPromise;
-};
-
-var getDictionary = function(facet, dictionaries, $q, $injector) {
-	var delay = $q.defer();
-	var dictionaryDefinition = facet.dictionary;
-
-	if (_(dictionaries).isUndefined()) {
-		console.warn('Dictionary chache is undefined');
-		return getInjectedDictionaryPromise(dictionaryDefinition.service, $injector);
-	}
-
-	if (_(dictionaries[facet.attribute]).isObject()) {
-		console.log("Getting " + facet.attribute + " dictionary from cache");
-		delay.resolve(dictionaries[facet.attribute].list);
-	} else {
-		console.warn("Acquiring dictionary " + facet.attribute + " for cache");
-		var dictionaryPromise = getInjectedDictionaryPromise(dictionaryDefinition.service, $injector);
-
-		dictionaryPromise.then(function(dictionaryResource) {
-			console.log("Putting dictionary " + facet.attribute + " to cache");
-			dictionaries[facet.attribute] = {};
-			dictionaries[facet.attribute].list = dictionaryResource;
-			dictionaries[facet.attribute].map = _.dictionaryToMap(dictionaryResource);
-			delay.resolve(dictionaries[facet.attribute].list);
-		}, function(error) {
-			delay.reject(error);
-		});
-	}
-
-	return delay.promise;
-};
-
-// zamienia liste obiektów na mapę
-_.mixin({
-	dictionaryToMap: function(dictionary) {
-		var dictionaryMap = {};
-		_.each(dictionary, function(entry) {
-			dictionaryMap[entry.id] = entry.name;
-		});
-		return dictionaryMap;
-	}
-});
-
 directives.directive('searchfield',
 	function($compile, $searchFacets, $injector, $q) {
 		var singleDropdownTemplate = _.template('<select bs-select class="input-xlarge single" ng-model="<%= ngmodel %>" ng-options="entry.id as entry.name for entry in dictionary"></select>');
@@ -112,6 +35,53 @@ directives.directive('searchfield',
 
 			return template;
 		};
+
+		var getInjectedDictionaryPromise = function(dictionaryName, $injector) {
+			var service = $injector.get(dictionaryName);
+			var dictionaryPromise = service();
+			return dictionaryPromise;
+		};
+
+		var getDictionary = function(facet, dictionaries, $q, $injector) {
+			var delay = $q.defer();
+			var dictionaryDefinition = facet.dictionary;
+
+			if (_(dictionaries).isUndefined()) {
+				console.warn('Dictionary chache is undefined');
+				return getInjectedDictionaryPromise(dictionaryDefinition.service, $injector);
+			}
+
+			if (_(dictionaries[facet.attribute]).isObject()) {
+				console.debug("Getting " + facet.attribute + " dictionary from cache");
+				delay.resolve(dictionaries[facet.attribute].list);
+			} else {
+				console.warn("Acquiring dictionary " + facet.attribute + " for cache");
+				var dictionaryPromise = getInjectedDictionaryPromise(dictionaryDefinition.service, $injector);
+
+				dictionaryPromise.then(function(dictionaryResource) {
+					console.debug("Putting dictionary " + facet.attribute + " to cache");
+					dictionaries[facet.attribute] = {};
+					dictionaries[facet.attribute].list = dictionaryResource;
+					dictionaries[facet.attribute].map = _.dictionaryToMap(dictionaryResource);
+					delay.resolve(dictionaries[facet.attribute].list);
+				}, function(error) {
+					delay.reject(error);
+				});
+			}
+
+			return delay.promise;
+		};
+
+		// zamienia liste obiektów na mapę
+		_.mixin({
+			dictionaryToMap: function(dictionary) {
+				var dictionaryMap = {};
+				_.each(dictionary, function(entry) {
+					dictionaryMap[entry.id] = entry.name;
+				});
+				return dictionaryMap;
+			}
+		});
 
 		return {
 			scope: {
@@ -180,7 +150,7 @@ directives.directive('searchfield',
 							});
 						},
 						function(error) {
-							console.log('Error while getting dictionary:' + JSON.stringify(error));
+							console.error('Error while getting dictionary:' + JSON.stringify(error));
 						});
 
 				}

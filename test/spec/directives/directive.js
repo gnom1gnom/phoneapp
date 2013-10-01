@@ -19,29 +19,29 @@ describe('Directive', function() {
       form = scope.productForm;
     }));
 
-    it('should validate price - abc', inject(function($compile) {
+    it('should validate price - abc', function() {
       // wpisujemy wartośc do pola    
       form.price.$setViewValue("abc");
 
       expect(form.price.$error.float).toBe(true);
       expect(form.price.$valid).toBe(false);
-    }));
+    });
 
-    it('should validate price - 110', inject(function($compile) {
+    it('should validate price - 110', function() {
       // wpisujemy wartośc do pola    
       form.price.$setViewValue("110");
 
       expect(form.price.$error.float).toBe(false);
       expect(form.price.$valid).toBe(true);
-    }));
+    });
 
-    it('should validate price - 325.54', inject(function($compile) {
+    it('should validate price - 325.54', function() {
       // wpisujemy wartośc do pola    
       form.price.$setViewValue("325.54");
 
       expect(form.price.$error.float).toBe(false);
       expect(form.price.$valid).toBe(true);
-    }));
+    });
   });
 
   describe('integer', function() {
@@ -59,28 +59,28 @@ describe('Directive', function() {
       form = scope.productForm;
     }));
 
-    it('should validate integer - abc', inject(function($compile) {
+    it('should validate integer - abc', function() {
       // wpisujemy wartośc do pola    
       form.stock.$setViewValue("abc");
 
       expect(form.stock.$error.integer).toBe(true);
       expect(form.stock.$valid).toBe(false);
-    }));
+    });
 
-    it('should validate integer - 110', inject(function($compile) {
+    it('should validate integer - 110', function() {
       // wpisujemy wartośc do pola    
       form.stock.$setViewValue("110");
 
       expect(form.stock.$error.integer).toBe(false);
       expect(form.stock.$valid).toBe(true);
-    }));
+    });
 
-    it('should validate integer - 325.54', inject(function($compile) {
+    it('should validate integer - 325.54', function() {
       // wpisujemy wartośc do pola    
       form.stock.$setViewValue("325.54");
 
       expect(form.stock.$error.integer).toBe(true);
       expect(form.stock.$valid).toBe(false);
-    }));
+    });
   });
 });

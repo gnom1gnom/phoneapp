@@ -34,26 +34,13 @@ directives.directive('butterbar', ['$rootScope',
 	}
 ]);
 
-directives.directive('focus',
-	function() {
-		return {
-			link: function(scope, element, attrs) {
-				element[0].focus();
-			}
-		};
-	});
-
-directives.directive('nav',
-	function() {
-		return {
-			link: function(scope, element, attrs) {
-				element.click(function() {
-					element.siblings().removeClass('active');
-					element.addClass('active');
-				});
-			}
-		};
-	});
+directives.directive('focus', function() {
+	return {
+		link: function(scope, element, attrs) {
+			element[0].focus();
+		}
+	};
+});
 
 var INTEGER_REGEXP = /^\-?\d*$/;
 directives.directive('integer', function() {
