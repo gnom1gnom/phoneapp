@@ -57,6 +57,17 @@ app.controller('ProductViewCtrl', ['$scope', '$location', '$dialog', 'product', 
 			$scope.product.$delete(function() {
 				delete $scope.product;
 				$location.path('/products');
+			}, function(error) {
+				console.error(JSON.stringify(error));
+				var title = 'Delete product error';
+				var msg = 'Cannot delete product: ' + $errorDictionary.describe(error) + ".";
+
+				var btns = [{
+					result: true,
+					label: 'OK',
+					cssClass: 'btn-danger'
+				}];
+				$dialog.messageBox(title, msg, btns).open()
 			});
 		}
 	}
@@ -80,6 +91,17 @@ app.controller('ProductEditCtrl', ['$scope', '$location', 'product', 'categories
 		$scope.save = function() {
 			$scope.product.$update(function(product) {
 				$location.path('/viewProduct/' + product.id);
+			}, function(error) {
+				console.error(JSON.stringify(error));
+				var title = 'Save product error';
+				var msg = 'Cannot save product: ' + $errorDictionary.describe(error) + ".";
+
+				var btns = [{
+					result: true,
+					label: 'OK',
+					cssClass: 'btn-danger'
+				}];
+				$dialog.messageBox(title, msg, btns).open()
 			});
 		};
 
@@ -106,6 +128,17 @@ app.controller('ProductNewCtrl', ['$scope', '$location', 'Product', 'categories'
 		$scope.save = function() {
 			$scope.product.$save(function(product) {
 				$location.path('/viewProduct/' + product.id);
+			}, function(error) {
+				console.error(JSON.stringify(error));
+				var title = 'Create product error';
+				var msg = 'Cannot create product: ' + $errorDictionary.describe(error) + ".";
+
+				var btns = [{
+					result: true,
+					label: 'OK',
+					cssClass: 'btn-danger'
+				}];
+				$dialog.messageBox(title, msg, btns).open()
 			});
 		};
 

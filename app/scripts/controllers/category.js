@@ -8,8 +8,8 @@ app.controller('CategoryListCtrl', ['$scope', 'categories',
 	}
 ]);
 
-app.controller('CategoryViewCtrl', ['$scope', '$location', '$dialog', 'category',
-	function($scope, $location, $dialog, category) {
+app.controller('CategoryViewCtrl', ['$scope', '$location', '$dialog', 'category', '$errorDictionary',
+	function($scope, $location, $dialog, category, $errorDictionary) {
 		$scope.category = category;
 
 		$scope.opts = {
@@ -25,7 +25,7 @@ app.controller('CategoryViewCtrl', ['$scope', '$location', '$dialog', 'category'
 
 		$scope.remove = function() {
 			var title = 'Delete category';
-			var msg = 'Do you want to delete category: ' + $scope.category.name;
+			var msg = 'Do you want to delete category: ' + $scope.category.name + "?";
 			var btns = [{
 				result: false,
 				label: 'Cancel'
@@ -46,20 +46,42 @@ app.controller('CategoryViewCtrl', ['$scope', '$location', '$dialog', 'category'
 
 		$scope.delete = function() {
 			$scope.category.$delete(function() {
-				delete $scope.category; 
+				delete $scope.category;
 				$location.path('/categories');
+			}, function(error) {
+				console.error(JSON.stringify(error));
+				var title = 'Delete category error';
+				var msg = 'Cannot delete category: ' + $errorDictionary.describe(error) + ".";
+
+				var btns = [{
+					result: true,
+					label: 'OK',
+					cssClass: 'btn-danger'
+				}];
+				$dialog.messageBox(title, msg, btns).open()
 			});
 		}
 	}
 ]);
 
-app.controller('CategoryEditCtrl', ['$scope', '$location', 'category',
-	function($scope, $location, category) {
+app.controller('CategoryEditCtrl', ['$scope', '$location', 'category', '$errorDictionary',
+	function($scope, $location, category, $errorDictionary) {
 		$scope.category = category;
 
 		$scope.save = function() {
 			$scope.category.$update(function(category) {
 				$location.path('/viewCategory/' + category.id);
+			}, function(error) {
+				console.error(JSON.stringify(error));
+				var title = 'Save category error';
+				var msg = 'Cannot save category: ' + $errorDictionary.describe(error) + ".";
+
+				var btns = [{
+					result: true,
+					label: 'OK',
+					cssClass: 'btn-danger'
+				}];
+				$dialog.messageBox(title, msg, btns).open()
 			});
 		};
 
@@ -69,13 +91,24 @@ app.controller('CategoryEditCtrl', ['$scope', '$location', 'category',
 	}
 ]);
 
-app.controller('CategoryNewCtrl', ['$scope', '$location', 'Category',
-	function($scope, $location, Category) {
+app.controller('CategoryNewCtrl', ['$scope', '$location', 'Category', '$errorDictionary',
+	function($scope, $location, Category, $errorDictionary) {
 		$scope.category = new Category();
 
 		$scope.save = function() {
 			$scope.category.$save(function(category) {
 				$location.path('/viewCategory/' + category.id);
+			}, function(error) {
+				console.error(JSON.stringify(error));
+				var title = 'Save category error';
+				var msg = 'Cannot save category: ' + $errorDictionary.describe(error) + ".";
+
+				var btns = [{
+					result: true,
+					label: 'OK',
+					cssClass: 'btn-danger'
+				}];
+				$dialog.messageBox(title, msg, btns).open()
 			});
 		};
 

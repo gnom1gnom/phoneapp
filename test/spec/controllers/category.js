@@ -50,7 +50,7 @@ describe('Controllers', function() {
   });
 
   describe('CategoryViewCtrl', function() {
-    var mockBackend, location, $document;
+    var mockBackend, location;
     beforeEach(inject(function($rootScope, $controller, _$httpBackend_, $location, Category) {
       mockBackend = _$httpBackend_;
       location = $location;

@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('phoneappApp', ['phoneappApp.productSearchService', 'phoneappApp.tagServices', 'phoneappApp.categoryServices',
-  'phoneappApp.productServices', 'phoneappApp.directives', 'phoneappApp.searchDirectives',
+  'phoneappApp.productServices', 'phoneappApp.directives', 'phoneappApp.searchDirectives', 'phoneappApp.errorDictionary',
   'phoneappApp.searchFacets', 'ui.bootstrap', 'ui.router', '$strap.directives'
 ]).config(function($stateProvider, $urlRouterProvider) {
 

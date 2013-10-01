@@ -8,8 +8,8 @@ app.controller('TagListCtrl', ['$scope', 'tags',
 	}
 ]);
 
-app.controller('TagViewCtrl', ['$scope', '$location', '$dialog', 'tag',
-	function($scope, $location, $dialog, tag) {
+app.controller('TagViewCtrl', ['$scope', '$location', '$dialog', 'tag', '$errorDictionary',
+	function($scope, $location, $dialog, tag, $errorDictionary) {
 		$scope.tag = tag;
 
 		$scope.opts = {
@@ -25,7 +25,7 @@ app.controller('TagViewCtrl', ['$scope', '$location', '$dialog', 'tag',
 
 		$scope.remove = function() {
 			var title = 'Delete tag';
-			var msg = 'Do you want to delete tag: ' + $scope.tag.name;
+			var msg = 'Do you want to delete tag: ' + $scope.tag.name + "?";
 			var btns = [{
 				result: false,
 				label: 'Cancel'
@@ -48,18 +48,40 @@ app.controller('TagViewCtrl', ['$scope', '$location', '$dialog', 'tag',
 			$scope.tag.$delete(function() {
 				delete $scope.tag;
 				$location.path('/tags');
+			}, function(error) {
+				console.error(JSON.stringify(error));
+				var title = 'Delete tag error';
+				var msg = 'Cannot delete tag: ' + $errorDictionary.describe(error) + ".";
+
+				var btns = [{
+					result: true,
+					label: 'OK',
+					cssClass: 'btn-danger'
+				}];
+				$dialog.messageBox(title, msg, btns).open()
 			});
 		}
 	}
 ]);
 
-app.controller('TagEditCtrl', ['$scope', '$location', 'tag',
-	function($scope, $location, tag) {
+app.controller('TagEditCtrl', ['$scope', '$location', 'tag', '$errorDictionary',
+	function($scope, $location, tag, $errorDictionary) {
 		$scope.tag = tag;
 
 		$scope.save = function() {
 			$scope.tag.$update(function(tag) {
 				$location.path('/viewTag/' + tag.id);
+			}, function(error) {
+				console.error(JSON.stringify(error));
+				var title = 'Save tag error';
+				var msg = 'Cannot save tag: ' + $errorDictionary.describe(error) + ".";
+
+				var btns = [{
+					result: true,
+					label: 'OK',
+					cssClass: 'btn-danger'
+				}];
+				$dialog.messageBox(title, msg, btns).open()
 			});
 		};
 
@@ -69,13 +91,24 @@ app.controller('TagEditCtrl', ['$scope', '$location', 'tag',
 	}
 ]);
 
-app.controller('TagNewCtrl', ['$scope', '$location', 'Tag',
-	function($scope, $location, Tag) {
+app.controller('TagNewCtrl', ['$scope', '$location', 'Tag', '$errorDictionary',
+	function($scope, $location, Tag, $errorDictionary) {
 		$scope.tag = new Tag();
 
 		$scope.save = function() {
 			$scope.tag.$save(function(tag) {
 				$location.path('/viewTag/' + tag.id);
+			}, function(error) {
+				console.error(JSON.stringify(error));
+				var title = 'Create tag error';
+				var msg = 'Cannot create tag: ' + $errorDictionary.describe(error) + ".";
+
+				var btns = [{
+					result: true,
+					label: 'OK',
+					cssClass: 'btn-danger'
+				}];
+				$dialog.messageBox(title, msg, btns).open()
 			});
 		};
 
