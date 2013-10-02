@@ -79,7 +79,7 @@ describe('Controller: ProductsearchCtrl', function() {
 
   // mock the service
   beforeEach(function() {
-    searchServiceMock = jasmine.createSpyObj('CookieStore', ['search', 'suggest']);
+    searchServiceMock = jasmine.createSpyObj('searchService', ['search', 'suggest']);
     searchServiceMock.search.andCallFake(function() {
       var delay = $q.defer();
       delay.resolve(searchResults);

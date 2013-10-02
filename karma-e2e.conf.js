@@ -11,6 +11,7 @@ module.exports = function(config) {
 
         // list of files / patterns to load in the browser
         files: [
+            'app/bower_components/underscore/underscore.js',
             'test/e2e/**/*.js'
         ],
 
@@ -22,7 +23,7 @@ module.exports = function(config) {
 
         // level of logging
         // possible values: LOG_DISABLE || LOG_ERROR || LOG_WARN || LOG_INFO || LOG_DEBUG
-        logLevel: config.LOG_DEBUG,
+        logLevel: config.LOG_INFO,
 
 
         // enable / disable watching file and executing tests whenever any file changes
@@ -37,7 +38,7 @@ module.exports = function(config) {
         // - Safari (only Mac)
         // - PhantomJS
         // - IE (only Windows)
-        browsers: ['Chrome'],
+        browsers: ['Chrome_without_security'],
 
 
         // Continuous Integration mode
@@ -45,6 +46,14 @@ module.exports = function(config) {
         singleRun: false,
 
         reporters: ['dots'],
+
+        // you can define custom flags
+        customLaunchers: {
+            Chrome_without_security: {
+                base: 'Chrome',
+                flags: ['--disable-web-security']
+            }
+        },
 
         plugins: [
             'karma-ng-scenario',
