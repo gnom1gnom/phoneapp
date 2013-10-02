@@ -79,15 +79,14 @@ describe('Controller: ProductsearchCtrl', function() {
 
   // mock the service
   beforeEach(function() {
-    searchServiceMock = {};
-
-    searchServiceMock.search = jasmine.createSpy("search() spy").andCallFake(function() {
+    searchServiceMock = jasmine.createSpyObj('CookieStore', ['search', 'suggest']);
+    searchServiceMock.search.andCallFake(function() {
       var delay = $q.defer();
       delay.resolve(searchResults);
       return delay.promise;
     });
 
-    searchServiceMock.suggest = jasmine.createSpy("suggest() spy").andCallFake(function() {
+    searchServiceMock.suggest.andCallFake(function() {
       var delay = $q.defer();
       delay.resolve(suggestResult);
       return delay.promise;

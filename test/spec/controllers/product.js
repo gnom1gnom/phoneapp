@@ -35,20 +35,20 @@ describe('Controllers', function() {
   });
 
   beforeEach(function() {
-    categoriesMock = {
-      get: function() {
-        return [{ "name": "Kategoria A", "id": 1}, { "name": "Kategoria B", "id": 2}, { "name": "Kategoria C", "id": 3}];
-      }
-    };
+    categoriesMock = jasmine.createSpyObj('Categories', ['get']);
+    categoriesMock.get.andCallFake(function() {
+      return [{ "name": "Kategoria A", "id": 1}, { "name": "Kategoria B", "id": 2}, { "name": "Kategoria C", "id": 3}];
+    });
+    
     module(function($provide) {
       $provide.value('categories', categoriesMock);
     });
 
-    tagsMock = {
-      get: function() {
-        return [{ "name": "Tag A", "id": 1}, { "name": "Tag B", "id": 2}, { "name": "Tag C", "id": 3}];
-      }
-    };
+    tagsMock = jasmine.createSpyObj('Tags', ['get']);
+    tagsMock.get.andCallFake(function() {
+      return [{ "name": "Tag A", "id": 1}, { "name": "Tag B", "id": 2}, { "name": "Tag C", "id": 3}];
+    });
+
     module(function($provide) {
       $provide.value('tags', tagsMock);
     });
