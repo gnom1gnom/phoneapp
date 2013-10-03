@@ -42,7 +42,7 @@ directives.directive('focus', function() {
 	};
 });
 
-var INTEGER_REGEXP = /^\-?\d*$/;
+var INTEGER_REGEXP = /^\d*$/;
 directives.directive('integer', function() {
 	return {
 		require: 'ngModel',
@@ -60,7 +60,7 @@ directives.directive('integer', function() {
 	};
 });
 
-var FLOAT_REGEXP = /^\-?\d+((\.|\,)\d\d)?$/;
+var FLOAT_REGEXP = /^\d+((\.|\,)\d{1,2})?$/;
 directives.directive('price', function() {
 	return {
 		require: 'ngModel',

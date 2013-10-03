@@ -12,7 +12,7 @@
       <div class="control-group" ng-class="{error: productForm.stock.$error.integer}">
         <label class="control-label" for="stock">Stock</label>
         <div class="controls">
-          <input ng-model="product.stock" type="number" min="0" class="input-xlarge" id="stock" name="stock" required integer>
+          <input ng-model="product.stock" type="text" min="0" class="input-xlarge" id="stock" name="stock" required integer>
           <span ng-show="productForm.stock.$error.integer" class="help-inline">Niepoprawna ilość</span>
         </div>
       </div>
@@ -32,7 +32,7 @@
       <div class="control-group" ng-class="{error: productForm.price.$error.float}">
         <label class="control-label" for="price">Price</label>
         <div class="controls">
-          <input ng-model="product.price" min="0" class="input-xlarge" id="price" name="price" type="number" required price>
+          <input ng-model="product.price" min="0" class="input-xlarge" id="price" name="price" type="text" required price>
           <span ng-show="productForm.price.$error.float" class="help-inline">Niepoprawny format ceny</span>
         </div>
       </div>
@@ -40,7 +40,7 @@
       <div class="control-group">
         <label class="control-label" for="categories">Categories</label>
         <div class="controls">
-          <select bs-select class="input span3 single" ng-model="product.category" ng-options="category.name for category in categoryList" id="categories"></select>
+          <select bs-select class="input span3 single" ng-model="product.category" ng-options="category.name for category in categoryList" id="categories" required></select>
         </div>
       </div>
 
