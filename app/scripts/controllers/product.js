@@ -73,8 +73,8 @@ app.controller('ProductViewCtrl', ['$scope', '$location', '$dialog', 'product', 
 	}
 ]);
 
-app.controller('ProductEditCtrl', ['$scope', '$location', 'product', 'categories', 'tags',
-	function($scope, $location, product, categories, tags) {
+app.controller('ProductEditCtrl', ['$scope', '$location', 'product', 'categories', 'tags', '$dialog',
+	function($scope, $location, product, categories, tags, $dialog) {
 		$scope.product = product;
 		$scope.categoryList = categories;
 		$scope.tagList = tags;
@@ -116,8 +116,8 @@ app.controller('ProductEditCtrl', ['$scope', '$location', 'product', 'categories
 	}
 ]);
 
-app.controller('ProductNewCtrl', ['$scope', '$location', 'Product', 'categories', 'tags',
-	function($scope, $location, Product, categories, tags) {
+app.controller('ProductNewCtrl', ['$scope', '$location', 'Product', 'categories', 'tags', '$dialog',
+	function($scope, $location, Product, categories, tags, $dialog) {
 		$scope.product = new Product();
 		$scope.product.tags = [];
 		$scope.product.tagObjs = [];

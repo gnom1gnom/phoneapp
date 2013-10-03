@@ -64,8 +64,8 @@ app.controller('CategoryViewCtrl', ['$scope', '$location', '$dialog', 'category'
 	}
 ]);
 
-app.controller('CategoryEditCtrl', ['$scope', '$location', 'category', '$errorDictionary',
-	function($scope, $location, category, $errorDictionary) {
+app.controller('CategoryEditCtrl', ['$scope', '$location', 'category', '$errorDictionary', '$dialog',
+	function($scope, $location, category, $errorDictionary, $dialog) {
 		$scope.category = category;
 
 		$scope.save = function() {
@@ -91,8 +91,8 @@ app.controller('CategoryEditCtrl', ['$scope', '$location', 'category', '$errorDi
 	}
 ]);
 
-app.controller('CategoryNewCtrl', ['$scope', '$location', 'Category', '$errorDictionary',
-	function($scope, $location, Category, $errorDictionary) {
+app.controller('CategoryNewCtrl', ['$scope', '$location', 'Category', '$errorDictionary', '$dialog',
+	function($scope, $location, Category, $errorDictionary, $dialog) {
 		$scope.category = new Category();
 
 		$scope.save = function() {

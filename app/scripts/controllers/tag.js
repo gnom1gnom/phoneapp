@@ -64,8 +64,8 @@ app.controller('TagViewCtrl', ['$scope', '$location', '$dialog', 'tag', '$errorD
 	}
 ]);
 
-app.controller('TagEditCtrl', ['$scope', '$location', 'tag', '$errorDictionary',
-	function($scope, $location, tag, $errorDictionary) {
+app.controller('TagEditCtrl', ['$scope', '$location', 'tag', '$dialog', '$errorDictionary',
+	function($scope, $location, tag, $dialog, $errorDictionary) {
 		$scope.tag = tag;
 
 		$scope.save = function() {
@@ -91,8 +91,8 @@ app.controller('TagEditCtrl', ['$scope', '$location', 'tag', '$errorDictionary',
 	}
 ]);
 
-app.controller('TagNewCtrl', ['$scope', '$location', 'Tag', '$errorDictionary',
-	function($scope, $location, Tag, $errorDictionary) {
+app.controller('TagNewCtrl', ['$scope', '$location', 'Tag', '$dialog', '$errorDictionary',
+	function($scope, $location, Tag, $dialog, $errorDictionary) {
 		$scope.tag = new Tag();
 
 		$scope.save = function() {

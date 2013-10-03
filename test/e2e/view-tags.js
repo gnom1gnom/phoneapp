@@ -1,6 +1,6 @@
 'use strict';
 
-describe('my app', function() {
+describe('View tags', function() {
 	// tablica opcji selecta wygenerowanego dla facetu tags
 	var tagsList = [
 		['Tag foo'],
@@ -16,5 +16,12 @@ describe('my app', function() {
 		for (var i = 0; i < tagsList.length; i++) {
 			expect(repeater('#tags li').row(i)).toEqual(tagsList[i]);
 		}
+	});
+
+	it('clicking on tag link should leed to product', function() {
+		browser().navigateTo('/#/tags');
+		element('#tags li:eq(0) a').click();
+		expect(browser().location().path()).toEqual('/viewTag/1');
+		expect(element('form #name').text()).toEqual(tagsList[0][0]);
 	});
 });

@@ -4,6 +4,7 @@ angular.module('phoneappApp.errorDictionary', [], ['$provide',
 	function($provide) {
 		$provide.value('$errorDictionary', {
 			"HAS_DEPENDENT_PRODUCTS": "there are related products",
+			"DUPLICATE": "object already exists",
 
 			"UNKNOWN": "unknown reason",
 
