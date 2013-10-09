@@ -10,7 +10,7 @@ describe('View tags', function() {
 		['Tag fnord']
 	];
 
-	it('should list all tags', function() {
+	xit('should list all tags', function() {
 		browser().navigateTo('/#/tags');
 		expect(repeater('#tags li').count()).toEqual(tagsList.length);
 		for (var i = 0; i < tagsList.length; i++) {
@@ -18,7 +18,7 @@ describe('View tags', function() {
 		}
 	});
 
-	it('clicking on tag link should leed to product', function() {
+	xit('clicking on tag link should leed to product', function() {
 		browser().navigateTo('/#/tags');
 		element('#tags li:eq(0) a').click();
 		expect(browser().location().path()).toEqual('/viewTag/1');

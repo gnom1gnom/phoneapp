@@ -21,7 +21,7 @@
         <label class="control-label" for="created">Created</label>
         <div class="controls">
           <div ng-controller="DatepickerCtrl">
-            <input ng-model="product.created" type="text" show-weeks="false" datepicker-popup="dd-MMMM-yyyy" is-open="opened" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" class="input-xlarge" id="created">
+            <input ng-model="product.created" type="text" show-weeks="false" datepicker-popup="dd-MMMM-yyyy" open="opened" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" class="input-xlarge" id="created">
 <!--             <button type='button' class="btn" ng-click="openDatePicker()"> <i class="icon-calendar"></i>
             </button> -->
           </div>
@@ -59,7 +59,7 @@
             </li>
             <li>
                 <select bs-select class="input-xlarge" ng-model="addedTag" class="select-xlarge list-add" ng-options="tag.name for tag in tagList | tagFilter:this"></select>
-                <button type="button" class="btn btn-small list-add" ng-click="addTag()" ng-disabled="!addedTag" ><i class="icon-plus icon-small"></i></button>
+                <button type="button" class="btn btn-small list-add" ng-click="addTag()" ng-disabled="!addedTag" id="buttonAddTag" ><i class="icon-plus icon-small"></i></button>
             </li>
           </ul>
         </div>
@@ -75,7 +75,7 @@
     </fieldset>
   </div>
   <div class="form-actions">
-    <button class="btn btn-primary" ng-disabled="productForm.$invalid">Save</button>
+    <button class="btn btn-primary" ng-disabled="productForm.$invalid" id="buttonSave">Save</button>
     <button type="button" ng-click="cancel()" class="btn">Cancel</button>
   </div>
 </form>

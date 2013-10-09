@@ -30,7 +30,9 @@ app.controller('DatepickerCtrl', function($scope, $timeout) {
 
 	$scope.openDatePicker = function() {
 		$timeout(function() {
+			console.log("Datepicker: " + $scope.opened);
 			$scope.opened = true;
+			console.log("Datepicker: " + $scope.opened);
 		});
 	};
 

@@ -12,10 +12,10 @@ describe('Create, edit and delete category', function() {
 
 	it('should edit the category', function() {
 		element('#buttonEdit').click();
-		input('category.name').enter('Testowa categoria nowa');
+		input('category.name').enter('Testowa kategoria nowa');
 		element('#buttonSave').click();
 		expect(browser().location().path()).toMatch(new RegExp(/^\/viewCategory\/\d+$/));
-		expect(element('form #name').text()).toEqual('Testowa categoria nowa');
+		expect(element('form #name').text()).toEqual('Testowa kategoria nowa');
 	});
 
 	it('should delete the category', function() {
